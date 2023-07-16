@@ -1,0 +1,6 @@
+log: # delete logs automatically
+  autodel: True #
+  keepdays: 1 # the days before today
+  num: 1 # num of log files
+debug: False # Run in debug mode
+
