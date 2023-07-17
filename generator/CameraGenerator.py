@@ -1,3 +1,10 @@
+#!/usr/bin
+# -*- coding: utf-8 -*-
+# @Time    : 7/17/2023 2:09 PM
+# @Team    : Siemens Prescan SLS
+# @Author  : Yi Yang
+# @Support : prescansls.sisw@siemens.com
+
 from sensors.Camera import Camera
 from sensors.MetaSensor import Sensor
 from ObjectParser import GeneratorObject
@@ -78,9 +85,9 @@ class CameraGenerator(Generator):
                     self.steps += f"{self.space4}{sensorDemux}::demux_cameraSimulinkU8(\n" \
                                   f"{func_space}{cameraUnit_prefix}_{camera.camera.name},\n" \
                                   f"{func_space}//Demux:\n" \
-                                  f"{func_space}Terminator, // ->R\n" \
-                                  f"{func_space}Terminator, // ->G\n" \
-                                  f"{func_space}Terminator); // ->B\n"
+                                  f"{func_space}Terminator, // ->R (valid)\n" \
+                                  f"{func_space}Terminator, // ->G (valid)\n" \
+                                  f"{func_space}Terminator); // ->B (valid)\n"
                 elif camera.format == prescan_api_camera.ImageFormat.BGRU8:
                     # output properties and constructors
                     self.properties += f"{self.space4}{uchar_vector_ptr} {cameraUnit_prefix}_{camera.camera.name}_BGRU8;\n"
@@ -90,7 +97,7 @@ class CameraGenerator(Generator):
                     self.steps += f"{self.space4}{sensorDemux}::demux_cameraBGRU8(\n" \
                                   f"{func_space}{cameraUnit_prefix}_{camera.camera.name},\n" \
                                   f"{func_space}//Demux:\n" \
-                                  f"{func_space}Terminator); // -> BGRU8\n"
+                                  f"{func_space}Terminator); // -> BGRU8 (valid)\n"
                 else:
                     pass
                 self.constructor += "\n"

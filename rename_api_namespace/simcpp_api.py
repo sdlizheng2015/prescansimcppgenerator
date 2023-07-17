@@ -1,3 +1,10 @@
+#!/usr/bin
+# -*- coding: utf-8 -*-
+# @Time    : 7/17/2023 2:09 PM
+# @Team    : Siemens Prescan SLS
+# @Author  : Yi Yang
+# @Support : prescansls.sisw@siemens.com
+
 type_incl = '''#include "prescan/api/Types.hpp"\n#include "prescan/sim/SelfSensorUnit.hpp"\n'''
 camera_incl = '''#include "prescan/api/Camera.hpp"\n#include "prescan/sim/CameraSensorUnit.hpp"\n'''
 pcs_incl = '''#include "prescan/api/Pcs.hpp"\n#include "prescan/sim/PcsSensorUnit.hpp"\n'''

@@ -1,3 +1,10 @@
+#!/usr/bin
+# -*- coding: utf-8 -*-
+# @Time    : 7/17/2023 2:09 PM
+# @Team    : Siemens Prescan SLS
+# @Author  : Yi Yang
+# @Support : prescansls.sisw@siemens.com
+
 from rename_api_namespace.prescan_python_dmapi import *
 import sys
 from prescan.internal import PrescanException
@@ -35,16 +42,15 @@ class GeneratorObject:
 class ObjectParser:
     def __init__(self, pb: str, pb_yaml: str, load_yaml: bool):
         self._generator_objects: List[GeneratorObject] = []
+        self.xp_yaml = {}
         try:
             self.xp: prescan_api_experiment.Experiment = prescan_api_experiment.loadExperimentFromFile(pb)
             if load_yaml:
                 with open(pb_yaml, "rt") as file:
                     self.xp_yaml: dict = yaml.load(file, yaml.FullLoader)
-            else:
-                self.xp_yaml = {}
         except PrescanException as ee:
             uniLog.logger.error(self.__class__.__name__ + ": " + str(ee))
-            sys.exit()
+            raise PrescanException("load pb/yaml file failed")
         else:
             self._parse_objects()
             self._register_sensors()

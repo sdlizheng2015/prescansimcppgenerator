@@ -1,3 +1,10 @@
+#!/usr/bin
+# -*- coding: utf-8 -*-
+# @Time    : 7/17/2023 2:09 PM
+# @Team    : Siemens Prescan SLS
+# @Author  : Yi Yang
+# @Support : prescansls.sisw@siemens.com
+
 from sensors.Trajectory import Trajectory
 from sensors.MetaSensor import Sensor
 from ObjectParser import GeneratorObject

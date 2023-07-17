@@ -1,5 +1,5 @@
 //
-// (c)Copyright 2019 by Siemens Industry Software and Services B.V.
+// (c)Copyright 2023 by Siemens Industry Software and Services B.V.
 // All rights reserved.
 //
 // Simcenter Prescan(r) has been developed at Siemens Industry Software and

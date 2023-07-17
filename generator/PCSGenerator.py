@@ -1,3 +1,10 @@
+#!/usr/bin
+# -*- coding: utf-8 -*-
+# @Time    : 7/17/2023 2:09 PM
+# @Team    : Siemens Prescan SLS
+# @Author  : Yi Yang
+# @Support : prescansls.sisw@siemens.com
+
 from sensors.Pcs import Pcs
 from sensors.MetaSensor import Sensor
 from ObjectParser import GeneratorObject
@@ -86,7 +93,7 @@ class PCSGenerator(Generator):
                               f"{func_space}{int(pcs.outputObjectID)}, // outputObjectID?, DON'T EDIT\n" \
                               f"{func_space}{int(pcs.outputAngles)}, // outputAngles?, DON'T EDIT\n" \
                               f"{func_space}//Demux:\n" \
-                              f"{func_space}Terminator, // ->Range\n" \
+                              f"{func_space}Terminator, // ->Range (valid)\n" \
                               f"{func_space}Terminator, // ->Velocity {'(valid)' if pcs.outputDopplerVelocity else '(invalid)'}\n" \
                               f"{func_space}Terminator, // ->Intensity {'(valid)' if pcs.outputIntensity else '(invalid)'}\n" \
                               f"{func_space}Terminator, // ->ID {'(valid)' if pcs.outputObjectID else '(invalid)'}\n" \
@@ -115,9 +122,9 @@ class PCSGenerator(Generator):
                               f"{func_space}{int(pcs.outputIntensity)}, // outputIntensity?, DON'T EDIT\n" \
                               f"{func_space}{int(pcs.outputObjectID)}, // outputObjectID?, DON'T EDIT\n" \
                               f"{func_space}//Demux:\n" \
-                              f"{func_space}Terminator, // ->X\n" \
-                              f"{func_space}Terminator, // ->Y\n" \
-                              f"{func_space}Terminator, // ->Z\n" \
+                              f"{func_space}Terminator, // ->X (valid)\n" \
+                              f"{func_space}Terminator, // ->Y (valid)\n" \
+                              f"{func_space}Terminator, // ->Z (valid)\n" \
                               f"{func_space}Terminator, // ->I {'(valid)' if pcs.outputIntensity else '(invalid)'}\n" \
                               f"{func_space}Terminator); // ->ID {'(valid)' if pcs.outputObjectID else '(invalid)'}\n"
             self.steps += "\n"

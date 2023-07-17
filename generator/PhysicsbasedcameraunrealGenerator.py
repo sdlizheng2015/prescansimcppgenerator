@@ -1,3 +1,10 @@
+#!/usr/bin
+# -*- coding: utf-8 -*-
+# @Time    : 7/17/2023 2:09 PM
+# @Team    : Siemens Prescan SLS
+# @Author  : Yi Yang
+# @Support : prescansls.sisw@siemens.com
+
 from sensors.Physicsbasedcameraunreal import Physicsbasedcameraunreal
 from sensors.MetaSensor import Sensor
 from ObjectParser import GeneratorObject
@@ -52,7 +59,7 @@ class PhysicsbasedcameraunrealGenerator(Generator):
                 self.steps += f"{self.space4}{sensorDemux}::demux_pbc(\n" \
                               f"{func_space}{pbcUnit_prefix}_{pbc.pbc.name},\n" \
                               f"{func_space}//Demux:\n" \
-                              f"{func_space}Terminator); // -> RGBU8\n"
+                              f"{func_space}Terminator); // -> RGBU8 (valid)\n"
 
                 self.steps += "\n"
                 self.properties += "\n"

@@ -1,11 +1,9 @@
-# /usr/bin/
-# --encoding=utf-8--
-# NAME   : 38_openPLANNING_Outdoor
-# FILE   : __init__.py
-# AUTHOR : Mr.OldYoung
-# Email  : yyangjlu@163.com
-# TIME   : 2022/1/12, 18:03
-# Bugs are everywhere, so be careful
+#!/usr/bin
+# -*- coding: utf-8 -*-
+# @Time    : 7/17/2023 2:09 PM
+# @Team    : Siemens Prescan SLS
+# @Author  : Yi Yang
+# @Support : prescansls.sisw@siemens.com
 
 
 from .UserLog import uniLog, Log

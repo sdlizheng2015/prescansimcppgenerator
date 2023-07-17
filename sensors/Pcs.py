@@ -1,3 +1,10 @@
+#!/usr/bin
+# -*- coding: utf-8 -*-
+# @Time    : 7/17/2023 2:09 PM
+# @Team    : Siemens Prescan SLS
+# @Author  : Yi Yang
+# @Support : prescansls.sisw@siemens.com
+
 from rename_api_namespace.prescan_python_dmapi import *
 from sensors.MetaSensor import Sensor
 
@@ -13,6 +20,12 @@ class Pcs(Sensor):
         Range = "range"
         SensorPosition = "sensorPosition"
         WorldPosition = "worldPosition"
+
+        Mode = {
+            1: Range,
+            2: WorldPosition,
+            3: SensorPosition,
+        }
 
     class OutChannels:
         outputDopplerVelocity = "outputDopplerVelocity"
@@ -39,8 +52,8 @@ class Pcs(Sensor):
             name = self.xp.getString(Pcs.pimp_model, f"sensor:{i}/sensorBase/name")
             if name == self.pcs.name:
                 """getString not work for this parameter now"""
-                # self.outputMode = self.xp.getString(Pcs.pimp_model, f"sensor:{i}/pointCloudSensor/sensorOutputMode")
-                self.outputMode = self.xp_yaml["sensor"][i]["pointCloudSensor"]["sensorOutputMode"]
+                self.outputMode = Pcs.OutputMode.Mode[
+                    self.xp.getInt32(Pcs.pimp_model, f"sensor:{i}/pointCloudSensor/sensorOutputMode")]
                 self.integerOutput = bool(self.xp.getBool(Pcs.pimp_model, f"sensor:{i}/pointCloudSensor/integerOutput"))
                 if self.integerOutput:
                     raise Exception("integerOutput is not supported")

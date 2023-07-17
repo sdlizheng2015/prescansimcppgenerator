@@ -1,3 +1,10 @@
+#!/usr/bin
+# -*- coding: utf-8 -*-
+# @Time    : 7/17/2023 2:09 PM
+# @Team    : Siemens Prescan SLS
+# @Author  : Yi Yang
+# @Support : prescansls.sisw@siemens.com
+
 from sensors.Air import Air
 from sensors.MetaSensor import Sensor
 from ObjectParser import GeneratorObject
@@ -70,10 +77,10 @@ class AirGenerator(Generator):
             self.steps += f"{self.space4}{sensorDemux}::demux_air(\n" \
                           f"{func_space}{airUnit_prefix}_{air.air.name},\n" \
                           f"{func_space}//Demux:\n" \
-                          f"{func_space}Terminator, // ->Range\n" \
-                          f"{func_space}Terminator, // ->Theta\n" \
-                          f"{func_space}Terminator, // ->Phi\n" \
-                          f"{func_space}Terminator, // ->ID\n" \
-                          f"{func_space}Terminator, // ->Velocity\n" \
-                          f"{func_space}Terminator); // ->Heading\n"
+                          f"{func_space}Terminator, // ->Range (valid)\n" \
+                          f"{func_space}Terminator, // ->Theta (valid)\n" \
+                          f"{func_space}Terminator, // ->Phi (valid)\n" \
+                          f"{func_space}Terminator, // ->ID (valid)\n" \
+                          f"{func_space}Terminator, // ->Velocity (valid)\n" \
+                          f"{func_space}Terminator); // ->Heading (valid)\n"
             self.steps += "\n"

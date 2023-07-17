@@ -1,3 +1,11 @@
+#!/usr/bin
+# -*- coding: utf-8 -*-
+# @Time    : 7/17/2023 2:09 PM
+# @Team    : Siemens Prescan SLS
+# @Author  : Yi Yang
+# @Support : prescansls.sisw@siemens.com
+
+
 """This module helps to rename Prescan python api namespace in PyCharm.
 
 Note:
@@ -156,7 +164,7 @@ Copyright = "# To generate Prescan python import api in PyCharmCE2022.1\n" \
             "# 1. This file is generated automatically;\n" \
             "# 2. All rights reserved by Siemens Prescan;\n" \
             "# 3. Any questions email at yiyyyang@siemens.com.\n" \
-            "# 4. Copyright 2022 Siemens\n"
+            "# 4. Copyright 2023 Siemens\n"
 
 
 def _right_py_clarification(file):

@@ -1,3 +1,10 @@
+#!/usr/bin
+# -*- coding: utf-8 -*-
+# @Time    : 7/17/2023 2:09 PM
+# @Team    : Siemens Prescan SLS
+# @Author  : Yi Yang
+# @Support : prescansls.sisw@siemens.com
+
 from sensors.Fullwaveformlidar import Fullwaveformlidar
 from sensors.MetaSensor import Sensor
 from ObjectParser import GeneratorObject
@@ -86,12 +93,12 @@ class FullwaveformlidarGenerator(Generator):
                               f"{func_space}{fwlBeamUnit_prefix}_{fwl.fwl.name},\n" \
                               f"{func_space}{fwlPowerUnit_prefix}_{fwl.fwl.name},\n" \
                               f"{func_space}//Demux:\n" \
-                              f"{func_space}Terminator, // ->X\n" \
-                              f"{func_space}Terminator, // ->Y\n" \
-                              f"{func_space}Terminator, // ->Z\n" \
-                              f"{func_space}Terminator, // ->I\n" \
-                              f"{func_space}Terminator, // ->Beam\n" \
-                              f"{func_space}Terminator); // ->Info\n"
+                              f"{func_space}Terminator, // ->X (valid)\n" \
+                              f"{func_space}Terminator, // ->Y (valid)\n" \
+                              f"{func_space}Terminator, // ->Z (valid)\n" \
+                              f"{func_space}Terminator, // ->I (valid)\n" \
+                              f"{func_space}Terminator, // ->Beam (valid)\n" \
+                              f"{func_space}Terminator); // ->Info (valid)\n"
             else:
                 self.steps += f"{self.space4}{sensorDemux}::demux_fwl(\n" \
                               f"{func_space}simmodel,\n" \
@@ -101,12 +108,12 @@ class FullwaveformlidarGenerator(Generator):
                               f"{func_space}{fwlBeamUnit_prefix}_{fwl.fwl.name},\n" \
                               f"{func_space}nullptr, // DON'T EDIT\n" \
                               f"{func_space}//Demux:\n" \
-                              f"{func_space}Terminator, // ->X\n" \
-                              f"{func_space}Terminator, // ->Y\n" \
-                              f"{func_space}Terminator, // ->Z\n" \
+                              f"{func_space}Terminator, // ->X (valid)\n" \
+                              f"{func_space}Terminator, // ->Y (valid)\n" \
+                              f"{func_space}Terminator, // ->Z (valid)\n" \
                               f"{func_space}Terminator, // ->I (invalid)\n" \
-                              f"{func_space}Terminator, // ->Beam\n" \
-                              f"{func_space}Terminator); // ->Info\n"
+                              f"{func_space}Terminator, // ->Beam (valid)\n" \
+                              f"{func_space}Terminator); // ->Info (valid)\n"
 
             self.constructor += "\n"
             self.steps += "\n"
