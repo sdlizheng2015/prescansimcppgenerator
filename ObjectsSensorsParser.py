@@ -15,13 +15,14 @@ from sensors.MetaSensor import Sensor
 from utils.load_modules import get_cls
 from typing import Dict
 
+sensor_names = [os.path.splitext(module)[0] for module in os.listdir("./sensors") if
+                os.path.splitext(module)[1] == ".py"]
+sensors_cls, _ = get_cls(sensor_names, "sensors")
+
 
 class ObjectSensors:
     def __init__(self, ps_object: prescan_api_types.WorldObject):
         self.ps_object: prescan_api_types.WorldObject = ps_object
-        sensor_names = [os.path.splitext(module)[0] for module in os.listdir("./sensors") if
-                        os.path.splitext(module)[1] == ".py"]
-        sensors_cls, _ = get_cls(sensor_names, "sensors")
         self.sensors_cls: Dict[str, callable(Sensor)] = {sensor.name: sensor for sensor in sensors_cls}
         self.objectSensors: Dict[str, List[Sensor]] = {sensor.name: [] for sensor in sensors_cls}
 
