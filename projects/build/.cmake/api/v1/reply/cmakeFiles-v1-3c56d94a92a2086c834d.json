@@ -1,0 +1,676 @@
+{
+	"inputs" : 
+	[
+		{
+			"path" : "CMakeLists.txt"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeDetermineSystem.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeSystem.cmake.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/3.24.2/CMakeSystem.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeDetermineCXXCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeDetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Platform/Windows-Determine-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeDetermineCompilerId.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeCompilerIdDetection.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/ADSP-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/ARMCC-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/ARMClang-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/AppleClang-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/Clang-DetermineCompilerInternal.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/Borland-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/Clang-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/Clang-DetermineCompilerInternal.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/Comeau-CXX-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/Cray-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/Embarcadero-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/Fujitsu-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/GHS-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/HP-CXX-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/IAR-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/Intel-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/MSVC-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/NVHPC-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/NVIDIA-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/PGI-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/PathScale-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/SCO-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/TI-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/Watcom-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/XL-CXX-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CompilerId/VS-10.vcxproj.in"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeFindBinUtils.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeCXXCompiler.cmake.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/3.24.2/CMakeCXXCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeGenericSystem.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Platform/Windows.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Platform/WindowsPaths.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeCXXInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/MSVC-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/MSVC.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Platform/Windows-MSVC-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Platform/Windows-MSVC.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeDetermineRCCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeRCCompiler.cmake.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/3.24.2/CMakeRCCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeRCInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeTestRCCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeTestCXXCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeTestCompilerCommon.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeDetermineCompilerABI.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeParseImplicitIncludeInfo.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeParseImplicitLinkInfo.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeParseLibraryArchitecture.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeTestCompilerCommon.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeCXXCompilerABI.cpp"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeDetermineCompileFeatures.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/Internal/FeatureTesting.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeCXXCompiler.cmake.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/3.24.2/CMakeCXXCompiler.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/lib/cmake/PrescanConfigVersion.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/lib/cmake/PrescanConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/AIR/cmake/AIRConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/ALMS/cmake/ALMSConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/Algorithm/cmake/AlgorithmConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/Annotations/cmake/AnnotationsConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/BRS/cmake/BRSConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/Camera/cmake/CameraConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/CollisionDetection/cmake/CollisionDetectionConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/Communication/cmake/CommunicationConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/GPS/cmake/GPSConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/GenericModel/cmake/GenericModelConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/GraphBasedRoads/cmake/GraphBasedRoadsConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/LMS/cmake/LMSConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/LaneMarker/cmake/LaneMarkerConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/Lidar/cmake/LidarConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/OCS/cmake/OCSConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/ObjectListProvider/cmake/ObjectListProviderConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/OpenDriveImporter/cmake/OpenDriveImporterConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/OpenScenarioImporter/cmake/OpenScenarioImporterConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/PCS/cmake/PCSConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/PhysicsBasedCamera/cmake/PhysicsBasedCameraConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/PrescanViewer/cmake/PrescanViewerConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/ProtobufScalarReader/cmake/ProtobufScalarReaderConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/Radar/cmake/RadarConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/ResultWriter/cmake/ResultWriterConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/ScannerSensor/cmake/ScannerSensorConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/SimulationControl/cmake/SimulationControlConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/TIS/cmake/TISConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/TestAutomation/cmake/TestAutomationConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/TrafficSignalSensor/cmake/TrafficSignalSensorConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/Trajectory/cmake/TrajectoryConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/TunableData/cmake/TunableDataConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/UltraSonic/cmake/UltraSonicConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/UserData/cmake/UserDataConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/VehicleDynamics/cmake/VehicleDynamicsConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/WheelContacts/cmake/WheelContactsConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/WorldModelActuators/cmake/WorldModelActuatorsConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/WorldModelSensors/cmake/WorldModelSensorsConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/modules/WorldViewer/cmake/WorldViewerConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/Plugins/FullWaveformLidarPlugin/lib/cmake/FullWaveformLidarConfigVersion.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/Plugins/FullWaveformLidarPlugin/lib/cmake/FullWaveformLidarConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/Plugins/FullWaveformLidarPlugin/lib/cmake/FullWaveformLidarTargets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/Plugins/FullWaveformLidarPlugin/lib/cmake/FullWaveformLidarTargets-release.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/Plugins/PBRadarPlugin/lib/cmake/PBRadarConfigVersion.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/Plugins/PBRadarPlugin/lib/cmake/PBRadarConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/Plugins/PBRadarPlugin/lib/cmake/PBRadarTargets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/Plugins/PBRadarPlugin/lib/cmake/PBRadarTargets-release.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/Plugins/PointCloudLidarPlugin/lib/cmake/PointCloudLidarConfigVersion.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/Plugins/PointCloudLidarPlugin/lib/cmake/PointCloudLidarConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/Plugins/PointCloudLidarPlugin/lib/cmake/PointCloudLidarTargets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/Plugins/PointCloudLidarPlugin/lib/cmake/PointCloudLidarTargets-release.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/Plugins/ProbabilisticSensorsPlugin/lib/cmake/ProbabilisticSensorsConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/Plugins/ProbabilisticSensorsPlugin/modules/ProbabilisticCamera/cmake/ProbabilisticCameraConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/Plugins/ProbabilisticSensorsPlugin/modules/ProbabilisticRadar/cmake/ProbabilisticRadarConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/Plugins/V2XPlugin/lib/cmake/v2xConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/Plugins/V2XPlugin/modules/v2x/cmake/v2xConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/lib/cmake/PrescanUtils.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Simcenter Prescan/Prescan_2302/lib/cmake/PrescanUtils.cmake"
+		}
+	],
+	"kind" : "cmakeFiles",
+	"paths" : 
+	{
+		"build" : "C:/Users/yiyan5ez/Desktop/PrescanSimcppGenerator/projects/build",
+		"source" : "C:/Users/yiyan5ez/Desktop/PrescanSimcppGenerator/projects"
+	},
+	"version" : 
+	{
+		"major" : 1,
+		"minor" : 0
+	}
+}
