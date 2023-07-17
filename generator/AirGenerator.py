@@ -7,7 +7,7 @@
 
 from sensors.Air import Air
 from sensors.MetaSensor import Sensor
-from ObjectParser import GeneratorObject
+from ObjectsSensorsParser import ObjectSensors
 from rename_api_namespace.simcpp_api import *
 from generator.MetaGenerator import Generator, Include
 import shutil
@@ -23,7 +23,7 @@ class AirGenerator(Generator):
             super().__init__(dst)
             self.include_air_dependency = False
 
-        def generate_codes(self, _object: GeneratorObject):
+        def generate_codes(self, _object: ObjectSensors):
             if len(_object.objectSensors[AirGenerator.sensorName]) > 0 and not self.include_air_dependency:
                 self.includes += air_incl
                 self.sensorDemux += f'''{sensorDemux_incl_prefix}_air.h"\n'''
@@ -33,7 +33,7 @@ class AirGenerator(Generator):
     def __init__(self):
         super().__init__()
 
-    def generate_codes(self, _object: GeneratorObject):
+    def generate_codes(self, _object: ObjectSensors):
         airSensor_prefix = f"airSensor_{_object.ps_object.name}"
         airUnit_prefix = f"airUnit_{_object.ps_object.name}"
 

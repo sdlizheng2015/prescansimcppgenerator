@@ -5,7 +5,7 @@
 # @Author  : Yi Yang
 # @Support : prescansls.sisw@siemens.com
 
-from ObjectParser import GeneratorObject
+from ObjectsSensorsParser import ObjectSensors
 from sensors.MetaSensor import Sensor
 from rename_api_namespace.simcpp_api import *
 from generator.MetaGenerator import Generator, Include
@@ -21,7 +21,7 @@ class StateActuatorGenerator(Generator):
             super().__init__(dst)
             self.include_state_actuator_dependency = False
 
-        def generate_codes(self, _object: GeneratorObject):
+        def generate_codes(self, _object: ObjectSensors):
             if not self.include_state_actuator_dependency:
                 self.includes += state_incl
                 self.include_state_actuator_dependency = True
@@ -29,7 +29,7 @@ class StateActuatorGenerator(Generator):
     def __init__(self):
         super().__init__()
 
-    def generate_codes(self, _object: GeneratorObject):
+    def generate_codes(self, _object: ObjectSensors):
         stateUnit_prefix = f"stateUnit_{_object.ps_object.name}"
         object_var = f"obj_{_object.ps_object.name}"
 

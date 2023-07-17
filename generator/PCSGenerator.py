@@ -7,7 +7,7 @@
 
 from sensors.Pcs import Pcs
 from sensors.MetaSensor import Sensor
-from ObjectParser import GeneratorObject
+from ObjectsSensorsParser import ObjectSensors
 from rename_api_namespace.simcpp_api import *
 from generator.MetaGenerator import Generator, Include
 import shutil
@@ -27,7 +27,7 @@ class PCSGenerator(Generator):
             self.include_pcs_rang = False
             self.include_pcs_dependency = False
 
-        def generate_codes(self, _object: GeneratorObject):
+        def generate_codes(self, _object: ObjectSensors):
             if len(_object.objectSensors[PCSGenerator.sensorName]) > 0 and not self.include_pcs_dependency:
                 self.includes += pcs_incl
                 self.include_pcs_dependency = True
@@ -49,7 +49,7 @@ class PCSGenerator(Generator):
     def __init__(self):
         super().__init__()
 
-    def generate_codes(self, _object: GeneratorObject):
+    def generate_codes(self, _object: ObjectSensors):
         pcsSensor_prefix = f"pcsSensor_{_object.ps_object.name}"
         pcsUnit_prefix = f"pcsUnit_{_object.ps_object.name}"
         for pcs in _object.objectSensors[PCSGenerator.sensorName]:  # type: Pcs

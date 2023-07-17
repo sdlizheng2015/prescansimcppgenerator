@@ -5,7 +5,7 @@
 # @Author  : Yi Yang
 # @Support : prescansls.sisw@siemens.com
 
-from ObjectParser import GeneratorObject
+from ObjectsSensorsParser import ObjectSensors
 from sensors.MetaSensor import Sensor
 from rename_api_namespace.simcpp_api import *
 from generator.MetaGenerator import Generator, Include
@@ -22,7 +22,7 @@ class SelfUnitGenerator(Generator):
             super().__init__(dst)
             self.include_type_dependency = False
 
-        def generate_codes(self, _object: GeneratorObject):
+        def generate_codes(self, _object: ObjectSensors):
             if not self.include_type_dependency:
                 self.includes += type_incl
                 self.sensorDemux += f'''{sensorDemux_incl_prefix}_selfunit.h"\n'''
@@ -32,7 +32,7 @@ class SelfUnitGenerator(Generator):
     def __init__(self):
         super().__init__()
 
-    def generate_codes(self, _object: GeneratorObject):
+    def generate_codes(self, _object: ObjectSensors):
         object_name_var = f"{_object.ps_object.name}"
         self_unit_var = f"selfUnit_{_object.ps_object.name}"
 

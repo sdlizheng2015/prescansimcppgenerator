@@ -9,17 +9,29 @@ import shutil
 import os
 import sys
 
+from rename_api_namespace.prescan_python_dmapi import *
+from prescan.internal import PrescanException
 from generator import *
 from typing import Dict, List, Tuple
 from sensors.MetaSensor import Sensor
-from ObjectParser import ObjectParser, GeneratorObject
+from ObjectsSensorsParser import ObjectsSensorsParser, ObjectSensors
 from utils.load_modules import get_cls
 from generator import SelfUnitGenerator, StateActuatorGenerator
+import yaml
+from logger.UserLog import uniLog
+
+generator_names = [os.path.splitext(module)[0] for module in os.listdir("./generator") if
+                   os.path.splitext(module)[1] == ".py"]
+generator_cls, incl_cls = get_cls(generator_names, "generator", sub_cls_name="SensorInclude")
+generator_cls.insert(0, generator_cls.pop(generator_cls.index(StateActuatorGenerator)))
+generator_cls.insert(0, generator_cls.pop(generator_cls.index(SelfUnitGenerator)))
+incl_cls.insert(0, incl_cls.pop(incl_cls.index(StateActuatorGenerator.SensorInclude)))
+incl_cls.insert(0, incl_cls.pop(incl_cls.index(SelfUnitGenerator.SensorInclude)))
 
 
 class SimcppGenerator:
     def __init__(self, pb: str, pb_yaml: str, ps_dir: str, load_yaml: bool = True):
-        self.objectParser = ObjectParser(pb, pb_yaml, load_yaml)
+        self.xp_yaml = {}
         self.ps_dir = ps_dir
         self.dst = ""
         self.includes = ""
@@ -30,6 +42,16 @@ class SimcppGenerator:
         self.terminate = ""
         self.constructor = ""
         self.initialize = ""
+        try:
+            self.xp: prescan_api_experiment.Experiment = prescan_api_experiment.loadExperimentFromFile(pb)
+            if load_yaml:
+                with open(pb_yaml, "rt") as file:
+                    self.xp_yaml: dict = yaml.load(file, yaml.FullLoader)
+        except PrescanException as ee:
+            uniLog.logger.error(self.__class__.__name__ + ": " + str(ee))
+            raise PrescanException("load pb/yaml file failed")
+        else:
+            self.objectsSensorsParser = ObjectsSensorsParser(self.xp, self.xp_yaml, load_yaml)
 
     def copy_to_project(self, dst: str = "./projects"):
         """
@@ -74,7 +96,12 @@ class SimcppGenerator:
             with open(write_to_path, "w") as file:
                 file.writelines(text)
 
-    def add_comments(self, _object: GeneratorObject):
+    def _add_comments(self, _object: ObjectSensors):
+        """
+        TODO: add comments for simmodel.h file
+        :param _object:
+        :return:
+        """
         propertyComment = f"{Generator.space2}//Define properties for {_object.ps_object.name}\n"
         self.properties += propertyComment
 
@@ -87,16 +114,37 @@ class SimcppGenerator:
         stepsComment = f"{Generator.space2}//Demux sensors for {_object.ps_object.name}\n"
         self.steps += stepsComment
 
-    def generate_codes(self):
-        generator_names = [os.path.splitext(module)[0] for module in os.listdir("./generator") if
-                           os.path.splitext(module)[1] == ".py"]
-        generator_cls, incl_cls = get_cls(generator_names, "generator", sub_cls_name="SensorInclude")
-        generator_cls.insert(0, generator_cls.pop(generator_cls.index(StateActuatorGenerator)))
-        generator_cls.insert(0, generator_cls.pop(generator_cls.index(SelfUnitGenerator)))
-        incl_cls.insert(0, incl_cls.pop(incl_cls.index(StateActuatorGenerator.SensorInclude)))
-        incl_cls.insert(0, incl_cls.pop(incl_cls.index(SelfUnitGenerator.SensorInclude)))
+    def _is_object_always_on_sheet(self, _object: ObjectSensors):
+        """
+        TODO: is actor always generated for GUI config
+        :param _object:
+        :return:
+        """
+        for i in range(len(self.xp.objects)):
+            if self.xp.getString("pimp/worldmodel", f"object:{i}/name") == _object.ps_object.name:
+                return bool(self.xp.getBool("pimp/worldmodel", f"object:{i}/genericModel/alwaysOnCompilationSheet"))
+        return False
 
-        for _object in self.objectParser.ParsedObjects:  # type: GeneratorObject
+    def _is_object_to_generate(self, _object: ObjectSensors):
+        """
+        TODO: generate actor with trajectory or dynamics or always_on_sheet
+        :param _object:
+        :return:
+        """
+        if len(_object.objectSensors[Sensor.Trajectory]) > 0 \
+                or len(_object.objectSensors[Sensor.AmesimDynamics]) > 0 \
+                or self._is_object_always_on_sheet(_object):
+            return True
+        return False
+
+    def generate_codes(self):
+        """
+        TODO:
+        :return:
+        """
+        for _object in self.objectsSensorsParser.ParsedObjectsSensors:  # type: ObjectSensors
+            if not self._is_object_to_generate(_object):
+                continue
             sensor_demux = ""
             sensor_includes = ""
             properties = ""
@@ -110,14 +158,15 @@ class SimcppGenerator:
             className = f"class {worldObject}" + "{" + f"\npublic:\n  explicit {worldObject}()" + "{\n"
             deconstructfunc = f"  ~{worldObject}()" + "{\n"
 
+            """generate #include in 'worldobject.h' files"""
             includes: List[Include] = [incl(self.dst) for incl in incl_cls]
             for include in includes:
                 include.generate_codes(_object)
                 sensor_demux += include.sensorDemux
                 sensor_includes += include.includes
 
+            """generate codes in 'worldobject.h' files"""
             generators: Dict[str, Generator] = {generator.sensorName: generator() for generator in generator_cls}
-
             for generator in generators.values():
                 generator.generate_codes(_object)
                 properties += generator.properties
@@ -133,6 +182,7 @@ class SimcppGenerator:
             else:
                 pass
 
+            """To generate all 'worldobject.h' files"""
             object_model_path = self.dst + "/simmodel/worldobjects/worldobject.h"
             object_model = {
                 "//INCLUDES//\n": sensor_includes,
@@ -150,7 +200,8 @@ class SimcppGenerator:
             }
             self.overwrite_files(files, new_path=self.dst + f"/simmodel/worldobjects/{worldObject}.h")
 
-            self.add_comments(_object)
+            """To overwrite simmodel.h file"""
+            self._add_comments(_object)
             self.includes += f'''#include "worldobjects/{worldObject}.h"\n'''
             self.properties += f"{Generator.space2}{worldObject} ps_{worldObject};\n"
             self.registerUnits += f"{Generator.space2}ps_{worldObject}.registerSimulationUnits(experiment, simulation);\n"

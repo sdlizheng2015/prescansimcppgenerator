@@ -7,7 +7,7 @@
 
 from sensors.AmesimDynamics import AmesimDynamics
 from sensors.MetaSensor import Sensor
-from ObjectParser import GeneratorObject
+from ObjectsSensorsParser import ObjectSensors
 from rename_api_namespace.simcpp_api import *
 from generator.MetaGenerator import Generator, Include
 import shutil
@@ -23,7 +23,7 @@ class AmesimDynamicsGenerator(Generator):
             super().__init__(dst)
             self.include_amesim_dependency = False
 
-        def generate_codes(self, _object: GeneratorObject):
+        def generate_codes(self, _object: ObjectSensors):
             if len(_object.objectSensors[
                        AmesimDynamicsGenerator.sensorName]) > 0 and not self.include_amesim_dependency:
                 self.includes += amesim_incl
@@ -34,7 +34,7 @@ class AmesimDynamicsGenerator(Generator):
     def __init__(self):
         super().__init__()
 
-    def generate_codes(self, _object: GeneratorObject):
+    def generate_codes(self, _object: ObjectSensors):
         dynamicsUnit_prefix = f"dynamicsUnit_{_object.ps_object.name}"
         object_var = f"obj_{_object.ps_object.name}"
         for _ in _object.objectSensors[AmesimDynamicsGenerator.sensorName]:  # type: AmesimDynamics

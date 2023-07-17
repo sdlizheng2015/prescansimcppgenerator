@@ -13,7 +13,7 @@ __load_module__ = ["Trajectory"]
 
 class Trajectory(Sensor):
     name = Sensor.Trajectory
-    getSensorsAPI = prescan_api_trajectory.getAttachedTrajectories
+    getSensorsAPI = lambda ps_object: [prescan_api_trajectory.getActiveTrajectory(ps_object)]
     pimp_model = "pimp/scenariomodel"
 
     def __init__(self, trajectory: prescan_api_trajectory.Trajectory, xp: prescan_api_experiment.Experiment,

@@ -7,7 +7,7 @@
 
 from sensors.Fullwaveformlidar import Fullwaveformlidar
 from sensors.MetaSensor import Sensor
-from ObjectParser import GeneratorObject
+from ObjectsSensorsParser import ObjectSensors
 from rename_api_namespace.simcpp_api import *
 from generator.MetaGenerator import Generator, Include
 import shutil
@@ -23,7 +23,7 @@ class FullwaveformlidarGenerator(Generator):
             super().__init__(dst)
             self.include_fwl_dependency = False
 
-        def generate_codes(self, _object: GeneratorObject):
+        def generate_codes(self, _object: ObjectSensors):
             if len(_object.objectSensors[
                        FullwaveformlidarGenerator.sensorName]) > 0 and not self.include_fwl_dependency:
                 self.includes += fwl_incl
@@ -34,7 +34,7 @@ class FullwaveformlidarGenerator(Generator):
     def __init__(self):
         super().__init__()
 
-    def generate_codes(self, _object: GeneratorObject):
+    def generate_codes(self, _object: ObjectSensors):
         fwlSensor_prefix = f"fwlSensor_{_object.ps_object.name}"
         fwlPointUnit_prefix = f"fwlPointUnit_{_object.ps_object.name}"
         fwlBeamUnit_prefix = f"fwlBeamUnit_{_object.ps_object.name}"

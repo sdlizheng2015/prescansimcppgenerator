@@ -7,7 +7,7 @@
 
 from sensors.Pointcloudlidar import Pointcloudlidar
 from sensors.MetaSensor import Sensor
-from ObjectParser import GeneratorObject
+from ObjectsSensorsParser import ObjectSensors
 from rename_api_namespace.simcpp_api import *
 from generator.MetaGenerator import Generator, Include
 import shutil
@@ -23,7 +23,7 @@ class PointcloudlidarGenerator(Generator):
             super().__init__(dst)
             self.include_pcl_dependency = False
 
-        def generate_codes(self, _object: GeneratorObject):
+        def generate_codes(self, _object: ObjectSensors):
             if len(_object.objectSensors[PointcloudlidarGenerator.sensorName]) > 0 and not self.include_pcl_dependency:
                 self.includes += pcl_incl
                 self.sensorDemux += f'''{sensorDemux_incl_prefix}_pcl.h"\n'''
@@ -33,7 +33,7 @@ class PointcloudlidarGenerator(Generator):
     def __init__(self):
         super().__init__()
 
-    def generate_codes(self, _object: GeneratorObject):
+    def generate_codes(self, _object: ObjectSensors):
         pclSensor_prefix = f"pclSensor_{_object.ps_object.name}"
         pclPointUnit_prefix = f"pclPointUnit_{_object.ps_object.name}"
         pclObjectIdUnit_prefix = f"pclObjectIdUnit_{_object.ps_object.name}"

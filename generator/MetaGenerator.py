@@ -6,7 +6,7 @@
 # @Support : prescansls.sisw@siemens.com
 
 from abc import abstractmethod, ABCMeta
-from ObjectParser import GeneratorObject
+from ObjectsSensorsParser import ObjectSensors
 
 __load_module__ = []
 
@@ -28,7 +28,7 @@ class Generator(metaclass=ABCMeta):
         self.has_trajectory = False
 
     @abstractmethod
-    def generate_codes(self, _object: GeneratorObject):
+    def generate_codes(self, _object: ObjectSensors):
         ...
 
 
@@ -39,5 +39,5 @@ class Include(metaclass=ABCMeta):
         self.sensorDemux = ""
 
     @abstractmethod
-    def generate_codes(self, _object: GeneratorObject):
+    def generate_codes(self, _object: ObjectSensors):
         ...

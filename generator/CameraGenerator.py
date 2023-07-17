@@ -7,7 +7,7 @@
 
 from sensors.Camera import Camera
 from sensors.MetaSensor import Sensor
-from ObjectParser import GeneratorObject
+from ObjectsSensorsParser import ObjectSensors
 from rename_api_namespace.simcpp_api import *
 from generator.MetaGenerator import Generator, Include
 from rename_api_namespace.prescan_python_dmapi import *
@@ -28,7 +28,7 @@ class CameraGenerator(Generator):
             self.include_camera_dependency = False
             self.include_camera_BGRU8 = False
 
-        def generate_codes(self, _object: GeneratorObject):
+        def generate_codes(self, _object: ObjectSensors):
             if len(_object.objectSensors[CameraGenerator.sensorName]) > 0 and not self.include_camera_dependency:
                 self.includes += camera_incl
                 self.include_camera_dependency = True
@@ -54,7 +54,7 @@ class CameraGenerator(Generator):
     def __init__(self):
         super().__init__()
 
-    def generate_codes(self, _object: GeneratorObject):
+    def generate_codes(self, _object: ObjectSensors):
         for camera in _object.objectSensors[CameraGenerator.sensorName]:  # type: Camera
             cameraSensor_prefix = f"cameraSensor_{_object.ps_object.name}"
             cameraUnit_prefix = f"cameraUnit_{_object.ps_object.name}"

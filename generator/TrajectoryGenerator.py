@@ -7,7 +7,7 @@
 
 from sensors.Trajectory import Trajectory
 from sensors.MetaSensor import Sensor
-from ObjectParser import GeneratorObject
+from ObjectsSensorsParser import ObjectSensors
 from rename_api_namespace.simcpp_api import *
 from generator.MetaGenerator import Generator, Include
 
@@ -22,7 +22,7 @@ class TrajectoryGenerator(Generator):
             super().__init__(dst)
             self.include_trajectory_dependency = False
 
-        def generate_codes(self, _object: GeneratorObject):
+        def generate_codes(self, _object: ObjectSensors):
             if len(_object.objectSensors[TrajectoryGenerator.sensorName]) > 0 and not self.include_trajectory_dependency:
                 self.includes += trajectory_incl
                 self.include_trajectory_dependency = True
@@ -30,7 +30,7 @@ class TrajectoryGenerator(Generator):
     def __init__(self):
         super().__init__()
 
-    def generate_codes(self, _object: GeneratorObject):
+    def generate_codes(self, _object: ObjectSensors):
         pathUnit_prefix = f"pathUnit_{_object.ps_object.name}"
         speedUnit_prefix = f"speedUnit_{_object.ps_object.name}"
         object_var = f"obj_{_object.ps_object.name}"

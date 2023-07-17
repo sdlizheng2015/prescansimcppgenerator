@@ -16,7 +16,7 @@ from utils.load_modules import get_cls
 from typing import Dict
 
 
-class GeneratorObject:
+class ObjectSensors:
     def __init__(self, ps_object: prescan_api_types.WorldObject):
         self.ps_object: prescan_api_types.WorldObject = ps_object
         sensor_names = [os.path.splitext(module)[0] for module in os.listdir("./sensors") if
@@ -39,32 +39,24 @@ class GeneratorObject:
                f"{self._objects_info()}"
 
 
-class ObjectParser:
-    def __init__(self, pb: str, pb_yaml: str, load_yaml: bool):
-        self._generator_objects: List[GeneratorObject] = []
-        self.xp_yaml = {}
-        try:
-            self.xp: prescan_api_experiment.Experiment = prescan_api_experiment.loadExperimentFromFile(pb)
-            if load_yaml:
-                with open(pb_yaml, "rt") as file:
-                    self.xp_yaml: dict = yaml.load(file, yaml.FullLoader)
-        except PrescanException as ee:
-            uniLog.logger.error(self.__class__.__name__ + ": " + str(ee))
-            raise PrescanException("load pb/yaml file failed")
-        else:
-            self._parse_objects()
-            self._register_sensors()
+class ObjectsSensorsParser:
+    def __init__(self, xp: prescan_api_experiment.Experiment, xp_yaml: dict, load_yaml: bool):
+        self._objects_sensors: List[ObjectSensors] = []
+        self._xp_yaml = xp_yaml
+        self._xp = xp
+        self._parse_objects()
+        self._register_sensors()
 
     @property
-    def ParsedObjects(self):
-        return self._generator_objects
+    def ParsedObjectsSensors(self):
+        return self._objects_sensors
 
     def _parse_objects(self):
-        for _object in self.xp.objects:
-            self._generator_objects.append(GeneratorObject(_object))
+        for _object in self._xp.objects:
+            self._objects_sensors.append(ObjectSensors(_object))
 
     def _register_sensors(self):
-        for _object in self._generator_objects:  # type: GeneratorObject
+        for _object in self._objects_sensors:  # type: ObjectSensors
             for sensor_name, sensor_cls in _object.sensors_cls.items():
                 try:
                     sensors = sensor_cls.getSensorsAPI(_object.ps_object)
@@ -72,4 +64,4 @@ class ObjectParser:
                     uniLog.logger.warn(self.__class__.__name__ + ": " + str(ee))
                 else:
                     _object.objectSensors[sensor_name].extend(
-                        [sensor_cls(sensor, self.xp, self.xp_yaml) for sensor in sensors])
+                        [sensor_cls(sensor, self._xp, self._xp_yaml) for sensor in sensors])

@@ -7,7 +7,7 @@
 
 from sensors.Physicsbasedcameraunreal import Physicsbasedcameraunreal
 from sensors.MetaSensor import Sensor
-from ObjectParser import GeneratorObject
+from ObjectsSensorsParser import ObjectSensors
 from rename_api_namespace.simcpp_api import *
 from generator.MetaGenerator import Generator, Include
 import shutil
@@ -23,7 +23,7 @@ class PhysicsbasedcameraunrealGenerator(Generator):
             super().__init__(dst)
             self.include_pbc_dependency = False
 
-        def generate_codes(self, _object: GeneratorObject):
+        def generate_codes(self, _object: ObjectSensors):
             if len(_object.objectSensors[
                        PhysicsbasedcameraunrealGenerator.sensorName]) > 0 and not self.include_pbc_dependency:
                 self.includes += pbc_incl
@@ -34,7 +34,7 @@ class PhysicsbasedcameraunrealGenerator(Generator):
     def __init__(self):
         super().__init__()
 
-    def generate_codes(self, _object: GeneratorObject):
+    def generate_codes(self, _object: ObjectSensors):
         pbcSensor_prefix = f"pbcSensor_{_object.ps_object.name}"
         pbcUnit_prefix = f"pbcUnit_{_object.ps_object.name}"
         for pbc in _object.objectSensors[
