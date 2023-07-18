@@ -47,16 +47,28 @@ public:
   void initialize(prescan::sim::ISimulation* simulation) override{
 //INITIALIZE//
     updateState();
+	
+	start_time = prescan::utils::get_milliseconds_timestamp();
+	last_time = start_time;
 }
 
   void step(prescan::sim::ISimulation* simulation) override{
-    //double simulation_time = prescan::utils::get_milliseconds_timestamp();
+    start_time = prescan::utils::get_milliseconds_timestamp();
     double simulation_time = simulation->getSampleTime();
-    std::cout<< std::fixed << std::setprecision(3) <<"Simulation time: " << simulation_time << std::endl;
+    std::cout<< std::fixed << std::setprecision(3) << " =============== Simulation time: " 
+	         << simulation_time << "[s] ===============" <<std::endl;
 
 //STEP//
 
     updateState();
+	
+	end_time = prescan::utils::get_milliseconds_timestamp();
+	std::cout <<"Step time: ";
+	std::cout << std::fixed << std::setprecision(3) << std::setw(7) << std::setfill('0') << std::left << end_time - start_time;
+	std::cout << "[s], Cilic time: ";
+	std::cout << std::fixed << std::setprecision(3) << std::setw(7) << std::setfill('0') << std::left << start_time - last_time;
+	std::cout << "[s]" << std::endl << std::endl;  
+	last_time = start_time;
 }
 
   void terminate(prescan::sim::ISimulation* simulation) override{
@@ -64,6 +76,8 @@ public:
 }
 
 public:
+  double start_time, last_time, end_time;
+  
 //PROPERTIES//
 
 };

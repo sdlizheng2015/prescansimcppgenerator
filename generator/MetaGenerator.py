@@ -13,6 +13,7 @@ __load_module__ = []
 
 class Generator(metaclass=ABCMeta):
     space2 = "    "
+    Terminator = "Terminator"
 
     def __init__(self):
         self.space4 = "    "

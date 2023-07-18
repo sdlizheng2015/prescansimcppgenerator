@@ -30,7 +30,8 @@ incl_cls.insert(0, incl_cls.pop(incl_cls.index(SelfUnitGenerator.SensorInclude))
 
 
 class SimcppGenerator:
-    def __init__(self, pb: str, pb_yaml: str, ps_dir: str, load_yaml: bool = True):
+    def __init__(self, pb: str, pb_yaml: str, ps_dir: str,
+                 load_yaml: bool = True, enable_all_port: bool = False):
         self.xp_yaml = {}
         self.ps_dir = ps_dir
         self.dst = ""
@@ -51,7 +52,7 @@ class SimcppGenerator:
             uniLog.logger.error(self.__class__.__name__ + ": " + str(ee))
             raise PrescanException("load pb/yaml file failed")
         else:
-            self.objectsSensorsParser = ObjectsSensorsParser(self.xp, self.xp_yaml, load_yaml)
+            self.objectsSensorsParser = ObjectsSensorsParser(self.xp, self.xp_yaml, load_yaml, enable_all_port)
 
     def copy_to_project(self, dst: str = "./projects"):
         """

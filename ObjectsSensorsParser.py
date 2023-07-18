@@ -21,8 +21,9 @@ sensors_cls, _ = get_cls(sensor_names, "sensors")
 
 
 class ObjectSensors:
-    def __init__(self, ps_object: prescan_api_types.WorldObject):
+    def __init__(self, ps_object: prescan_api_types.WorldObject, enable_all_port: bool):
         self.ps_object: prescan_api_types.WorldObject = ps_object
+        self.enable_all_ports = enable_all_port
         self.sensors_cls: Dict[str, callable(Sensor)] = {sensor.name: sensor for sensor in sensors_cls}
         self.objectSensors: Dict[str, List[Sensor]] = {sensor.name: [] for sensor in sensors_cls}
 
@@ -41,10 +42,12 @@ class ObjectSensors:
 
 
 class ObjectsSensorsParser:
-    def __init__(self, xp: prescan_api_experiment.Experiment, xp_yaml: dict, load_yaml: bool):
+    def __init__(self, xp: prescan_api_experiment.Experiment, xp_yaml: dict,
+                 load_yaml: bool, enable_all_port: bool = False):
         self._objects_sensors: List[ObjectSensors] = []
         self._xp_yaml = xp_yaml
         self._xp = xp
+        self._enable_all_ports = enable_all_port
         self._parse_objects()
         self._register_sensors()
 
@@ -54,7 +57,7 @@ class ObjectsSensorsParser:
 
     def _parse_objects(self):
         for _object in self._xp.objects:
-            self._objects_sensors.append(ObjectSensors(_object))
+            self._objects_sensors.append(ObjectSensors(_object, self._enable_all_ports))
 
     def _register_sensors(self):
         for _object in self._objects_sensors:  # type: ObjectSensors

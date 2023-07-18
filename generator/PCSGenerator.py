@@ -75,15 +75,27 @@ class PCSGenerator(Generator):
                     self.properties += f"{self.space4}{float_vector_ptr} {pcsUnit_prefix}_{pcs.pcs.name}_Intensity;\n"
                     self.constructor += f"{self.space4}{pcsUnit_prefix}_{pcs.pcs.name}_Intensity = {float_vector_ptr_make};\n"
                 if pcs.outputObjectID:
-                    self.properties += f"{self.space4}{int32_t_vector_ptr} {pcsUnit_prefix}_{pcs.pcs.name}_ID;\n"
-                    self.constructor += f"{self.space4}{pcsUnit_prefix}_{pcs.pcs.name}_ID = {int32_t_vector_ptr_make};\n"
+                    self.properties += f"{self.space4}{float_vector_ptr} {pcsUnit_prefix}_{pcs.pcs.name}_ID;\n"
+                    self.constructor += f"{self.space4}{pcsUnit_prefix}_{pcs.pcs.name}_ID = {float_vector_ptr_make};\n"
                 if pcs.outputAngles:
                     self.properties += f"{self.space4}{float_vector_ptr} {pcsUnit_prefix}_{pcs.pcs.name}_Angle_Theta;\n"
                     self.properties += f"{self.space4}{float_vector_ptr} {pcsUnit_prefix}_{pcs.pcs.name}_Angle_Phi;\n"
                     self.constructor += f"{self.space4}{pcsUnit_prefix}_{pcs.pcs.name}_Angle_Theta = {float_vector_ptr_make};\n"
                     self.constructor += f"{self.space4}{pcsUnit_prefix}_{pcs.pcs.name}_Angle_Phi = {float_vector_ptr_make};\n"
-                func_len = len(f"{self.space4}{sensorDemux}::demux_pcsRange(")
                 func_space = " " * 6
+                port_Range = f"{pcsUnit_prefix}_{pcs.pcs.name}_Range" \
+                    if _object.enable_all_ports else Generator.Terminator
+                port_Velocity = f"{pcsUnit_prefix}_{pcs.pcs.name}_Velocity" \
+                    if (_object.enable_all_ports and pcs.outputDopplerVelocity) else Generator.Terminator
+                port_Intensity = f"{pcsUnit_prefix}_{pcs.pcs.name}_Intensity" \
+                    if (_object.enable_all_ports and pcs.outputIntensity) else Generator.Terminator
+                port_ID = f"{pcsUnit_prefix}_{pcs.pcs.name}_ID" \
+                    if (_object.enable_all_ports and pcs.outputObjectID) else Generator.Terminator
+                port_Angle_Theta = f"{pcsUnit_prefix}_{pcs.pcs.name}_Angle_Theta" \
+                    if (_object.enable_all_ports and pcs.outputAngles) else Generator.Terminator
+                port_Angle_Phi = f"{pcsUnit_prefix}_{pcs.pcs.name}_Angle_Phi" \
+                    if (_object.enable_all_ports and pcs.outputAngles) else Generator.Terminator
+
                 self.steps += f"{self.space4}//If the output is disabled, DON'T/CAN'T replace its Terminator\n"
                 self.steps += f"{self.space4}{sensorDemux}::demux_pcsRange(\n" \
                               f"{func_space}{pcsUnit_prefix}_{pcs.pcs.name},\n" \
@@ -93,12 +105,12 @@ class PCSGenerator(Generator):
                               f"{func_space}{int(pcs.outputObjectID)}, // outputObjectID?, DON'T EDIT\n" \
                               f"{func_space}{int(pcs.outputAngles)}, // outputAngles?, DON'T EDIT\n" \
                               f"{func_space}//Demux:\n" \
-                              f"{func_space}Terminator, // ->Range (valid)\n" \
-                              f"{func_space}Terminator, // ->Velocity {'(valid)' if pcs.outputDopplerVelocity else '(invalid)'}\n" \
-                              f"{func_space}Terminator, // ->Intensity {'(valid)' if pcs.outputIntensity else '(invalid)'}\n" \
-                              f"{func_space}Terminator, // ->ID {'(valid)' if pcs.outputObjectID else '(invalid)'}\n" \
-                              f"{func_space}Terminator, // ->Angle_Theta {'(valid)' if pcs.outputAngles else '(invalid)'}\n" \
-                              f"{func_space}Terminator); // ->Angle_Phi {'(valid)' if pcs.outputAngles else '(invalid)'}\n"
+                              f"{func_space}{port_Range}, // ->Range (valid)\n" \
+                              f"{func_space}{port_Velocity}, // ->Velocity {'(valid)' if pcs.outputDopplerVelocity else '(invalid)'}\n" \
+                              f"{func_space}{port_Intensity}, // ->Intensity {'(valid)' if pcs.outputIntensity else '(invalid)'}\n" \
+                              f"{func_space}{port_ID}, // ->ID {'(valid)' if pcs.outputObjectID else '(invalid)'}\n" \
+                              f"{func_space}{port_Angle_Theta}, // ->Angle_Theta {'(valid)' if pcs.outputAngles else '(invalid)'}\n" \
+                              f"{func_space}{port_Angle_Phi}); // ->Angle_Phi {'(valid)' if pcs.outputAngles else '(invalid)'}\n"
             else:
                 # output properties and constructors
                 self.properties += f"{self.space4}{float_vector_ptr} {pcsUnit_prefix}_{pcs.pcs.name}_X;\n"
@@ -108,13 +120,23 @@ class PCSGenerator(Generator):
                 self.constructor += f"{self.space4}{pcsUnit_prefix}_{pcs.pcs.name}_Y = {float_vector_ptr_make};\n"
                 self.constructor += f"{self.space4}{pcsUnit_prefix}_{pcs.pcs.name}_Z = {float_vector_ptr_make};\n"
                 if pcs.outputObjectID:
-                    self.properties += f"{self.space4}{int32_t_vector_ptr} {pcsUnit_prefix}_{pcs.pcs.name}_ID;\n"
-                    self.constructor += f"{self.space4}{pcsUnit_prefix}_{pcs.pcs.name}_ID = {int32_t_vector_ptr_make};\n"
+                    self.properties += f"{self.space4}{float_vector_ptr} {pcsUnit_prefix}_{pcs.pcs.name}_ID;\n"
+                    self.constructor += f"{self.space4}{pcsUnit_prefix}_{pcs.pcs.name}_ID = {float_vector_ptr_make};\n"
                 if pcs.outputIntensity:
                     self.properties += f"{self.space4}{float_vector_ptr} {pcsUnit_prefix}_{pcs.pcs.name}_I;\n"
                     self.constructor += f"{self.space4}{pcsUnit_prefix}_{pcs.pcs.name}_I = {float_vector_ptr_make};\n"
-                func_len = len(f"{self.space4}{sensorDemux}::demux_pcsPosition(")
                 func_space = " " * 6
+                port_X = f"{pcsUnit_prefix}_{pcs.pcs.name}_X" \
+                    if _object.enable_all_ports else Generator.Terminator
+                port_Y = f"{pcsUnit_prefix}_{pcs.pcs.name}_Y" \
+                    if _object.enable_all_ports else Generator.Terminator
+                port_Z = f"{pcsUnit_prefix}_{pcs.pcs.name}_Z" \
+                    if _object.enable_all_ports else Generator.Terminator
+                port_ID = f"{pcsUnit_prefix}_{pcs.pcs.name}_ID" \
+                    if (_object.enable_all_ports and pcs.outputObjectID) else Generator.Terminator
+                port_I = f"{pcsUnit_prefix}_{pcs.pcs.name}_I" \
+                    if (_object.enable_all_ports and pcs.outputIntensity) else Generator.Terminator
+
                 self.steps += f"{self.space4}//If the output is disabled, DON'T/CAN'T replace its Terminator\n"
                 self.steps += f"{self.space4}{sensorDemux}::demux_pcsPosition(\n" \
                               f"{func_space}{pcsUnit_prefix}_{pcs.pcs.name},\n" \
@@ -122,11 +144,11 @@ class PCSGenerator(Generator):
                               f"{func_space}{int(pcs.outputIntensity)}, // outputIntensity?, DON'T EDIT\n" \
                               f"{func_space}{int(pcs.outputObjectID)}, // outputObjectID?, DON'T EDIT\n" \
                               f"{func_space}//Demux:\n" \
-                              f"{func_space}Terminator, // ->X (valid)\n" \
-                              f"{func_space}Terminator, // ->Y (valid)\n" \
-                              f"{func_space}Terminator, // ->Z (valid)\n" \
-                              f"{func_space}Terminator, // ->I {'(valid)' if pcs.outputIntensity else '(invalid)'}\n" \
-                              f"{func_space}Terminator); // ->ID {'(valid)' if pcs.outputObjectID else '(invalid)'}\n"
+                              f"{func_space}{port_X}, // ->X (valid)\n" \
+                              f"{func_space}{port_Y}, // ->Y (valid)\n" \
+                              f"{func_space}{port_Z}, // ->Z (valid)\n" \
+                              f"{func_space}{port_I}, // ->I {'(valid)' if pcs.outputIntensity else '(invalid)'}\n" \
+                              f"{func_space}{port_ID}); // ->ID {'(valid)' if pcs.outputObjectID else '(invalid)'}\n"
             self.steps += "\n"
             self.properties += "\n"
             self.registerUnits += "\n"

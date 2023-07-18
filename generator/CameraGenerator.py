@@ -77,27 +77,37 @@ class CameraGenerator(Generator):
                     self.properties += f"{self.space4}{uint8_t_vector_ptr} {cameraUnit_prefix}_{camera.camera.name}_R;\n"
                     self.properties += f"{self.space4}{uint8_t_vector_ptr} {cameraUnit_prefix}_{camera.camera.name}_G;\n"
                     self.properties += f"{self.space4}{uint8_t_vector_ptr} {cameraUnit_prefix}_{camera.camera.name}_B;\n"
-                    self.constructor += f"{self.space4}{cameraUnit_prefix}_{camera.camera.name}_R = {uint8_t_vector_ptr_make};\n"
-                    self.constructor += f"{self.space4}{cameraUnit_prefix}_{camera.camera.name}_G = {uint8_t_vector_ptr_make};\n"
-                    self.constructor += f"{self.space4}{cameraUnit_prefix}_{camera.camera.name}_B = {uint8_t_vector_ptr_make};\n"
-                    func_len = len(f"{self.space4}{sensorDemux}::demux_cameraSimulinkU8(")
+                    self.constructor += f"{self.space4}{cameraUnit_prefix}_{camera.camera.name}_R = " \
+                                        f"{uint8_t_vector_ptr_make};\n"
+                    self.constructor += f"{self.space4}{cameraUnit_prefix}_{camera.camera.name}_G = " \
+                                        f"{uint8_t_vector_ptr_make};\n"
+                    self.constructor += f"{self.space4}{cameraUnit_prefix}_{camera.camera.name}_B = " \
+                                        f"{uint8_t_vector_ptr_make};\n"
                     func_space = " " * 6
+                    port_R = f"{cameraUnit_prefix}_{camera.camera.name}_R" \
+                        if _object.enable_all_ports else Generator.Terminator
+                    port_G = f"{cameraUnit_prefix}_{camera.camera.name}_G" \
+                        if _object.enable_all_ports else Generator.Terminator
+                    port_B = f"{cameraUnit_prefix}_{camera.camera.name}_B" \
+                        if _object.enable_all_ports else Generator.Terminator
                     self.steps += f"{self.space4}{sensorDemux}::demux_cameraSimulinkU8(\n" \
                                   f"{func_space}{cameraUnit_prefix}_{camera.camera.name},\n" \
                                   f"{func_space}//Demux:\n" \
-                                  f"{func_space}Terminator, // ->R (valid)\n" \
-                                  f"{func_space}Terminator, // ->G (valid)\n" \
-                                  f"{func_space}Terminator); // ->B (valid)\n"
+                                  f"{func_space}{port_R}, // ->R (valid)\n" \
+                                  f"{func_space}{port_G}, // ->G (valid)\n" \
+                                  f"{func_space}{port_B}); // ->B (valid)\n"
                 elif camera.format == prescan_api_camera.ImageFormat.BGRU8:
                     # output properties and constructors
                     self.properties += f"{self.space4}{uchar_vector_ptr} {cameraUnit_prefix}_{camera.camera.name}_BGRU8;\n"
                     self.constructor += f"{self.space4}{cameraUnit_prefix}_{camera.camera.name}_BGRU8 = {uchar_vector_ptr_make};\n"
                     func_len = len(f"{self.space4}{sensorDemux}::demux_cameraBGRU8(")
                     func_space = " " * 6
+                    port_BGRU8 = f"{cameraUnit_prefix}_{camera.camera.name}_BGRU8" \
+                        if _object.enable_all_ports else Generator.Terminator
                     self.steps += f"{self.space4}{sensorDemux}::demux_cameraBGRU8(\n" \
                                   f"{func_space}{cameraUnit_prefix}_{camera.camera.name},\n" \
                                   f"{func_space}//Demux:\n" \
-                                  f"{func_space}Terminator); // -> BGRU8 (valid)\n"
+                                  f"{func_space}{port_BGRU8}); // -> BGRU8 (valid)\n"
                 else:
                     pass
                 self.constructor += "\n"

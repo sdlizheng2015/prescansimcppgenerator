@@ -42,13 +42,13 @@ class AirGenerator(Generator):
             self.properties += f"{self.space4}{AirSensor} {airSensor_prefix}_{air.air.name};\n"
             self.properties += f"{self.space4}{AirSensorUnit}* {airUnit_prefix}_{air.air.name}" + "{nullptr};\n"
 
+            # output properties
             self.properties += f"{self.space4}{double_vector_ptr} {airUnit_prefix}_{air.air.name}_Range;\n"
             self.properties += f"{self.space4}{double_vector_ptr} {airUnit_prefix}_{air.air.name}_Theta;\n"
             self.properties += f"{self.space4}{double_vector_ptr} {airUnit_prefix}_{air.air.name}_Phi;\n"
             self.properties += f"{self.space4}{uint32_t_vector_ptr} {airUnit_prefix}_{air.air.name}_ID;\n"
             self.properties += f"{self.space4}{double_vector_ptr} {airUnit_prefix}_{air.air.name}_Velocity;\n"
             self.properties += f"{self.space4}{double_vector_ptr} {airUnit_prefix}_{air.air.name}_Heading;\n"
-            self.properties += "\n"
 
             self.constructor += f"{self.space4}//Construct Air sensor properties\n"
             self.constructor += f"{self.space4}{airUnit_prefix}_{air.air.name}_Range = {double_vector_ptr_make};\n"
@@ -57,30 +57,52 @@ class AirGenerator(Generator):
             self.constructor += f"{self.space4}{airUnit_prefix}_{air.air.name}_ID = {uint32_t_vector_ptr_make};\n"
             self.constructor += f"{self.space4}{airUnit_prefix}_{air.air.name}_Velocity = {double_vector_ptr_make};\n"
             self.constructor += f"{self.space4}{airUnit_prefix}_{air.air.name}_Heading = {double_vector_ptr_make};\n"
-            self.constructor += "\n"
 
             self.registerUnits += f"{self.space4}//register Air sensor units\n"
-            self.registerUnits += f"{self.space4}{airSensor_prefix}_{air.air.name} = {getAirSensor}(\"{air.air.name}\");\n"
+            self.registerUnits += f"{self.space4}{airSensor_prefix}_{air.air.name} = " \
+                                  f"{getAirSensor}(\"{air.air.name}\");\n"
             self.registerUnits += f"{self.space4}{airUnit_prefix}_{air.air.name} = " \
                                   f"{registerAirSensorUnit}(simulation, {airSensor_prefix}_{air.air.name});\n"
-            self.registerUnits += f"{self.space4}{airUnit_prefix}_{air.air.name}_Range->reserve({airSensor_prefix}_{air.air.name}.maxDetectableObjects());\n"
-            self.registerUnits += f"{self.space4}{airUnit_prefix}_{air.air.name}_Theta->reserve({airSensor_prefix}_{air.air.name}.maxDetectableObjects());\n"
-            self.registerUnits += f"{self.space4}{airUnit_prefix}_{air.air.name}_Phi->reserve({airSensor_prefix}_{air.air.name}.maxDetectableObjects());\n"
-            self.registerUnits += f"{self.space4}{airUnit_prefix}_{air.air.name}_ID->reserve({airSensor_prefix}_{air.air.name}.maxDetectableObjects());\n"
-            self.registerUnits += f"{self.space4}{airUnit_prefix}_{air.air.name}_Velocity->reserve({airSensor_prefix}_{air.air.name}.maxDetectableObjects());\n"
-            self.registerUnits += f"{self.space4}{airUnit_prefix}_{air.air.name}_Heading->reserve({airSensor_prefix}_{air.air.name}.maxDetectableObjects());\n"
-            self.registerUnits += "\n"
+            self.registerUnits += f"{self.space4}{airUnit_prefix}_{air.air.name}_Range->" \
+                                  f"reserve({airSensor_prefix}_{air.air.name}.maxDetectableObjects());\n"
+            self.registerUnits += f"{self.space4}{airUnit_prefix}_{air.air.name}_Theta->" \
+                                  f"reserve({airSensor_prefix}_{air.air.name}.maxDetectableObjects());\n"
+            self.registerUnits += f"{self.space4}{airUnit_prefix}_{air.air.name}_Phi->" \
+                                  f"reserve({airSensor_prefix}_{air.air.name}.maxDetectableObjects());\n"
+            self.registerUnits += f"{self.space4}{airUnit_prefix}_{air.air.name}_ID->" \
+                                  f"reserve({airSensor_prefix}_{air.air.name}.maxDetectableObjects());\n"
+            self.registerUnits += f"{self.space4}{airUnit_prefix}_{air.air.name}_Velocity->" \
+                                  f"reserve({airSensor_prefix}_{air.air.name}.maxDetectableObjects());\n"
+            self.registerUnits += f"{self.space4}{airUnit_prefix}_{air.air.name}_Heading->" \
+                                  f"reserve({airSensor_prefix}_{air.air.name}.maxDetectableObjects());\n"
 
             self.steps += f"{self.space4}//demux air sensor outputs\n"
-            func_len = len(f"{self.space4}{sensorDemux}::demux_air(")
             func_space = " " * 6
+
+            port_Range = f"{airUnit_prefix}_{air.air.name}_Range" \
+                if _object.enable_all_ports else Generator.Terminator
+            port_Theta = f"{airUnit_prefix}_{air.air.name}_Theta" \
+                if _object.enable_all_ports else Generator.Terminator
+            port_Phi = f"{airUnit_prefix}_{air.air.name}_Phi" \
+                if _object.enable_all_ports else Generator.Terminator
+            port_ID = f"{airUnit_prefix}_{air.air.name}_ID" \
+                if _object.enable_all_ports else Generator.Terminator
+            port_Velocity = f"{airUnit_prefix}_{air.air.name}_Velocity" \
+                if _object.enable_all_ports else Generator.Terminator
+            port_Heading = f"{airUnit_prefix}_{air.air.name}_Heading" \
+                if _object.enable_all_ports else Generator.Terminator
+
             self.steps += f"{self.space4}{sensorDemux}::demux_air(\n" \
                           f"{func_space}{airUnit_prefix}_{air.air.name},\n" \
                           f"{func_space}//Demux:\n" \
-                          f"{func_space}Terminator, // ->Range (valid)\n" \
-                          f"{func_space}Terminator, // ->Theta (valid)\n" \
-                          f"{func_space}Terminator, // ->Phi (valid)\n" \
-                          f"{func_space}Terminator, // ->ID (valid)\n" \
-                          f"{func_space}Terminator, // ->Velocity (valid)\n" \
-                          f"{func_space}Terminator); // ->Heading (valid)\n"
+                          f"{func_space}{port_Range}, // ->Range (valid)\n" \
+                          f"{func_space}{port_Theta}, // ->Theta (valid)\n" \
+                          f"{func_space}{port_Phi}, // ->Phi (valid)\n" \
+                          f"{func_space}{port_ID}, // ->ID (valid)\n" \
+                          f"{func_space}{port_Velocity}, // ->Velocity (valid)\n" \
+                          f"{func_space}{port_Heading}); // ->Heading (valid)\n"
+
             self.steps += "\n"
+            self.properties += "\n"
+            self.constructor += "\n"
+            self.registerUnits += "\n"

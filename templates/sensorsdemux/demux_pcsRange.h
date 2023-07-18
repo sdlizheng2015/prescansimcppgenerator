@@ -36,7 +36,7 @@ namespace sensorDemux{
                       std::shared_ptr<std::vector<float>> Range = nullptr, 
 					  std::shared_ptr<std::vector<float>> Velocity = nullptr,
 					  std::shared_ptr<std::vector<float>> Intensity = nullptr,
-                      std::shared_ptr<std::vector<int32_t>> ID = nullptr,
+                      std::shared_ptr<std::vector<float>> ID = nullptr,
 					  std::shared_ptr<std::vector<float>> Angle_Theta = nullptr,
 					  std::shared_ptr<std::vector<float>> Angle_Phi = nullptr){
     if (Range == nullptr && Velocity == nullptr && Intensity == nullptr 
@@ -64,7 +64,7 @@ namespace sensorDemux{
     }
     if (isIDOn && ID != nullptr){
 	  auto pcsIdData = m_PcsSensorUnit->idOutput();
-      auto rawIdData = const_cast<int32_t*>(pcsIdData.data<int32_t>());
+      auto rawIdData = const_cast<float*>(pcsIdData.data<float>());
       ID->assign(rawIdData, rawIdData + resoluation);
     }
 	if (isAnglesOn){

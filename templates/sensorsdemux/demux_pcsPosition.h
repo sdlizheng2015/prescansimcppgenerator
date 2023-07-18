@@ -36,7 +36,7 @@ namespace sensorDemux{
 							           std::shared_ptr<std::vector<float>> Y = nullptr,
 							           std::shared_ptr<std::vector<float>> Z = nullptr,
                          std::shared_ptr<std::vector<float>> I = nullptr,
-                         std::shared_ptr<std::vector<int32_t>> ID = nullptr){
+                         std::shared_ptr<std::vector<float>> ID = nullptr){
     if (X == nullptr && Y == nullptr && Z == nullptr && I == nullptr && ID == nullptr ){
       return;
     }
@@ -65,7 +65,7 @@ namespace sensorDemux{
     }
     if (isIDOn && ID != nullptr){
       auto pcsID = m_pcsSensorUnit->idOutput();
-      auto p_ID = const_cast<int32_t *>(pcsID.data<int32_t>());
+      auto p_ID = const_cast<float *>(pcsID.data<float>());
       ID->assign(p_ID, p_ID + resoluation);
     }
 

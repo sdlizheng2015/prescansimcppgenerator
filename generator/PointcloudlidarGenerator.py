@@ -74,34 +74,32 @@ class PointcloudlidarGenerator(Generator):
                                       f"{registerPointCloudPowerUnit}(simulation, {pclSensor_prefix}_{pcl.pcl.name});\n"
 
             self.steps += f"{self.space4}//demux PCL sensor outputs\n"
-            func_len = len(f"{self.space4}{sensorDemux}::demux_pcl(")
             func_space = " " * 6
-            if pcl.enablePowerCalculation:
-                self.steps += f"{self.space4}{sensorDemux}::demux_pcl(\n" \
-                              f"{func_space}simmodel,\n" \
-                              f"{func_space}{pclSensor_prefix}_{pcl.pcl.name},\n" \
-                              f"{func_space}{pclPointUnit_prefix}_{pcl.pcl.name},\n" \
-                              f"{func_space}{pclObjectIdUnit_prefix}_{pcl.pcl.name},\n" \
-                              f"{func_space}{pclPowerUnit_prefix}_{pcl.pcl.name},\n" \
-                              f"{func_space}//Demux:\n" \
-                              f"{func_space}Terminator, // ->X (valid)\n" \
-                              f"{func_space}Terminator, // ->Y (valid)\n" \
-                              f"{func_space}Terminator, // ->Z (valid)\n" \
-                              f"{func_space}Terminator, // ->I (valid)\n" \
-                              f"{func_space}Terminator); // ->ID (valid)\n"
-            else:
-                self.steps += f"{self.space4}{sensorDemux}::demux_pcl(\n" \
-                              f"{func_space}simmodel,\n" \
-                              f"{func_space}{pclSensor_prefix}_{pcl.pcl.name},\n" \
-                              f"{func_space}{pclPointUnit_prefix}_{pcl.pcl.name},\n" \
-                              f"{func_space}{pclObjectIdUnit_prefix}_{pcl.pcl.name},\n" \
-                              f"{func_space}nullptr, // DON'T EDIT\n" \
-                              f"{func_space}//Demux:\n" \
-                              f"{func_space}Terminator, // ->X (valid)\n" \
-                              f"{func_space}Terminator, // ->Y (valid)\n" \
-                              f"{func_space}Terminator, // ->Z (valid)\n" \
-                              f"{func_space}Terminator, // ->I (invalid)\n" \
-                              f"{func_space}Terminator); // ->ID (valid)\n"
+            port_X = f"{pclPointUnit_prefix}_{pcl.pcl.name}_X" \
+                if _object.enable_all_ports else Generator.Terminator
+            port_Y = f"{pclPointUnit_prefix}_{pcl.pcl.name}_Y" \
+                if _object.enable_all_ports else Generator.Terminator
+            port_Z = f"{pclPointUnit_prefix}_{pcl.pcl.name}_Z" \
+                if _object.enable_all_ports else Generator.Terminator
+            port_ID = f"{pclObjectIdUnit_prefix}_{pcl.pcl.name}_ID" \
+                if _object.enable_all_ports else Generator.Terminator
+            port_I = f"{pclPowerUnit_prefix}_{pcl.pcl.name}_I" \
+                if (_object.enable_all_ports and pcl.enablePowerCalculation) else Generator.Terminator
+            pclPowerUnit = f"{pclPowerUnit_prefix}_{pcl.pcl.name}" if pcl.enablePowerCalculation else "nullptr"
+
+            self.steps += f"{self.space4}{sensorDemux}::demux_pcl(\n" \
+                          f"{func_space}simmodel,\n" \
+                          f"{func_space}{pclSensor_prefix}_{pcl.pcl.name},\n" \
+                          f"{func_space}{pclPointUnit_prefix}_{pcl.pcl.name},\n" \
+                          f"{func_space}{pclObjectIdUnit_prefix}_{pcl.pcl.name},\n" \
+                          f"{func_space}{pclPowerUnit}, // DON'T EDIT\n" \
+                          f"{func_space}//Demux:\n" \
+                          f"{func_space}{port_X}, // ->X (valid)\n" \
+                          f"{func_space}{port_Y}, // ->Y (valid)\n" \
+                          f"{func_space}{port_Z}, // ->Z (valid)\n" \
+                          f"{func_space}{port_I}, // ->I {'(valid)' if pcl.enablePowerCalculation else '(invalid)'}\n" \
+                          f"{func_space}{port_ID}); // ->ID (valid)\n"
+
             self.steps += "\n"
             self.properties += "\n"
             self.registerUnits += "\n"

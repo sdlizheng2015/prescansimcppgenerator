@@ -82,38 +82,34 @@ class FullwaveformlidarGenerator(Generator):
                                       f"{registerFwlPowerUnit}(simulation, {fwlSensor_prefix}_{fwl.fwl.name});\n"
 
             self.steps += f"{self.space4}//demux FWL sensor outputs\n"
-            func_len = len(f"{self.space4}{sensorDemux}::demux_fwl(")
             func_space = " " * 6
-            if fwl.enableEnergyCalculation:
-                self.steps += f"{self.space4}{sensorDemux}::demux_fwl(\n" \
-                              f"{func_space}simmodel,\n" \
-                              f"{func_space}{fwlSensor_prefix}_{fwl.fwl.name},\n" \
-                              f"{func_space}{fwlPointUnit_prefix}_{fwl.fwl.name},\n" \
-                              f"{func_space}{fwlInfoUnit_prefix}_{fwl.fwl.name},\n" \
-                              f"{func_space}{fwlBeamUnit_prefix}_{fwl.fwl.name},\n" \
-                              f"{func_space}{fwlPowerUnit_prefix}_{fwl.fwl.name},\n" \
-                              f"{func_space}//Demux:\n" \
-                              f"{func_space}Terminator, // ->X (valid)\n" \
-                              f"{func_space}Terminator, // ->Y (valid)\n" \
-                              f"{func_space}Terminator, // ->Z (valid)\n" \
-                              f"{func_space}Terminator, // ->I (valid)\n" \
-                              f"{func_space}Terminator, // ->Beam (valid)\n" \
-                              f"{func_space}Terminator); // ->Info (valid)\n"
-            else:
-                self.steps += f"{self.space4}{sensorDemux}::demux_fwl(\n" \
-                              f"{func_space}simmodel,\n" \
-                              f"{func_space}{fwlSensor_prefix}_{fwl.fwl.name},\n" \
-                              f"{func_space}{fwlPointUnit_prefix}_{fwl.fwl.name},\n" \
-                              f"{func_space}{fwlInfoUnit_prefix}_{fwl.fwl.name},\n" \
-                              f"{func_space}{fwlBeamUnit_prefix}_{fwl.fwl.name},\n" \
-                              f"{func_space}nullptr, // DON'T EDIT\n" \
-                              f"{func_space}//Demux:\n" \
-                              f"{func_space}Terminator, // ->X (valid)\n" \
-                              f"{func_space}Terminator, // ->Y (valid)\n" \
-                              f"{func_space}Terminator, // ->Z (valid)\n" \
-                              f"{func_space}Terminator, // ->I (invalid)\n" \
-                              f"{func_space}Terminator, // ->Beam (valid)\n" \
-                              f"{func_space}Terminator); // ->Info (valid)\n"
+            port_X = f"{fwlPointUnit_prefix}_{fwl.fwl.name}_X" \
+                if _object.enable_all_ports else Generator.Terminator
+            port_Y = f"{fwlPointUnit_prefix}_{fwl.fwl.name}_Y" \
+                if _object.enable_all_ports else Generator.Terminator
+            port_Z = f"{fwlPointUnit_prefix}_{fwl.fwl.name}_Z" \
+                if _object.enable_all_ports else Generator.Terminator
+            port_I = f"{fwlPowerUnit_prefix}_{fwl.fwl.name}_I" \
+                if (_object.enable_all_ports and fwl.enableEnergyCalculation) else Generator.Terminator
+            port_Beam = f"{fwlBeamUnit_prefix}_{fwl.fwl.name}_Beam" \
+                if _object.enable_all_ports else Generator.Terminator
+            port_Info = f"{fwlInfoUnit_prefix}_{fwl.fwl.name}_Info" \
+                if _object.enable_all_ports else Generator.Terminator
+
+            self.steps += f"{self.space4}{sensorDemux}::demux_fwl(\n" \
+                          f"{func_space}simmodel,\n" \
+                          f"{func_space}{fwlSensor_prefix}_{fwl.fwl.name},\n" \
+                          f"{func_space}{fwlPointUnit_prefix}_{fwl.fwl.name},\n" \
+                          f"{func_space}{fwlInfoUnit_prefix}_{fwl.fwl.name},\n" \
+                          f"{func_space}{fwlBeamUnit_prefix}_{fwl.fwl.name},\n" \
+                          f"{func_space}{fwlPowerUnit_prefix}_{fwl.fwl.name},\n" \
+                          f"{func_space}//Demux:\n" \
+                          f"{func_space}{port_X}, // ->X (valid)\n" \
+                          f"{func_space}{port_Y}, // ->Y (valid)\n" \
+                          f"{func_space}{port_Z}, // ->Z (valid)\n" \
+                          f"{func_space}{port_I}, // ->I (valid)\n" \
+                          f"{func_space}{port_Beam}, // ->Beam (valid)\n" \
+                          f"{func_space}{port_Info}); // ->Info (valid)\n"
 
             self.constructor += "\n"
             self.steps += "\n"

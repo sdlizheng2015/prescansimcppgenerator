@@ -56,10 +56,12 @@ class PhysicsbasedcameraunrealGenerator(Generator):
                                       f"{registerPhysicsBasedCameraUnrealRGBUnit}(simulation, {pbcSensor_prefix}_{pbc.pbc.name});\n"
                 func_space = " " * 6
                 self.steps += f"{self.space4}//demux PBC sensor outputs\n"
+                port_RGB8 = f"{pbcUnit_prefix}_{pbc.pbc.name}_RGB8" \
+                    if _object.enable_all_ports else Generator.Terminator
                 self.steps += f"{self.space4}{sensorDemux}::demux_pbc(\n" \
                               f"{func_space}{pbcUnit_prefix}_{pbc.pbc.name},\n" \
                               f"{func_space}//Demux:\n" \
-                              f"{func_space}Terminator); // -> RGBU8 (valid)\n"
+                              f"{func_space}{port_RGB8}); // -> RGBU8 (valid)\n"
 
                 self.steps += "\n"
                 self.properties += "\n"
