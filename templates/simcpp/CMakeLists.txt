@@ -24,6 +24,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
   ${CMAKE_CURRENT_BINARY_DIR}
   ${CMAKE_SOURCE_DIR}/simmodel/
   ${CMAKE_SOURCE_DIR}/simmodel/sensorsdemux/
+  ${CMAKE_SOURCE_DIR}/simmodel/simmodel/
   ${CMAKE_SOURCE_DIR}/simmodel/utils/
   ${CMAKE_SOURCE_DIR}/simmodel/worldobjects/
  )

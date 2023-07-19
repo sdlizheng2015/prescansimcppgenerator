@@ -16,6 +16,8 @@
 // may only be used or copied in accordance with the terms of these contracts.
 //
 
+#pragma once
+
 #include "utils/threadpool.h"
 #include "utils/cnpy.h"
 
@@ -45,30 +47,18 @@ public:
 }
   
   void initialize(prescan::sim::ISimulation* simulation) override{
-//INITIALIZE//
     updateState();
-	
-	start_time = prescan::utils::get_milliseconds_timestamp();
-	last_time = start_time;
+//INITIALIZE//
 }
 
   void step(prescan::sim::ISimulation* simulation) override{
-    start_time = prescan::utils::get_milliseconds_timestamp();
-    double simulation_time = simulation->getSampleTime();
-    std::cout<< std::fixed << std::setprecision(3) << " =============== Simulation time: " 
-	         << simulation_time << "[s] ===============" <<std::endl;
+//STEPSTART//
 
 //STEP//
 
     updateState();
-	
-	end_time = prescan::utils::get_milliseconds_timestamp();
-	std::cout <<"Step time: ";
-	std::cout << std::fixed << std::setprecision(3) << std::setw(7) << std::setfill('0') << std::left << end_time - start_time;
-	std::cout << "[s], Cilic time: ";
-	std::cout << std::fixed << std::setprecision(3) << std::setw(7) << std::setfill('0') << std::left << start_time - last_time;
-	std::cout << "[s]" << std::endl << std::endl;  
-	last_time = start_time;
+
+//STEPEND//
 }
 
   void terminate(prescan::sim::ISimulation* simulation) override{
@@ -76,8 +66,6 @@ public:
 }
 
 public:
-  double start_time, last_time, end_time;
-  
 //PROPERTIES//
 
 };

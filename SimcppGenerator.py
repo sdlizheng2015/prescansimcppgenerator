@@ -19,6 +19,7 @@ from utils.load_modules import get_cls
 from generator import SelfUnitGenerator, StateActuatorGenerator
 import yaml
 from logger.UserLog import uniLog
+from generator_texts.generator_texts import *
 
 generator_names = [os.path.splitext(module)[0] for module in os.listdir("./generator") if
                    os.path.splitext(module)[1] == ".py"]
@@ -31,7 +32,8 @@ incl_cls.insert(0, incl_cls.pop(incl_cls.index(SelfUnitGenerator.SensorInclude))
 
 class SimcppGenerator:
     def __init__(self, pb: str, pb_yaml: str, ps_dir: str,
-                 load_yaml: bool = True, enable_all_port: bool = False):
+                 load_yaml: bool = True, enable_all_port: bool = False,
+                 enable_sim_time: bool = True):
         self.xp_yaml = {}
         self.ps_dir = ps_dir
         self.dst = ""
@@ -43,6 +45,9 @@ class SimcppGenerator:
         self.terminate = ""
         self.constructor = ""
         self.initialize = ""
+        self.step_start = ""
+        self.step_end = ""
+        self.enable_sim_time = enable_sim_time
         try:
             self.xp: prescan_api_experiment.Experiment = prescan_api_experiment.loadExperimentFromFile(pb)
             if load_yaml:
@@ -136,11 +141,36 @@ class SimcppGenerator:
             return True
         return False
 
+    def generate_codes_with_sim_time(self):
+        if self.enable_sim_time:
+            self.includes += f'''#include "utils/printsteptime.h"\n'''
+            self.properties += f"{Generator.space2}//To print simulation step time info;\n"
+            self.properties += f"{Generator.space2}StepTimeInfo stepTimeInfo;\n"
+            self.initialize += f"{Generator.space2}stepTimeInfo.initialize();\n"
+            self.step_start += f"{Generator.space2}stepTimeInfo.step_start_time(simulation);\n"
+            self.step_end += f"{Generator.space2}stepTimeInfo.step_end_time();\n"
+
+    def generate_object_provider(self):
+        if self.xp.getBool('pimp/objectlistprovidermodel', 'detectionOn'):
+            self.includes += f'''#include "worldobjects/objectsprovider.h"\n'''
+
+            self.properties += f"{Generator.space2}//Create ObjectListProvider\n"
+            self.properties += f"{Generator.space2}ObjectsProvider objectsProvider;\n"
+
+            self.registerUnits += f"{Generator.space2}//Register ObjectsProvider\n"
+            self.registerUnits += f"{Generator.space2}objectsProvider.registerSimulationUnits(experiment, simulation);\n"
+
+            self.initialize += f"{Generator.space2}//Initialize ObjectsProvider\n"
+            self.initialize += f"{Generator.space2}objectsProvider.initialize(simulation);\n"
+            self.initialize += f"{Generator.space2}//use 'objectsProvider.get_object_from_ID(NumericID)'\n"
+
     def generate_codes(self):
         """
         TODO:
         :return:
         """
+        self.generate_codes_with_sim_time()
+        self.generate_object_provider()
         for _object in self.objectsSensorsParser.ParsedObjectsSensors:  # type: ObjectSensors
             if not self._is_object_to_generate(_object):
                 continue
@@ -207,7 +237,7 @@ class SimcppGenerator:
             self.updates += f"{Generator.space2}ps_{worldObject}.updateState();\n"
             self.steps += f"{Generator.space2}ps_{worldObject}.step(simulation, this);\n"
 
-    def write_to_project(self):
+    def write_to_simmodel(self):
         simmodel_h_path = self.dst + "/simmodel/simmodel/simmodel.h"
         simmodel_h = {
             "//INCLUDES//\n": self.includes,
@@ -215,6 +245,9 @@ class SimcppGenerator:
             "//REGISTER//\n": self.registerUnits,
             "//UPDATE//\n": self.updates,
             "//STEP//\n": self.steps,
+            "//STEPSTART//\n": self.step_start,
+            "//STEPEND//\n": self.step_end,
+            "//INITIALIZE//\n": self.initialize,
         }
 
         cmake_list_path = self.dst + "/CMakeLists.txt"
