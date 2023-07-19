@@ -24,7 +24,6 @@
 #include "prescan/sim/LmsSensorUnit.hpp"
 #include "vector"
 #include <cmath>
-#include "corecrt_math_defines.h"
 
 using namespace std;
 
