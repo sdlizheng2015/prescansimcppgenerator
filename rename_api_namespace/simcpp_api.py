@@ -5,6 +5,7 @@
 # @Author  : Yi Yang
 # @Support : prescansls.sisw@siemens.com
 
+"""sensor API includes"""
 type_incl = '''#include "prescan/api/Types.hpp"\n#include "prescan/sim/SelfSensorUnit.hpp"\n'''
 camera_incl = '''#include "prescan/api/Camera.hpp"\n#include "prescan/sim/CameraSensorUnit.hpp"\n'''
 pcs_incl = '''#include "prescan/api/Pcs.hpp"\n#include "prescan/sim/PcsSensorUnit.hpp"\n'''
@@ -15,10 +16,17 @@ pbc_incl = '''#include "prescan/api/Physicsbasedcameraunreal.hpp"\n#include "pre
 fwl_incl = '''#include "prescan/api/Fullwaveformlidar.hpp"\n#include "prescan/sim/FullWaveformLidarSensorUnit.hpp"\n#include <prescan/sim/SignalView.hpp>\n#include "prescan/sim/ISimulationModel.hpp"\n'''
 amesim_incl = '''#include "prescan/api/Vehicledynamics.hpp"\n#include "prescan/sim/AmesimPreconfiguredDynamicsUnit.hpp"\n'''
 state_incl = '''#include "prescan/sim/StateActuatorUnit.hpp"\n'''
+lms_incl = '''#include "prescan/api/Lms.hpp"\n#include "prescan/sim/LmsSensorUnit.hpp"\n'''
+alms_incl = '''#include "prescan/api/Alms.hpp"\n#include "prescan/sim/AlmsSensorUnit.hpp"\n'''
 
+"""sensor unit types"""
 SelfSensorUnit = "prescan::sim::SelfSensorUnit"
 AirSensor = "prescan::api::air::AirSensor"
 AirSensorUnit = "prescan::sim::AirSensorUnit"
+LmsSensor = "prescan::api::lms::LmsSensor"
+LmsSensorUnit = "prescan::sim::LmsSensorUnit"
+AlmsSensor = "prescan::api::alms::AlmsSensor"
+AlmsSensorUnit = "prescan::sim::AlmsSensorUnit"
 PcsSensor = "prescan::api::pcs::PcsSensor"
 PcsSensorUnit = "prescan::sim::PcsSensorUnit"
 CameraSensor = "prescan::api::camera::CameraSensor"
@@ -39,6 +47,7 @@ SpeedProfileUnit = "prescan::sim::SpeedProfileUnit"
 AmesimVehicleDynamicsUnit = "prescan::sim::AmesimVehicleDynamicsUnit"
 StateActuatorUnit = "prescan::sim::StateActuatorUnit"
 
+"""sensor output types"""
 double_vector_ptr = "std::shared_ptr<std::vector<double>>"
 double_vector_ptr_make = "std::make_shared<std::vector<double>>()"
 
@@ -63,32 +72,53 @@ fwl_beam_vector_ptr_make = "std::make_shared<std::vector<std::vector<PRESCAN_FUL
 fwl_info_vector_ptr = "std::shared_ptr<std::vector<PRESCAN_FULLWAVEFORMLIDAR_OUTPUT_INFO_DATA>>"
 fwl_info_vector_ptr_make = "std::make_shared<std::vector<PRESCAN_FULLWAVEFORMLIDAR_OUTPUT_INFO_DATA>>()"
 
+lms_line_vector_ptr = "std::shared_ptr<std::vector<std::vector<PRESCAN_LMS_DATA>>>"
+lms_line_vector_ptr_make = "std::make_shared<std::vector<std::vector<PRESCAN_LMS_DATA>>>()"
+
+alms_line_vector_ptr = "std::shared_ptr<std::vector<const PRESCAN_ALMS_DATA*>>"
+alms_line_vector_ptr_make = "std::make_shared<std::vector<const PRESCAN_ALMS_DATA*>>()"
+
 sensorDemux = "prescan::sensorDemux"
 sensorDemux_incl_prefix = '''#include "sensorsdemux/demux'''
 sensorDemux_file_prefix = "./templates/sensorsdemux/demux"
 
+""" get sensor and register units API """
 getWorldObject = "experiment.getObjectByName<prescan::api::types::WorldObject>"
 registerSelfSensorUnit = "prescan::sim::registerUnit<prescan::sim::SelfSensorUnit>"
+registerStateActuatorUnit = "prescan::sim::registerUnit<prescan::sim::StateActuatorUnit>"
+
 getAirSensor = "experiment.getObjectByName<prescan::api::air::AirSensor>"
 registerAirSensorUnit = "prescan::sim::registerUnit<prescan::sim::AirSensorUnit>"
+
+getLmsSensor = "experiment.getObjectByName<prescan::api::lms::LmsSensor>"
+registerLmsSensorUnit = "prescan::sim::registerUnit<prescan::sim::LmsSensorUnit>"
+
+getAlmsSensor = "experiment.getObjectByName<prescan::api::alms::AlmsSensor>"
+registerAlmsSensorUnit = "prescan::sim::registerUnit<prescan::sim::AlmsSensorUnit>"
+
 getPcsSensor = "experiment.getObjectByName<prescan::api::pcs::PcsSensor>"
 registerPcsSensorUnit = "prescan::sim::registerUnit<prescan::sim::PcsSensorUnit>"
+
 getCameraSensor = "experiment.getObjectByName<prescan::api::camera::CameraSensor>"
 registerCameraSensorUnit = "prescan::sim::registerUnit<prescan::sim::CameraSensorUnit>"
+
 getPointCloudLidarSensor = "experiment.getObjectByName<prescan::api::pointcloudlidar::PointCloudLidarSensor>"
 registerPointCloudUnit = "prescan::sim::registerUnit<prescan::sim::pointcloudlidar::PointCloudUnit>"
 registerPointCloudObjectIdUnit = "prescan::sim::registerUnit<prescan::sim::pointcloudlidar::ObjectIdUnit>"
 registerPointCloudPowerUnit = "prescan::sim::registerUnit<prescan::sim::pointcloudlidar::PowerUnit>"
+
 getPhysicsBasedCameraUnrealSensor = "experiment.getObjectByName<prescan::api::physicsbasedcameraunreal::PhysicsBasedCameraUnrealSensor>"
 registerPhysicsBasedCameraUnrealRGBUnit = "prescan::sim::registerUnit<prescan::sim::PhysicsBasedCameraUnrealRGBUnit>"
+
 getFullWaveformLidarSensor = "experiment.getObjectByName<prescan::api::fullwaveformlidar::FullWaveformLidarSensor>"
 registerFwlPointCloudUnit = "prescan::sim::registerUnit<prescan::sim::fullwaveformlidar::PointCloudUnit>"
 registerFwlBeamUnit = "prescan::sim::registerUnit<prescan::sim::fullwaveformlidar::BeamUnit>"
 registerFwlOutputInfoUnit = "prescan::sim::registerUnit<prescan::sim::fullwaveformlidar::OutputInfoUnit>"
 registerFwlPowerUnit = "prescan::sim::registerUnit<prescan::sim::fullwaveformlidar::PowerUnit>"
+
 getActiveTrajectory = "prescan::api::trajectory::getActiveTrajectory"
 registerPathUnit = "prescan::sim::registerUnit<prescan::sim::PathUnit>"
 registerSpeedProfileUnit = "prescan::sim::registerUnit<prescan::sim::SpeedProfileUnit>"
+
 getAttachedAmesimPreconfiguredDynamics = "prescan::api::vehicledynamics::getAttachedAmesimPreconfiguredDynamics"
 registerAmesimVehicleDynamicsUnit = "prescan::sim::registerUnit<prescan::sim::AmesimVehicleDynamicsUnit>"
-registerStateActuatorUnit = "prescan::sim::registerUnit<prescan::sim::StateActuatorUnit>"

@@ -132,9 +132,7 @@ class SimcppGenerator:
         :param _object:
         :return:
         """
-        if len(_object.objectSensors[Sensor.Trajectory]) > 0 \
-                or len(_object.objectSensors[Sensor.AmesimDynamics]) > 0 \
-                or self._is_object_always_on_sheet(_object):
+        if _object.to_generate_code or self._is_object_always_on_sheet(_object):
             return True
         return False
 

@@ -27,6 +27,8 @@ class Sensor(metaclass=ABCMeta):
     SelfUnit = "SelfUnit"  # not a real sensor
     StateActuator = "StateActuator"  # not a real sensor
     Trajectory = "Trajectory"
+    Lms = "Lms"
+    Alms = "Alms"
 
     def __init__(self):
         ...

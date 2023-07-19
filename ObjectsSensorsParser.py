@@ -24,6 +24,7 @@ class ObjectSensors:
     def __init__(self, ps_object: prescan_api_types.WorldObject, enable_all_port: bool):
         self.ps_object: prescan_api_types.WorldObject = ps_object
         self.enable_all_ports = enable_all_port
+        self.to_generate_code = False
         self.sensors_cls: Dict[str, callable(Sensor)] = {sensor.name: sensor for sensor in sensors_cls}
         self.objectSensors: Dict[str, List[Sensor]] = {sensor.name: [] for sensor in sensors_cls}
 
@@ -61,6 +62,7 @@ class ObjectsSensorsParser:
 
     def _register_sensors(self):
         for _object in self._objects_sensors:  # type: ObjectSensors
+            generate_code = False
             for sensor_name, sensor_cls in _object.sensors_cls.items():
                 try:
                     sensors = sensor_cls.getSensorsAPI(_object.ps_object)
@@ -69,3 +71,10 @@ class ObjectsSensorsParser:
                 else:
                     _object.objectSensors[sensor_name].extend(
                         [sensor_cls(sensor, self._xp, self._xp_yaml) for sensor in sensors])
+                    if not generate_code:
+                        """must has a real sensor or a trajectory"""
+                        if len(_object.objectSensors[sensor_name]) > 0 and \
+                                sensor_name not in [Sensor.SelfUnit, Sensor.StateActuator]:
+                            generate_code = True
+            _object.to_generate_code = generate_code
+

@@ -20,3 +20,6 @@ from .PCSGenerator import PCSGenerator
 from .SelfUnitGenerattor import SelfUnitGenerator
 from .StateActuatorGenerator import StateActuatorGenerator
 from .TrajectoryGenerator import TrajectoryGenerator
+from .LmsGenerator import LmsGenerator
+from .AlmsGenerator import AlmsGenerator
+
