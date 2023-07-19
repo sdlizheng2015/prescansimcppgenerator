@@ -19,7 +19,7 @@ from utils.load_modules import get_cls
 from generator import SelfUnitGenerator, StateActuatorGenerator
 import yaml
 from logger.UserLog import uniLog
-from generator_texts.generator_texts import *
+
 
 generator_names = [os.path.splitext(module)[0] for module in os.listdir("./generator") if
                    os.path.splitext(module)[1] == ".py"]

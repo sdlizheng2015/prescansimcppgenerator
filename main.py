@@ -15,9 +15,9 @@ _argparse.add_argument("ps_dir", type=str,
                        help=r'''Prescan_DIR path, e.g., "D:\Simcenter Prescan\Prescan_2302\lib\cmake"''')
 _argparse.add_argument("-out_dir", type=str, action="store", default="./projects",
                        help="folder to save generated simcpp project, default: ./projects, e.g.,: -out_dir ./projects")
-_argparse.add_argument("-all_ports", type=int, action="store", default=0,
+_argparse.add_argument("-all_ports", type=int, action="store", default=1,
                        help="Enable all sensors output ports, default: 0, e.g., -all_ports 1")
-_argparse.add_argument("-show_time", type=int, action="store", default=0,
+_argparse.add_argument("-show_time", type=int, action="store", default=1,
                        help="print simulation time and cyclic time, default: 1, e.g., -show_time 1")
 _argparse.add_argument("-load_yaml", type=int, action="store", default=0,
                        help="Load pb yaml configs(not used now)")

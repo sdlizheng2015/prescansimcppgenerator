@@ -1,0 +1,757 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "MinSizeRel/SimCppProject.exe"
+		},
+		{
+			"path" : "MinSizeRel/SimCppProject.pdb"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"target_link_libraries",
+			"find_package",
+			"target_include_directories"
+		],
+		"files" : 
+		[
+			"CMakeLists.txt",
+			"D:/Simcenter Prescan/Prescan_2302/lib/cmake/PrescanConfig.cmake",
+			"D:/Simcenter Prescan/Prescan_2302/Plugins/ProbabilisticSensorsPlugin/lib/cmake/ProbabilisticSensorsConfig.cmake"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 19,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 12,
+				"parent" : 0
+			},
+			{
+				"file" : 1,
+				"parent" : 2
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 47,
+				"parent" : 3
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 98,
+				"parent" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 82,
+				"parent" : 3
+			},
+			{
+				"file" : 2,
+				"parent" : 6
+			},
+			{
+				"command" : 1,
+				"file" : 2,
+				"line" : 23,
+				"parent" : 7
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 21,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 23,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "/DWIN32 /D_WINDOWS /EHsc /O1 /Ob1 /DNDEBUG -MD"
+				},
+				{
+					"fragment" : "-std:c++14"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 9,
+					"define" : "PRESCAN_VERSION=\"2023.1.0\""
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 10,
+					"path" : "C:/Users/yiyan5ez/Desktop/PrescanSimcppGenerator/projects/build"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "C:/Users/yiyan5ez/Desktop/PrescanSimcppGenerator/projects/simmodel"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "C:/Users/yiyan5ez/Desktop/PrescanSimcppGenerator/projects/simmodel/sensorsdemux"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "C:/Users/yiyan5ez/Desktop/PrescanSimcppGenerator/projects/simmodel/simmodel"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "C:/Users/yiyan5ez/Desktop/PrescanSimcppGenerator/projects/simmodel/utils"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "C:/Users/yiyan5ez/Desktop/PrescanSimcppGenerator/projects/simmodel/worldobjects"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/include"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/include/platform"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/AIR/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/ALMS/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/Algorithm/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/Annotations/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/BRS/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/Camera/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/CollisionDetection/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/Communication/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/GPS/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/GenericModel/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/GraphBasedRoads/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/LMS/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/LaneMarker/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/Lidar/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/OCS/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/ObjectListProvider/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/OpenDriveImporter/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/OpenScenarioImporter/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/PCS/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/PhysicsBasedCamera/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/PrescanViewer/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/ProtobufScalarReader/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/Radar/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/ResultWriter/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/ScannerSensor/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/SimulationControl/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/TIS/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/TestAutomation/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/TrafficSignalSensor/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/Trajectory/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/TunableData/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/UltraSonic/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/UserData/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/VehicleDynamics/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/WheelContacts/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/WorldModelActuators/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/WorldModelSensors/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/modules/WorldViewer/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/Plugins/FullWaveformLidarPlugin/modules/fullwaveformlidar/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/Plugins/PBRadarPlugin/modules/pbradar/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/Plugins/PointCloudLidarPlugin/modules/pointcloudlidar/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/Plugins/ProbabilisticSensorsPlugin/modules/ProbabilisticCamera/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/Plugins/ProbabilisticSensorsPlugin/modules/ProbabilisticRadar/include_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "D:/Simcenter Prescan/Prescan_2302/Plugins/V2XPlugin/modules/v2x/include_interface"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					1
+				],
+				"standard" : "14"
+			},
+			"sourceIndexes" : 
+			[
+				14,
+				15
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df"
+		}
+	],
+	"id" : "SimCppProject::@6890427a1f51a3e7e1df",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "/DWIN32 /D_WINDOWS /EHsc /O1 /Ob1 /DNDEBUG -MD",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "/machine:x64 /INCREMENTAL:NO /subsystem:console",
+				"role" : "flags"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\platform.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_AIR.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_ALMS.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_Algorithm.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_Annotations.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_BRS.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_Camera.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_CollisionDetection.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_Communication.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_GPS.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_GenericModel.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_GraphBasedRoads.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_LMS.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_LaneMarker.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_Lidar.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_OCS.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_ObjectListProvider.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_OpenDriveImporter.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_OpenScenarioImporter.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_PCS.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_PhysicsBasedCamera.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_PrescanViewer.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_ProtobufScalarReader.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_Radar.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_ResultWriter.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_ScannerSensor.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_SimulationControl.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_TIS.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_TestAutomation.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_TrafficSignalSensor.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_Trajectory.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_TunableData.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_UltraSonic.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_UserData.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_VehicleDynamics.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_WheelContacts.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_WorldModelActuators.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_WorldModelSensors.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\lib\\interface_WorldViewer.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\Plugins\\FullWaveformLidarPlugin\\.\\lib\\interface_FullWaveformLidar.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\Plugins\\PBRadarPlugin\\.\\lib\\interface_PBRadar.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\Plugins\\PointCloudLidarPlugin\\.\\lib\\interface_PointCloudLidar.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 8,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\Plugins\\ProbabilisticSensorsPlugin\\lib\\interface_ProbabilisticCamera.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 8,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\Plugins\\ProbabilisticSensorsPlugin\\lib\\interface_ProbabilisticRadar.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "\"D:\\Simcenter Prescan\\Prescan_2302\\Plugins\\V2XPlugin\\lib\\interface_v2x.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "SimCppProject",
+	"nameOnDisk" : "SimCppProject.exe",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13
+			]
+		},
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				14,
+				15
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"path" : "simmodel/sensorsdemux/demux_air.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "simmodel/sensorsdemux/demux_alms.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "simmodel/sensorsdemux/demux_amesim.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "simmodel/sensorsdemux/demux_lms.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "simmodel/sensorsdemux/demux_selfunit.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "simmodel/simmodel/simmodel.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "simmodel/utils/cnpy.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "simmodel/utils/printsteptime.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "simmodel/utils/threadpool.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "simmodel/worldobjects/DAF_95_XF.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "simmodel/worldobjects/MercedesBenz.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "simmodel/worldobjects/objectsprovider.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "simmodel/worldobjects/printsteptime.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "simmodel/worldobjects/worldobject.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "simmodel/main.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "simmodel/utils/cnpy.cpp",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "EXECUTABLE"
+}

@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\yiyan5ez\Desktop\PrescanSimcppGenerator\projects\simmodel\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yiyan5ez\Desktop\PrescanSimcppGenerator\projects\simmodel\utils\cnpy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\yiyan5ez\Desktop\PrescanSimcppGenerator\projects\simmodel\sensorsdemux\demux_air.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yiyan5ez\Desktop\PrescanSimcppGenerator\projects\simmodel\sensorsdemux\demux_alms.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yiyan5ez\Desktop\PrescanSimcppGenerator\projects\simmodel\sensorsdemux\demux_amesim.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yiyan5ez\Desktop\PrescanSimcppGenerator\projects\simmodel\sensorsdemux\demux_lms.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yiyan5ez\Desktop\PrescanSimcppGenerator\projects\simmodel\sensorsdemux\demux_selfunit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yiyan5ez\Desktop\PrescanSimcppGenerator\projects\simmodel\simmodel\simmodel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yiyan5ez\Desktop\PrescanSimcppGenerator\projects\simmodel\utils\cnpy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yiyan5ez\Desktop\PrescanSimcppGenerator\projects\simmodel\utils\printsteptime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yiyan5ez\Desktop\PrescanSimcppGenerator\projects\simmodel\utils\threadpool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yiyan5ez\Desktop\PrescanSimcppGenerator\projects\simmodel\worldobjects\DAF_95_XF.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yiyan5ez\Desktop\PrescanSimcppGenerator\projects\simmodel\worldobjects\MercedesBenz.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yiyan5ez\Desktop\PrescanSimcppGenerator\projects\simmodel\worldobjects\objectsprovider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yiyan5ez\Desktop\PrescanSimcppGenerator\projects\simmodel\worldobjects\printsteptime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yiyan5ez\Desktop\PrescanSimcppGenerator\projects\simmodel\worldobjects\worldobject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\yiyan5ez\Desktop\PrescanSimcppGenerator\projects\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{D468AEAB-175C-33B6-A70B-CDD241A1050D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{FE600014-90A0-3413-A8A2-76EE31B789E5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

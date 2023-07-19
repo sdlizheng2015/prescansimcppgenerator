@@ -8,7 +8,6 @@
 """
 // ouput lms data
     ps_Audi_A3_1.step(simulation, this);
-	std::cout << ps_Audi_A3_1.lmsUnit_Audi_A3_1_LMSSensor_1_Lines->size() << std::endl;
     int i = 0;
     for (const auto & line : *ps_Audi_A3_1.lmsUnit_Audi_A3_1_LMSSensor_1_Lines){
       std::cout << "Line" + std::to_string(i) << "= [";
