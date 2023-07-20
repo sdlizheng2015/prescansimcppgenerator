@@ -257,7 +257,7 @@ class SimcppGenerator:
 
         files = {
             simmodel_h_path: simmodel_h,
-            cmake_list_path: cmake_list,
+            #cmake_list_path: cmake_list,
         }
 
         self.overwrite_files(files)

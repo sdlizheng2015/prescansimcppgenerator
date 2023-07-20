@@ -95,6 +95,9 @@ class FullwaveformlidarGenerator(Generator):
                 if _object.enable_all_ports else Generator.Terminator
             port_Info = f"{fwlInfoUnit_prefix}_{fwl.fwl.name}_Info" \
                 if _object.enable_all_ports else Generator.Terminator
+                
+            
+            powerUnit = f"{fwlPowerUnit_prefix}_{fwl.fwl.name}" if fwl.enableEnergyCalculation else Generator.Terminator
 
             self.steps += f"{self.space4}{sensorDemux}::demux_fwl(\n" \
                           f"{func_space}simmodel,\n" \
@@ -102,7 +105,7 @@ class FullwaveformlidarGenerator(Generator):
                           f"{func_space}{fwlPointUnit_prefix}_{fwl.fwl.name},\n" \
                           f"{func_space}{fwlInfoUnit_prefix}_{fwl.fwl.name},\n" \
                           f"{func_space}{fwlBeamUnit_prefix}_{fwl.fwl.name},\n" \
-                          f"{func_space}{fwlPowerUnit_prefix}_{fwl.fwl.name},\n" \
+                          f"{func_space}{powerUnit},\n" \
                           f"{func_space}//Demux:\n" \
                           f"{func_space}{port_X}, // ->X (valid)\n" \
                           f"{func_space}{port_Y}, // ->Y (valid)\n" \
