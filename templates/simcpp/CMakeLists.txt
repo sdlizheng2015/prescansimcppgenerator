@@ -13,10 +13,10 @@ find_package(Prescan 2023.1 REQUIRED)
 include(${Prescan_DIR}/PrescanUtils.cmake)
 
 
-file(GLOB_RECURSE allheaders CONFIGURE_DEPENDS "simmodel/*.h*")
+#file(GLOB_RECURSE allheaders CONFIGURE_DEPENDS "simmodel/*.h*")
 file(GLOB_RECURSE allsources CONFIGURE_DEPENDS "simmodel/*.cpp")
 
-add_executable(${PROJECT_NAME} ${allheaders} ${allsources})
+add_executable(${PROJECT_NAME} ${allsources})
 
 target_link_libraries(${PROJECT_NAME} Prescan::Prescan) 
 
