@@ -59,7 +59,7 @@ class SimcppGenerator:
         else:
             self.objectsSensorsParser = ObjectsSensorsParser(self.xp, self.xp_yaml, load_yaml, enable_all_port)
 
-    def copy_to_project(self, dst: str = "./projects"):
+    def copy_to_project(self, dst: str = "./simcpp"):
         """
         TODO: call this first
         :param dst:
@@ -83,7 +83,7 @@ class SimcppGenerator:
                 sys.exit()
         else:
             shutil.copytree("./templates/simcpp", dst)
-            print("copy templates to project")
+            print(f"copy templates to {self.dst}")
 
     @staticmethod
     def overwrite_files(files: Dict[str, Dict[str, str]], new_path: str = ""):

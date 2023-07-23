@@ -13,8 +13,8 @@ _argparse.add_argument("pb_dir", type=str,
                        help=r'''Path pb file, e.g., "C:\Users\yiyan5ez\Desktop\SimcppGenerator\SimcppGenerator.pb"''')
 _argparse.add_argument("ps_dir", type=str,
                        help=r'''Prescan_DIR path, e.g., "D:\Simcenter Prescan\Prescan_2302\lib\cmake"''')
-_argparse.add_argument("-out_dir", type=str, action="store", default="./projects",
-                       help="folder to save generated simcpp project, default: ./projects, e.g.,: -out_dir ./projects")
+_argparse.add_argument("-out_dir", type=str, action="store", default="./simcpp",
+                       help="folder to save generated simcpp project, default: ./simcpp, e.g.,: -out_dir ./simcpp")
 _argparse.add_argument("-all_ports", type=int, action="store", default=1,
                        help="Enable all sensors output ports, default: 0, e.g., -all_ports 1")
 _argparse.add_argument("-show_time", type=int, action="store", default=1,
