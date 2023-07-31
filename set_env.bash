@@ -12,4 +12,4 @@ export PYTHONPATH=$PYTHONPATH:/usr/local/Prescan_2302/python:/usr/local/Prescan_
 export experiment_dir=/home/yang/Desktop/SimcppGenerator
 export experiment_pb=/home/yang/Desktop/SimcppGenerator/SimcppGenerator.pb
 
-export generator_dir=/home/yang/Desktop/PrescanSimcppGenerator
+export simcpp_dir=/home/yang/Desktop/SimcppGenerator/simcpp

@@ -11,8 +11,6 @@ import argparse
 _argparse = argparse.ArgumentParser()
 _argparse.add_argument("pb_dir", type=str,
                        help=r'''Path pb file, e.g., "C:\Users\yiyan5ez\Desktop\SimcppGenerator\SimcppGenerator.pb"''')
-_argparse.add_argument("ps_dir", type=str,
-                       help=r'''Prescan_DIR path, e.g., "D:\Simcenter Prescan\Prescan_2302\lib\cmake"''')
 _argparse.add_argument("-out_dir", type=str, action="store", default="./simcpp",
                        help="folder to save generated simcpp project, default: ./simcpp, e.g.,: -out_dir ./simcpp")
 _argparse.add_argument("-all_ports", type=int, action="store", default=1,
@@ -27,8 +25,6 @@ _argparse.add_argument("-yaml", type=str, action="store", default="",
 if __name__ == '__main__':
     args = _argparse.parse_args()
     pb_dir = args.pb_dir
-    ps_dir: str = args.ps_dir
-    ps_dir = ps_dir.replace("\\", "\\\\")
     dst = args.out_dir
     all_ports = bool(args.all_ports)
     show_time = bool(args.show_time)
@@ -36,7 +32,6 @@ if __name__ == '__main__':
     generator = SimcppGenerator(
         pb=fr"{pb_dir}",
         pb_yaml="",
-        ps_dir=fr"{ps_dir}",
         load_yaml=False,
         enable_all_port=all_ports,
         enable_sim_time=show_time

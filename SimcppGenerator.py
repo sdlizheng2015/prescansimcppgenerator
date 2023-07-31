@@ -31,7 +31,7 @@ incl_cls.insert(0, incl_cls.pop(incl_cls.index(SelfUnitGenerator.SensorInclude))
 
 
 class SimcppGenerator:
-    def __init__(self, pb: str, pb_yaml: str, ps_dir: str,
+    def __init__(self, pb: str, pb_yaml: str, ps_dir: str = "",
                  load_yaml: bool = True, enable_all_port: bool = False,
                  enable_sim_time: bool = True):
         self.xp_yaml = {}
@@ -250,10 +250,10 @@ class SimcppGenerator:
             "//INITIALIZE//\n": self.initialize,
         }
 
-        cmake_list_path = self.dst + "/CMakeLists.txt"
-        cmake_list = {
-            "#PRESCAN_DIR#\n": f'''set(Prescan_DIR "{self.ps_dir}")\n''',
-        }
+        # cmake_list_path = self.dst + "/CMakeLists.txt"
+        # cmake_list = {
+        #     "#PRESCAN_DIR#\n": f'''set(Prescan_DIR "{self.ps_dir}")\n''',
+        # }
 
         files = {
             simmodel_h_path: simmodel_h,
