@@ -11,19 +11,21 @@ import sys
 
 from rename_api_namespace.prescan_python_dmapi import *
 from prescan.internal import PrescanException
-from generator import *
+from generators.MetaGenerator import Include
 from typing import Dict, List, Tuple
 from sensors.MetaSensor import Sensor
 from ObjectsSensorsParser import ObjectsSensorsParser, ObjectSensors
 from utils.load_modules import get_cls
-from generator import SelfUnitGenerator, StateActuatorGenerator
+from generators.SelfUnitGenerattor import SelfUnitGenerator
+from generators.MetaGenerator import Generator
+from generators.StateActuatorGenerator import StateActuatorGenerator
 import yaml
 from logger.UserLog import uniLog
 
 
-generator_names = [os.path.splitext(module)[0] for module in os.listdir("./generator") if
+generator_names = [os.path.splitext(module)[0] for module in os.listdir("generators") if
                    os.path.splitext(module)[1] == ".py"]
-generator_cls, incl_cls = get_cls(generator_names, "generator", sub_cls_name="SensorInclude")
+generator_cls, incl_cls = get_cls(generator_names, "generators", sub_cls_name="SensorInclude")
 generator_cls.insert(0, generator_cls.pop(generator_cls.index(StateActuatorGenerator)))
 generator_cls.insert(0, generator_cls.pop(generator_cls.index(SelfUnitGenerator)))
 incl_cls.insert(0, incl_cls.pop(incl_cls.index(StateActuatorGenerator.SensorInclude)))

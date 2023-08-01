@@ -2,8 +2,8 @@
 setlocal
 
 
-cd "C:\Users\yiyan5ez\Desktop\SimcppGenerator"
+cd %experiment_dir%
 
-::prescanrun "C:\Users\yiyan5ez\Desktop\PrescanSimcppGenerator\simcpp\build\Debug\SimCppProject.exe" SimcppGenerator.pb 1 >> ps_run_results.txt
-prescanrun "C:\Users\yiyan5ez\Desktop\PrescanSimcppGenerator\simcpp\build\Debug\SimCppProject.exe" SimcppGenerator.pb 1
+
+prescanrun %simcpp_dir%\\build\\Release\\SimCppProject.exe %experiment_pb% 10
 

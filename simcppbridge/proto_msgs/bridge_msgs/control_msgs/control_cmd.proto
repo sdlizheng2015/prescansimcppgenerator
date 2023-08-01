@@ -1,0 +1,28 @@
+syntax = "proto2";
+package prescan.control;
+
+import "bridge_msgs/basic_msgs/header.proto";
+import "bridge_msgs/chassis_msgs/chassis.proto";
+
+
+// next id : 27
+message ControlCommand {
+  optional prescan.common.Header header = 1;
+  // target throttle in  [0, 1]
+  optional double throttle = 3;
+
+  // target brake in [0, 1]
+  optional double brake = 4;
+
+  // target steering angle in [-1, 1]
+  optional double steering = 7;
+
+  // target speed, in m/s
+  optional double tar_speed = 9;
+
+  // target acceleration in m`s^-2
+  optional double tar_acceleration = 10;
+
+  // target GearPosition
+  optional prescan.chassis.Chassis.GearPosition gear_location = 20;
+}

@@ -56,7 +56,7 @@ class Pcs(Sensor):
                     self.xp.getInt32(Pcs.pimp_model, f"sensor:{i}/pointCloudSensor/sensorOutputMode")]
                 self.integerOutput = bool(self.xp.getBool(Pcs.pimp_model, f"sensor:{i}/pointCloudSensor/integerOutput"))
                 if self.integerOutput:
-                    raise Exception("integerOutput is not supported")
+                    raise Exception(f"PCS: {self.pcs.name} integerOutput is not supported")
                 self.outputIntensity = bool(
                     self.xp.getBool(Pcs.pimp_model, f"sensor:{i}/pointCloudSensor/outputIntensity"))
                 self.outputObjectID = bool(

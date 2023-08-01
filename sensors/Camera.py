@@ -33,6 +33,8 @@ class Camera(Sensor):
             if name == self.camera.name:
                 self.outputCameraImage = bool(self.xp.getBool(Camera.pimp_model, f"sensor:{i}/outputCameraImage"))
                 break
+        if not self.outputCameraImage:
+            raise Exception(f"Camera: {self.camera.name} output is not enabled")
 
     def __str__(self):
         return f"    {self.camera.name}: \n" \

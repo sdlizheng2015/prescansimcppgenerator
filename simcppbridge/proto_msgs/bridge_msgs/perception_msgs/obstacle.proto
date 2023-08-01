@@ -1,0 +1,103 @@
+syntax = "proto2";
+
+package prescan.perception;
+
+import "bridge_msgs/basic_msgs/header.proto";
+import "bridge_msgs/basic_msgs/geometry.proto";
+
+
+message Obstacle {
+  optional int32 id = 1;  // obstacle ID.
+
+  // obstacle position in VRF.Unit [m]
+  optional prescan.common.Point3D position = 2;
+
+  optional double heading = 3;  // heading in the VRF, Unit [deg]
+  optional prescan.common.Point3D velocity = 4;  // obstacle velocity. Unit [m/s]
+
+  // Size of obstacle bounding box, unit [m]
+  optional prescan.common.BoundingBox3D box = 5;
+
+  enum Type {
+    UNKNOWN = 0;
+    UNKNOWN_MOVABLE = 1;
+    UNKNOWN_UNMOVABLE = 2;
+    PEDESTRIAN = 3;  // Pedestrian, usually determined by moving behavior.
+    BICYCLE = 4;     // bike, motor bike
+    VEHICLE = 5;     // Passenger car or truck.
+  };
+  optional Type type = 10;         // obstacle type
+
+  optional double confidence = 13 [deprecated = true];
+
+  enum SubType {
+    ST_UNKNOWN = 0;
+    ST_UNKNOWN_MOVABLE = 1;
+    ST_UNKNOWN_UNMOVABLE = 2;
+    ST_CAR = 3;
+    ST_VAN = 4;
+    ST_TRUCK = 5;
+    ST_BUS = 6;
+    ST_CYCLIST = 7;
+    ST_MOTORCYCLIST = 8;
+    ST_TRICYCLIST = 9;
+    ST_PEDESTRIAN = 10;
+    ST_TRAFFICCONE = 11;
+  };
+  optional SubType sub_type = 19;  // obstacle sub_type
+  optional prescan.common.Header header = 20;
+}
+
+message PointLane {
+  repeated prescan.common.Point3D point = 1;
+  optional uint32 numericID = 2;
+  optional prescan.common.Header header = 3;
+}
+
+message PointLanes {
+  repeated PointLane lane = 1;
+  optional prescan.common.Header header = 2;
+}
+
+message PolyNomial {
+  optional double N0 = 1;
+  optional double N1 = 2;
+  optional double N2 = 3;
+  optional double N3 = 4;
+}
+
+message PolyLane {
+  enum Type {
+    Solid = 0;
+    Dash = 1;
+    SolidSolid = 2;
+    SolidDash = 3;
+    DashDash = 4;
+    DashSolid = 5;
+  };
+  optional Type type = 1;
+  optional double quality = 2;  // range = [0,1]; 1 = the best quality
+  optional int32 model_degree = 3;
+
+  // equation P = N3 * P^3 + N2 * P^2 + N1 * P + N0, in sensor frame
+  optional PolyNomial X = 4;
+  optional PolyNomial Y = 5;
+  optional PolyNomial Z = 6;
+  optional double length = 8;
+  optional uint32 groupID = 9;
+  optional uint32 lane_label = 10;
+  optional uint32 numericID = 11;
+  optional prescan.common.Header header = 12;
+}
+
+
+message PolyLanes {
+  repeated PolyLane lane = 1;
+  optional prescan.common.Header header = 2;
+}
+
+
+message Obstacles {
+  repeated Obstacle perception_obstacle = 1;  // An array of obstacles
+  optional prescan.common.Header header = 2;             // Header
+}

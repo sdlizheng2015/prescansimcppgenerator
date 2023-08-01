@@ -7,7 +7,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/${Prescan_version}/lib
 
 export Prescan_DIR=/usr/local/${Prescan_version}/lib/cmake
 
-export PYTHONPATH=$PYTHONPATH:/usr/local/Prescan_2302/python:/usr/local/Prescan_2302/modules
+export PYTHONPATH=$PYTHONPATH:/usr/local/Prescan_2302/python:/usr/local/Prescan_2302/modules:/usr/local/Prescan_2302/Plugins
 
 export experiment_dir=/home/yang/Desktop/SimcppGenerator
 export experiment_pb=/home/yang/Desktop/SimcppGenerator/SimcppGenerator.pb
