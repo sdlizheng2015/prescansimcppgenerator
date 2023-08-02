@@ -288,8 +288,11 @@ SimCPP Generator可以在Windows或Ubuntu上分别为Prescan工程自动生成Si
     ![Alt text](./pic/generated_win.png)
 5. 在Prescan工程目录下，即可看到一个simcpp文件夹，里面包含了整个工程的SimCPP程序。
     ![Alt text](./pic/simcpp_win.png)
+
     进入该文件夹内，可以看到如下文件结构：
+
     ![Alt text](./pic/simmode_win.png)
+
     双击```set_env.bat```即可打开一个cmd窗口，输入：
     ```powershell
     build.bat
@@ -359,6 +362,7 @@ SimCPP Generator可以在Windows或Ubuntu上分别为Prescan工程自动生成Si
     python3 main.py $experiment_pb -out_dir $simcpp_dir
     ```
     运行成功的话，同样将在Prescan工程文件夹下找到simcpp文件夹。
+    
     ![Alt text](./pic/simmodel_linux.png)
 6. 在simcpp文件夹内打开一个Terminal，依次输入：
     ```shell

@@ -285,10 +285,13 @@ SimCPP Generator can help generate the Prescan simcpp codes on both Windows and 
     ![Alt text](./pic/generate_win.png)
     input 'y' means to delete the existing simcpp folder and input 'n' or others mean to exit the program without doing anything. If codes are generated successfully, you will see the following outputs:
     ![Alt text](./pic/generated_win.png)
+    
 5. Go to the Prescan experiment folder, you can see a folder called 'simcpp' which includes all the C++ codes for this experiment simulation.
     ![Alt text](./pic/simcpp_win.png)
+
     Inside the folder，you can see the file strcture:
     ![Alt text](./pic/simmode_win.png)
+
     double click ```set_env.bat``` will pop up a cmd termina, type：
     ```powershell
     build.bat
