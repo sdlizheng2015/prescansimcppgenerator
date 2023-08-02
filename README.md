@@ -121,7 +121,7 @@ For users who have installed Prescan with all features enabled, you can directly
 ### prescan_python_dmapi.py
 Firstly, you need to delete/commentout some codes in ```./rename_api_namespace/prescan_python_dmapi.py```. This python module will import the open API of all Prescan features.
 
-```python {.line-numbers}
+```python
 import prescan.api
 import prescan.api.experiment
 import prescan.api.types

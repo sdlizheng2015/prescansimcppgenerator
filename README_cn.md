@@ -122,7 +122,7 @@ export simcpp_dir=/home/yang/Desktop/PrescanSimcppGenerator/prescandemos/SimcppG
 首先需要删减或注释的部分在```./rename_api_namespace/prescan_python_dmapi.py```文件中，该模块导入了Prescan 2302对用户开放的所有功能的python API。
 
 
-```python {.line-numbers}
+```python
 import prescan.api
 import prescan.api.experiment
 import prescan.api.types
