@@ -1,10 +1,11 @@
-<div style="text-align: center"><span style="font-family: Arial; font-size: 20px;"><strong>———————————————————————</strong></span></div>
+<div style="text-align: center"><span style="font-family: Arial; font-size: 20px;"><strong>—————————————————————————————</strong></span></div>
 
 <div style="text-align: center"><span style="font-family: Arial; font-size: 20px;"><strong>欢迎使用 PrescanSimCppGenerator 1.0</strong></span></div>
 
-<div style="text-align: center"><span style="font-family: Arial; font-size: 20px;"><strong>———————————————————————</strong></span></div>
+<div style="text-align: center"><span style="font-family: Arial; font-size: 20px;"><strong>—————————————————————————————</strong></span></div>
 
 ---
+[English Document](/README.md)
 
 [toc]
 
@@ -61,11 +62,11 @@ Prescan Simcpp Generator 旨在提供了一个Prescan C++ 仿真工程的代码�
 根据你电脑Prescan和其他软件的安装情况，你需要做如下的步骤：
 1. 首先更改```set_env.bat```文件中的环境变量，将Prescan安装目录下的bin目录。如果有安装Plugins，也需要将Plugin文件夹下的bin目录添加到系统```PATH```路径；
 2. 然后添加Prescan CMake配置文件的路径到```Prescan_DIR```变量；
-3. 如果你的系统环境变量中没有Python路径，你需要指定使用某个版本的Python，并将其添加到```PATH```变量中，如果有则忽略；
+3. 如果你的系统环境变量中没有Python路径，你需要指定使用某个版本的Python，并将其添加到```PATH```变量中，如果有则忽略并删除该步骤；
 4. 然后你需要将Prescan安装目录下的python、modules和Plugins几个目录添加到```PYTHONPATH```变量；
 5. 将需要仿真的Prescan工程目录添加到```experiment_dir```;
 6. 将需要仿真的Prescan工程的pb文件路径添加到```experiment_pb```;
-7. 将SimCPP Generator生成的simcpp工程路径添加到```simcpp_dir```，建议在将自动生成的SimCPP工程放置在Prescan工程文件夹下的simcpp文件夹内，即```"<Prescan Experiment path>\\simcpp"```
+7. 将SimCPP Generator生成的simcpp工程路径添加到```simcpp_dir```，建议在将自动生成的SimCPP工程放置在Prescan工程文件夹下的simcpp文件夹内，即```"%experiment_dir%\\simcpp"```
 
 最后的环境变量设置如下所示：
 
@@ -81,25 +82,21 @@ set "PATH=D:\Python38\Scripts\;D:\Python38\;%PATH%"
 
 set "PYTHONPATH=D:\Simcenter Prescan\Prescan_2302\python;D:\Simcenter Prescan\Prescan_2302\modules;D:\Simcenter Prescan\Prescan_2302\Plugins;%PYTHONPATH%"
 
-set experiment_dir="C:\\Users\\yiyan5ez\\Desktop\\SimcppGenerator"
-set experiment_pb="C:\\Users\\yiyan5ez\\Desktop\\SimcppGenerator\\SimcppGenerator.pb"
-set simcpp_dir="C:\\Users\\yiyan5ez\\Desktop\\SimcppGenerator\\simcpp"
+set experiment_dir="C:\\Users\\yiyan5ez\\Desktop\\PrescanSimcppGenerator\\prescandemos\\SimcppGenerator"
+set experiment_pb="C:\\Users\\yiyan5ez\\Desktop\\PrescanSimcppGenerator\\prescandemos\\SimcppGenerator\\SimcppGenerator.pb"
+set simcpp_dir="C:\\Users\\yiyan5ez\\Desktop\\PrescanSimcppGenerator\\prescandemos\\SimcppGenerator\\simcpp"
 
 echo set path ...
-
 cmd
 ```
 
-在更改完```set_env.bat```文件后，你可以将更改的文件拷贝到```./templates/simcpp```下替换掉该目录下的```set_env.bat```文件，这两个文件内容保持一致，方便后面的操作。
-
-
 ### Ubuntu
-==**注意**==：Prescan 2307版本正式支持Ubuntu20.04系统，且包含了Windows版本下所有的基于物理建模的传感器，但不持支V2X插件。但在2307之前的版本，并不支持在Ubuntu系统下运行Physics-Based Point Cloud Lidar 和 Physics-Based Radar。因此用户在Ubuntu下使用该项目时候，需要根据自身Prescan版本以及安装的Plugins来添加环境变量。如何在Ubuntu下添加 Prescan Plugin及其PATH，请参考Prescan相关手册。
+==**注意**==：Prescan 2307版本正式支持Ubuntu20.04系统，且包含了Windows版本下所有的基于物理建模的传感器，但不持支V2X插件。但在2307之前的版本，并不支持在Ubuntu系统下运行Physics-Based Point Cloud Lidar 和 Physics-Based Radar。因此用户在Ubuntu下使用该项目时候，需要根据自身Prescan版本以及安装的Plugins来添加环境变量。如何在Ubuntu下添加 Prescan Plugin及其PATH，请参考Prescan相关手册。在Prescan 2302的测试项目中，Ubuntu上未安装任何Prescan Plugins。
 
 ```bash
 #! /usr/bin/env bash
 
-# add Prescan
+# add prescan
 export Prescan_version=Prescan_2302
 export PATH=$PATH:/usr/local/${Prescan_version}/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/${Prescan_version}/lib
@@ -109,14 +106,12 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/${Prescan_version}/lib
 
 export Prescan_DIR=/usr/local/${Prescan_version}/lib/cmake
 
-export PYTHONPATH=$PYTHONPATH:/usr/local/Prescan_2302/python:/usr/local/Prescan_2302/modules:/usr/local/Prescan_2302/Plugins
+export PYTHONPATH=$PYTHONPATH:/usr/local/${Prescan_version}/python:/usr/local/${Prescan_version}/modules:/usr/local/${Prescan_version}/Plugins
 
-export experiment_dir=/home/yang/Desktop/SimcppGenerator
-export experiment_pb=/home/yang/Desktop/SimcppGenerator/SimcppGenerator.pb
-export simcpp_dir=/home/yang/Desktop/SimcppGenerator/simcpp
+export experiment_dir=/home/yang/Desktop/PrescanSimcppGenerator/prescandemos/SimcppGenerator
+export experiment_pb=/home/yang/Desktop/PrescanSimcppGenerator/prescandemos/SimcppGenerator/SimcppGenerator.pb
+export simcpp_dir=/home/yang/Desktop/PrescanSimcppGenerator/prescandemos/SimcppGenerator/simcpp
 ```
-
-同样，在更改完```set_env.bash```文件后，你可以将更改的文件拷贝到```./templates/simcpp```下替换掉该目录下的```set_env.bash```文件。
 
 
 ## 代码删减
@@ -270,19 +265,19 @@ import GraphBasedRoads.python_interface.prescan.api.roads.types as prescan_api_r
 在删除或注释掉对应plugin的API导入后，还需要在```sensors```和```generator```文件夹内删除对应的传感器模块。例如：如果在```prescan_python_dmapi.py```中注释或者删除掉了```pointcloudlidar```的导入，则必须在```sensors```和```generator```文件中分别删除```Pointcloudlidar.py```和```PointcloudlidarGenerator.py```。
 
 ## 使用步骤
-SimCPP Generator可以在Windows或Ubuntu上分别为Prescan工程自动生成SimCPP代码。同时，也可以仅在Windows上生成SimCPP然后拷贝到Ubuntu上编译运行。==在进行正式SimCPP代码生成前，确保已经根据Prescan实际安装情况和支持的功能，按上述要求完成了SimCPP Generator源代码的删减。==
+==在进行正式SimCPP代码生成前，确保已经根据Prescan实际安装情况和支持的功能，按上述要求完成了SimCPP Generator源代码的删减==。
+SimCPP Generator可以在Windows或Ubuntu上分别为Prescan工程自动生成SimCPP代码。但考虑到Prescan在Ubuntu上安装Plugins的时候具有一定的灵活性，不同的用户可能安装到不同的目录或者命名不同的文件夹。所以，如果要在Ubuntu上使用到Prescan Plugins的一些功能，建议直接在Windows上生成SimCPP然后拷贝到Ubuntu上编译运行。
 
 ### Windows
-1. 首先创建Prescan工程，该示例中工程创建在```C:\Users\yiyan5ez\Desktop\```路径下，工程名称为```SimcppGenerator```。
+1. 首先创建或打开一个Prescan工程，我们在该项目中已经包含了一个示例工程，在项目的```./prescandemos```文件夹下，工程名称为```SimcppGenerator```。
 2. 在Prescan GUI中创建场景，添加道路、建筑、车辆等，设置仿真，然后给车辆添加运动轨迹或者AmesimPreconfigedDynamics，最后给感兴趣的车辆添加传感器（[支持自动生成SimCPP代码的传感器类型](#introduction)）；
 ![GUI](./pic/GUI.png)
-3. 在SimCPP generator中修改```set_env.bat```文件中的环境变量，以下路径改为所创建的Prescan工程路径、pb文件以及期望把生成的Simcpp工程放置的路径:
+3. 在SimCPP generator中修改```set_env.bat```文件中的环境变量，例如，将该项目文件夹位于```C:\\Users\\yiyan5ez\\Desktop\\PrescanSimcppGenerator```时候，以下路径改为Prescan示例工程路径、pb文件以及期望把生成的Simcpp工程放置的路径:
     ```powershell
-    set experiment_dir="C:\\Users\\yiyan5ez\\Desktop\\SimcppGenerator"
-    set experiment_pb="C:\\Users\\yiyan5ez\\Desktop\\SimcppGenerator\\SimcppGenerator.pb"
-    set simcpp_dir="C:\\Users\\yiyan5ez\\Desktop\\SimcppGenerator\\simcpp"
+    set experiment_dir="C:\\Users\\yiyan5ez\\Desktop\\PrescanSimcppGenerator\\prescandemos\\SimcppGenerator"
+    set experiment_pb="C:\\Users\\yiyan5ez\\Desktop\\PrescanSimcppGenerator\\prescandemos\\SimcppGenerator\\SimcppGenerator.pb"
+    set simcpp_dir="C:\\Users\\yiyan5ez\\Desktop\\PrescanSimcppGenerator\\prescandemos\\SimcppGenerator\\simcpp"
     ```
-    在更改完```set_env.bat```文件后，记得将更改的文件拷贝到```./templates/simcpp```下替换掉该目录下的```set_env.bat```文件。
 4. 双击```set_env.bat```即可打开一个cmd窗口，输入：
     ```powershell
     python main.py %experiment_pb% -out_dir %simcpp_dir%
@@ -349,11 +344,11 @@ SimCPP Generator可以在Windows或Ubuntu上分别为Prescan工程自动生成Si
 1. 步骤同Windows；
 2. 步骤同Windows；
 3. 将Prescan工程和Simcpp Generator项目文件夹都拷贝到Ubuntu；
-4. 在SimCPP generator中修改```set_env.bash```文件中的环境变量，以下路径改为所创建的Prescan工程路径、pb文件以及期望把生成的Simcpp工程放置的路径:
+4. 同理，在SimCPP generator中修改```set_env.bash```文件中的环境变量，例如以下路径改为所创建的Prescan工程路径、pb文件以及期望把生成的Simcpp工程放置的路径:
     ```bash
-    export experiment_dir=/home/yang/Desktop/SimcppGenerator
-    export experiment_pb=/home/yang/Desktop/SimcppGenerator/SimcppGenerator.pb
-    export simcpp_dir=/home/yang/Desktop/SimcppGenerator/simcpp
+    export experiment_dir=/home/yang/Desktop/PrescanSimcppGenerator/prescandemos/SimcppGenerator
+    export experiment_pb=/home/yang/Desktop/PrescanSimcppGenerator/prescandemos/SimcppGenerator/SimcppGenerator.pb
+    export simcpp_dir=/home/yang/Desktop/PrescanSimcppGenerator/prescandemos/SimcppGenerator/simcpp
     ```
     在更改完```set_env.bash```文件后，记得将更改的文件拷贝到```./templates/simcpp```下替换掉该目录下的```set_env.bash```文件。
 5. 在当前SimCPP generator项目文件夹中打开一个Terminal，依次输入：
@@ -423,7 +418,7 @@ SimCPP Generator可以在Windows或Ubuntu上分别为Prescan工程自动生成Si
 
 
 # 代码详解
-## SensorDemux
+## 获取数据
 
 
 # 进阶应用

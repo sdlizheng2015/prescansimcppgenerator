@@ -9,7 +9,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #PRESCAN_DIR#
 
 ################### add_subdirectory() here ###############
+#ADDSUBDIR#
 # e.g., add_subdirectory(bridge)
+#
+###########################################################
+
+################### find_package() here ###################
+#FINDPKG#
+# e.g., find_package(boost)
 #
 ###########################################################
 
@@ -25,10 +32,12 @@ add_executable(${PROJECT_NAME} ${allsources})
 target_link_libraries(${PROJECT_NAME} 
                       ${Prescan_LIBS}
 					  ################ add additional libs ###################
+					  #ADDLIBS#
 					  #e.g., ${Protobuf_LIBRARIES}
 					  #e.g., proj
+					  #e.g., ${Boost_LIBRARIES}
 					  ########################################################
-) 
+)
 
 target_include_directories(${PROJECT_NAME} PRIVATE
   ${CMAKE_CURRENT_BINARY_DIR}

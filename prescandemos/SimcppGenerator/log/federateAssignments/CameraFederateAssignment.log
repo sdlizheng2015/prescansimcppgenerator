@@ -1,0 +1,19 @@
+federates:
+[
+  {
+    federateId: 0
+    moduleName: CameraPlugin::CameraFederate
+    instanceName: CameraFederate_0
+    hostName: di2cnctu0122wnb
+    gpuId: -1
+    cameraType: pointCloud
+    sensors: 
+    [
+      {
+        index: 0
+        name: PointCloudSensor_1
+        cameraType: pointCloud
+      }
+    ]
+  }
+]

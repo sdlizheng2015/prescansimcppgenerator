@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<ExperimentConfig>
+  <Federates>
+    <Federate federateId="0" hostId="localhost" />
+    <Federate federateId="1" hostId="localhost" />
+  </Federates>
+  <SensorAssignments>
+    <SensorAssignment sensorId="ALMS_1" federateId="0" />
+    <SensorAssignment sensorId="ALMS_2" federateId="1" />
+  </SensorAssignments>
+</ExperimentConfig>

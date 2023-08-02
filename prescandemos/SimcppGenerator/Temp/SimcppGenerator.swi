@@ -1,0 +1,36 @@
+# create sensor mounts and cameras
+ALMS_1_mount = visnodes.VisTransform.createTransformNode(r"ALMS_1_mount")
+scene.DAF_95_XF.addChild(ALMS_1_mount)
+scene.getTransformChild("ALMS_1_mount")
+ALMS_1_mount.setTranslation(5, 0, 2.84999990463257)
+ALMS_1_mount.setRotation(0, 1, 0, 0)
+
+LMSSensor_1_mount = visnodes.VisTransform.createTransformNode(r"LMSSensor_1_mount")
+scene.DAF_95_XF.addChild(LMSSensor_1_mount)
+scene.getTransformChild("LMSSensor_1_mount")
+LMSSensor_1_mount.setTranslation(5, 0, 2.84999990463257)
+LMSSensor_1_mount.setRotation(0, 1, 0, 0)
+
+LMSSensor_2_mount = visnodes.VisTransform.createTransformNode(r"LMSSensor_2_mount")
+scene.MercedesBenz.addChild(LMSSensor_2_mount)
+scene.getTransformChild("LMSSensor_2_mount")
+LMSSensor_2_mount.setTranslation(5.84999990463257, 0, 2.84999990463257)
+LMSSensor_2_mount.setRotation(0, 1, 0, 0)
+
+ALMS_2_mount = visnodes.VisTransform.createTransformNode(r"ALMS_2_mount")
+scene.MercedesBenz.addChild(ALMS_2_mount)
+scene.getTransformChild("ALMS_2_mount")
+ALMS_2_mount.setTranslation(5.84999990463257, 0, 2.84999990463257)
+ALMS_2_mount.setRotation(0, 1, 0, 0)
+
+PointCloudSensor_1_mount = visnodes.VisTransform.createTransformNode(r"PointCloudSensor_1_mount")
+scene.MercedesBenz.addChild(PointCloudSensor_1_mount)
+scene.getTransformChild("PointCloudSensor_1_mount")
+PointCloudSensor_1_mount.setTranslation(5.84999990463257, 0, 2.84999990463257)
+PointCloudSensor_1_mount.setRotation(0, 1, 0, 0)
+
+PointCloudSensor_1 = visviewer.VisCamera(r"PointCloudSensor_1")
+PointCloudSensor_1_mount.addChild(PointCloudSensor_1)
+PointCloudSensor_1.setProjectionMatrixPerspective(1.0471975511965976, 0.52359877559829882, 0.10000000149011612, 150)
+
+

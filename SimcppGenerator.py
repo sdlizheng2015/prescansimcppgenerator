@@ -22,9 +22,8 @@ from generators.StateActuatorGenerator import StateActuatorGenerator
 import yaml
 from logger.UserLog import uniLog
 
-
 generator_names = [os.path.splitext(module)[0] for module in os.listdir("generators") if
-                   os.path.splitext(module)[1] == ".py"]
+                   os.path.splitext(module)[1] in [".py", ".pyx"]]
 generator_cls, incl_cls = get_cls(generator_names, "generators", sub_cls_name="SensorInclude")
 generator_cls.insert(0, generator_cls.pop(generator_cls.index(StateActuatorGenerator)))
 generator_cls.insert(0, generator_cls.pop(generator_cls.index(SelfUnitGenerator)))
@@ -35,7 +34,7 @@ incl_cls.insert(0, incl_cls.pop(incl_cls.index(SelfUnitGenerator.SensorInclude))
 class SimcppGenerator:
     def __init__(self, pb: str, pb_yaml: str, ps_dir: str = "",
                  load_yaml: bool = True, enable_all_port: bool = False,
-                 enable_sim_time: bool = True):
+                 enable_sim_time: bool = True, enable_bridge: bool = False):
         self.xp_yaml = {}
         self.ps_dir = ps_dir
         self.dst = ""
@@ -50,6 +49,7 @@ class SimcppGenerator:
         self.step_start = ""
         self.step_end = ""
         self.enable_sim_time = enable_sim_time
+        self.enable_bridge = enable_bridge
         try:
             self.xp: prescan_api_experiment.Experiment = prescan_api_experiment.loadExperimentFromFile(pb)
             if load_yaml:
@@ -77,15 +77,16 @@ class SimcppGenerator:
                     shutil.rmtree(dst)
                 except Exception as ee:
                     print(ee)
-                finally:
-                    shutil.copytree("./templates/simcpp", dst)
-                    print("deleting the exiting project and copy templates to project")
+                    sys.exit()
+                else:
+                    print(f"deleting the exiting simcpp project in {self.dst}")
             else:
-                print("not copy templates to project")
+                print(f"not copy templates to {self.dst}")
                 sys.exit()
-        else:
-            shutil.copytree("./templates/simcpp", dst)
-            print(f"copy templates to {self.dst}")
+        shutil.copytree("./templates/simcpp", dst)
+        shutil.copy("./set_env.bat", f"{self.dst}")
+        shutil.copy("./set_env.bash", f"{self.dst}")
+        print(f"copy templates to {self.dst}")
 
     @staticmethod
     def overwrite_files(files: Dict[str, Dict[str, str]], new_path: str = ""):
@@ -259,7 +260,7 @@ class SimcppGenerator:
 
         files = {
             simmodel_h_path: simmodel_h,
-            #cmake_list_path: cmake_list,
+            # cmake_list_path: cmake_list,
         }
 
         self.overwrite_files(files)
