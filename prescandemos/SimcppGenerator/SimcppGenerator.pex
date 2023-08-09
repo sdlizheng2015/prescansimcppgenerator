@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Experiment xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Description="" id="SimcppGenerator" UniqueId="0" TotalSimulationTime="18.05" Built="true" EnableCollisionDetection="false" MaxNumberOfCollisions="5" EnableObjectListProvider="true" EnableTestAutomation="false" Generate3DTrajectories="false" VisualizeSensorBeams="false" VisualizeBoundingBoxes="false" Parsed="true" PrecipitationRandomSeed="0" PRESCANVersion="2023.1.0" ResourcesDir="Resources" SensorRandomSeed="0" SimulationGenerationHash="721DA5E79FC8CEA996ABCCEAF9D3A307A7F1F3463364F31FB2340915E7A9C56D" UniqueExperimentIdentifier="86b87947-79f7-4fb7-9394-210f8fb246b4" UniqueIdCounter="848" VisuAidMaxRenderingDistance="750" VisuAidMinRenderingDistance="0.1" WeatherTypeName="None">
+<Experiment xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Description="" id="SimcppGenerator" UniqueId="0" TotalSimulationTime="18.05" Built="true" EnableCollisionDetection="false" MaxNumberOfCollisions="5" EnableObjectListProvider="true" EnableTestAutomation="false" Generate3DTrajectories="false" VisualizeSensorBeams="false" VisualizeBoundingBoxes="false" Parsed="true" PrecipitationRandomSeed="0" PRESCANVersion="2023.1.0" ResourcesDir="Resources" SensorRandomSeed="0" SimulationGenerationHash="52AF15BD19E609170BD3875E63D31E92F6BEAFA3E35EE285B927C92C0FEE8126" UniqueExperimentIdentifier="a0fd980b-8bf0-48fc-98f0-071db96ab04a" UniqueIdCounter="867" VisuAidMaxRenderingDistance="750" VisuAidMinRenderingDistance="0.1" WeatherTypeName="None">
   <Actors>
     <Actor xsi:type="GenericModel" Description="A model of a DAF 95XF" id="DAF_95_XF" UniqueId="558" SensorDetectability="Detectable" NumericalID="4" ObjectTypeID="3" ParticipateInCollisionDetection="false" Movable="true" DynamicsConfiguration="AmesimPreconfigured" AmesimConfiguration="None" ContactConfiguration="Geometric" DiscreteModeActivated="false" FlatGround="false" Reference="false" UserSpecifiedControl="false" PhysicsSimpleDynamicsInteraction="PhysicsInheritsFromSD" ActorKind="DAF_95_XF" AnimatedActor="false" CompilationSheetPicture="DAF_95_XF_HighPoly.png" HashCode="a2d56834c0977a2c5f466a1bb6159c15" ModelFile="Vehicles\DAF_95_XF\DAF_95_XF.osgb" GenericModelSourceFile="Vehicles\DAF_95_XF\DAF_95_XF.pgmb" FileLocationType="ModelDepo" ContactWorldDetectable="false" SupportedDynamics="None Simple SimpleTD UserSpecified AmesimPreconfigured AmesimArchetype">
       <Location X="57.187564849853516" Y="78.322982788085938" Z="0.87999999523162842" />
@@ -436,6 +436,21 @@
           <Orientation Bank="0" Tilt="0" Heading="0" />
           <Origin X="0" Y="1" Z="0" />
           <Size X="9.1462650299072266" Y="1.6562497615814209" Z="0.10000000149011612" />
+          <CoGOffset X="0" Y="0" Z="0" />
+          <TestAutomationVariables>
+            <TestAutomationVariable VariableName="Location" VariableState="false" />
+            <TestAutomationVariable VariableName="Orientation" VariableState="false" />
+            <TestAutomationVariable VariableName="FoVAzimuth" VariableState="false" />
+            <TestAutomationVariable VariableName="FoVElevation" VariableState="false" />
+            <TestAutomationVariable VariableName="IntensityFactorRGBMono" VariableState="false" />
+          </TestAutomationVariables>
+          <IntensityFactorRGBMono IntensityFactorR="0.3" IntensityFactorG="0.59" IntensityFactorB="0.11" />
+        </Sensor>
+        <Sensor xsi:type="CameraSensor" Description="" id="CameraSensor_1" UniqueId="866" PreventDragging="true" CurrentAttachmentPoint="Actor" Visualize="true" VisualizedAlpha="25" Annotate="false" BeamColor="Yellow (FFFFFF00)" FovAzimuth="46.21265" FovElevation="35.48935" HorizontalResolution="800" VerticalResolution="600" OutputCameraImage="true" ColorAssignment="Color" FrameRate="20" SweepRateScaleFactor="1" FocalLength="7.5" NearClippingDistance="0.1" FarClippingDistance="300" CurrentEffect="default" UsesCCDspec="true" SensorCCDType="HalfInch" CustomCCDWidth="2.5" CustomCCDHeight="2.5">
+          <Location X="5" Y="0" Z="2.84999990463257" />
+          <Orientation Bank="0" Tilt="0" Heading="0" />
+          <Origin X="0" Y="1" Z="0" />
+          <Size X="11.206160545349121" Y="1.6562497615814209" Z="0.10000000149011612" />
           <CoGOffset X="0" Y="0" Z="0" />
           <TestAutomationVariables>
             <TestAutomationVariable VariableName="Location" VariableState="false" />
@@ -1779,7 +1794,7 @@
           </TestAutomationVariables>
           <IntensityFactorRGBMono IntensityFactorR="0.3" IntensityFactorG="0.59" IntensityFactorB="0.11" />
         </Sensor>
-        <Sensor xsi:type="PointCloudSensor" Description="" id="PointCloudSensor_1" UniqueId="810" PreventDragging="true" CurrentAttachmentPoint="Actor" Visualize="true" VisualizedAlpha="25" Annotate="true" BeamColor="DarkCyan (FF008B8B)" FovAzimuth="60" FovElevation="30" HorizontalResolution="320" VerticalResolution="160" OutputCameraImage="true" ColorAssignment="Color" FrameRate="20" SweepRateScaleFactor="1" FocalLength="7.5" NearClippingDistance="0.1" FarClippingDistance="150" CurrentEffect="default" AzimuthSampleAccuracy="0.05" ElevationSampleAccuracy="0.05" ExtrapolateRange="true" OutputMode="SensorPosition" OutputDopplerVelocity="false" OutputIntensity="true" OutputObjectID="true" OutputAngles="false" IntegerOutput="false">
+        <Sensor xsi:type="PointCloudSensor" Description="" id="PointCloudSensor_1" UniqueId="810" PreventDragging="true" CurrentAttachmentPoint="Actor" Visualize="true" VisualizedAlpha="25" Annotate="false" BeamColor="DarkCyan (FF008B8B)" FovAzimuth="60" FovElevation="30" HorizontalResolution="320" VerticalResolution="160" OutputCameraImage="true" ColorAssignment="Color" FrameRate="20" SweepRateScaleFactor="1" FocalLength="7.5" NearClippingDistance="0.1" FarClippingDistance="150" CurrentEffect="default" AzimuthSampleAccuracy="0.05" ElevationSampleAccuracy="0.05" ExtrapolateRange="true" OutputMode="SensorPosition" OutputDopplerVelocity="false" OutputIntensity="true" OutputObjectID="true" OutputAngles="false" IntegerOutput="false">
           <Location X="5.84999990463257" Y="0" Z="2.84999990463257" />
           <Orientation Bank="0" Tilt="0" Heading="0" />
           <Origin X="0" Y="1" Z="0" />

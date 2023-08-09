@@ -2,8 +2,10 @@
 <ExperimentConfig>
   <Federates>
     <Federate federateId="0" hostId="localhost" gpuId="default gpu" />
+    <Federate federateId="1" hostId="localhost" gpuId="default gpu" />
   </Federates>
   <SensorAssignments>
     <SensorAssignment sensorId="PointCloudSensor_1" federateId="0" />
+    <SensorAssignment sensorId="CameraSensor_1" federateId="1" />
   </SensorAssignments>
 </ExperimentConfig>

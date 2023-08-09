@@ -11,6 +11,18 @@ scene.getTransformChild("LMSSensor_1_mount")
 LMSSensor_1_mount.setTranslation(5, 0, 2.84999990463257)
 LMSSensor_1_mount.setRotation(0, 1, 0, 0)
 
+CameraSensor_1_mount = visnodes.VisTransform.createTransformNode(r"CameraSensor_1_mount")
+scene.DAF_95_XF.addChild(CameraSensor_1_mount)
+CameraSensor_1_mount.setTranslation(5, 0, 2.84999990463257)
+CameraSensor_1_mount.setRotationLegacyYUpAxes(1.5707963267948966, -1, 0, 0)
+
+CameraSensor_1 = visviewer.VisCamera(r"CameraSensor_1")
+CameraSensor_1_mount.addChild(CameraSensor_1)
+CameraSensor_1.setProjectionMatrixPerspective(0.80656290379155327, 0.61940599581389943, 0.10000000149011612, 300)
+
+cameras[r"CameraSensor_1"] = VisCameras.CameraInfo(r"CameraSensor_1", CameraSensor_1, visviewer.VisViewerBase.SPECTATOR, True)
+cameras[r"CameraSensor_1"].setSensorDimensions(6.4, 4.8);cameras[r"CameraSensor_1"].setFrameRate(20)
+
 LMSSensor_2_mount = visnodes.VisTransform.createTransformNode(r"LMSSensor_2_mount")
 scene.MercedesBenz.addChild(LMSSensor_2_mount)
 scene.getTransformChild("LMSSensor_2_mount")

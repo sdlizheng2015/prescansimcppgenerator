@@ -1,0 +1,6 @@
+# CMake generation dependency list for this directory.
+C:/Program Files/CMake/share/cmake-3.24/Modules/FindBoost.cmake
+C:/Program Files/CMake/share/cmake-3.24/Modules/FindPackageHandleStandardArgs.cmake
+C:/Program Files/CMake/share/cmake-3.24/Modules/FindPackageMessage.cmake
+C:/Users/yiyan5ez/Desktop/PrescanSimcppGenerator/bridgedemos/cppbridge/bridge/bridge_base/CMakeLists.txt
+D:/vcpkg/installed/x64-windows/share/boost/vcpkg-cmake-wrapper.cmake
