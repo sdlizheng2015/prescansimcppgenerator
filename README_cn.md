@@ -1,3 +1,9 @@
+---
+html:
+  embed_local_images: true
+#   toc: true
+---
+
 <div style="text-align: center"><span style="font-family: Arial; font-size: 20px;"><strong>—————————————————————————————</strong></span></div>
 
 <div style="text-align: center"><span style="font-family: Arial; font-size: 20px;"><strong>欢迎使用 PrescanSimCppGenerator 1.0</strong></span></div>
@@ -5,7 +11,7 @@
 <div style="text-align: center"><span style="font-family: Arial; font-size: 20px;"><strong>—————————————————————————————</strong></span></div>
 
 ---
-[English Document](/README.md)
+[English Document](/README.html)
 
 [toc]
 
@@ -59,6 +65,7 @@ Prescan Simcpp Generator 旨在提供了一个Prescan C++ 仿真工程的代码�
 
 ## 变量设置
 <div id="set_env.bat"></div>
+
 ### Windows
 根据你电脑Prescan和其他软件的安装情况，你需要做如下的步骤：
 1. 首先更改```set_env.bat```文件中的环境变量，将Prescan安装目录下的bin目录。如果有安装Plugins，也需要将Plugin文件夹下的bin目录添加到系统```PATH```路径；

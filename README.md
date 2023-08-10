@@ -1,10 +1,17 @@
+---
+html:
+  embed_local_images: true
+#   toc: true
+---
+
+
 <div style="text-align: center"><span style="font-family: Arial; font-size: 20px;"><strong>—————————————————————————————</strong></span></div>
 <div style="text-align: center"><span style="font-family: Arial; font-size: 20px;"><strong>Welcome to PrescanSimCppGenerator 1.0</strong></span></div>
 <div style="text-align: center"><span style="font-family: Arial; font-size: 20px;"><strong>—————————————————————————————</strong></span></div>
 
 ---
 
-[中文文档](/README_cn.md)
+[中文文档](/README_cn.html)
 
 [toc]
 
@@ -53,12 +60,13 @@ This project is not officially released by Siemens Prescan, which is only for us
 Before you start with this project, make sure you've installed the following softwares:
 * Prescan 2302 or higher
 * Python 3.8 or higher，with following packages：
-  * pyyaml
+  * pip install pyyaml
 * C/C++ compiler(recommended to use Visual Studio 2019)
 * CMake 3.21 or higher
 
 ## Environment Vars
 <div id="set_env.bat"></div>
+
 ### Windows
 According to installation of Prescan on your machine, you may need to do the following configurations：
 1. First change the vars in ```set_env.bat```，add the Prescan bin directory as well as Plugins bin if exists to system ```PATH```；
