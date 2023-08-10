@@ -30,7 +30,7 @@ shmHeader = ShmHeader()
 
 class ShmHandler:
     if platform.system() == "Windows":
-        shm_path = "C:\\ProgramData\\boost_interprocess\\43000000\\"
+        shm_path = "C:\\ProgramData\\boost_interprocess\\44000000\\"
     elif platform.system() == "Linux":
         shm_path = "/dev/shm/"
     else:

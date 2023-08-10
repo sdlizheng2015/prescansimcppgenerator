@@ -286,7 +286,7 @@ SimCPP Generator可以在Windows或Ubuntu上分别为Prescan工程自动生成Si
     ![Alt text](./pic/generate_win.png)
     输入'y'表示同意删除，'n'或其他字符不删除并退出程序，如图显示SimCPP创建成功。
     ![Alt text](./pic/generated_win.png)
-5. 在Prescan工程目录下，即可看到一个simcpp文件夹，里面包含了整个工程的SimCPP程序。
+5. 在对应的Prescan工程目录下，即可看到一个simcpp文件夹，里面包含了整个工程的SimCPP程序。
     ![Alt text](./pic/simcpp_win.png)
 
     进入该文件夹内，可以看到如下文件结构：
@@ -353,7 +353,6 @@ SimCPP Generator可以在Windows或Ubuntu上分别为Prescan工程自动生成Si
     export experiment_pb=/home/yang/Desktop/PrescanSimcppGenerator/prescandemos/SimcppGenerator/SimcppGenerator.pb
     export simcpp_dir=/home/yang/Desktop/PrescanSimcppGenerator/prescandemos/SimcppGenerator/simcpp
     ```
-    在更改完```set_env.bash```文件后，记得将更改的文件拷贝到```./templates/simcpp```下替换掉该目录下的```set_env.bash```文件。
 5. 在当前SimCPP generator项目文件夹中打开一个Terminal，依次输入：
     ```shell
     source set_env.bash
@@ -427,3 +426,6 @@ SimCPP Generator可以在Windows或Ubuntu上分别为Prescan工程自动生成Si
 
 # 进阶应用
 ## SimCppBridge
+该项目中包含了一个Simcpp和C++或Python进程通过共享内存进行通信的示例。Prescan将感知数据从Simcpp中发送到共享内存，工作流程如下：
+![](./pic/workflow_cn.png)
+首先

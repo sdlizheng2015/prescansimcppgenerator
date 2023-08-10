@@ -13,8 +13,5 @@ set experiment_dir="C:\\Users\\yiyan5ez\\Desktop\\PrescanSimcppGenerator\\presca
 set experiment_pb="C:\\Users\\yiyan5ez\\Desktop\\PrescanSimcppGenerator\\prescandemos\\SimcppGenerator\\SimcppGenerator.pb"
 set simcpp_dir="C:\\Users\\yiyan5ez\\Desktop\\PrescanSimcppGenerator\\prescandemos\\SimcppGenerator\\simcpp"
 
-::SimcppBridge Dependencies
-set vcpkg="D:\vcpkg\scripts\buildsystems\vcpkg.cmake"
-
 echo set path ...
 cmd

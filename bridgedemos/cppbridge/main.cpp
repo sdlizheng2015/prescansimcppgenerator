@@ -17,6 +17,10 @@ int main(int argc, char*argv[]){
     double _timeout{0.001};
     bool _block{true};
 
+    #if __linux__
+        ThreadPool threadpool{10};
+    #endif
+
     prescan::bridge::HandlerManager hander_manager;
 
     prescan::bridge::ShmHandler syncHandler{"Sync", 1024};
@@ -40,6 +44,10 @@ int main(int argc, char*argv[]){
     prescan::bridge::ShmHandler controlHandler{"Control", 1024};
     ControlCommand control;
 
+    #if __linux__
+        threadpool.start();
+    #endif
+
     hander_manager.add_handler(&syncHandler);
     hander_manager.add_handler(&chassisHandler);
     hander_manager.add_handler(&localizationHandler);
@@ -54,12 +62,25 @@ int main(int argc, char*argv[]){
         /*read data from Prescan*/
         syncHandler.read_shm(p_header, &syncheader, _timeout, _block);
         if(syncheader.timestamp_sec() < 0) break;
-        chassisHandler.read_shm(p_header, &chassis, _timeout, _block);
-        localizationHandler.read_shm(p_header, &localization, _timeout, _block);
-        obstaclesHandler.read_shm(p_header, &obstacles, _timeout, _block);
-        polyLanesHandler.read_shm(p_header, &polyLanes, _timeout, _block);
-        pointLanesHandler.read_shm(p_header, &pointLanes, _timeout, _block);
 
+        #if __linux__
+            /*This threadpool works correctly on linux, not always on Windows*/
+            threadpool.appendTask(std::bind(&ShmHandler::read_shm, &chassisHandler, p_header, &chassis, _timeout, _block));
+            threadpool.appendTask(std::bind(&ShmHandler::read_shm, &localizationHandler, p_header, &localization, _timeout, _block));
+            threadpool.appendTask(std::bind(&ShmHandler::read_shm, &obstaclesHandler, p_header, &obstacles, _timeout, _block));
+            threadpool.appendTask(std::bind(&ShmHandler::read_shm, &polyLanesHandler, p_header, &polyLanes, _timeout, _block));
+            threadpool.appendTask(std::bind(&ShmHandler::read_shm, &pointLanesHandler, p_header, &pointLanes, _timeout, _block));
+            threadpool.wait();
+        #endif
+
+        #if _WIN64
+            chassisHandler.read_shm(p_header, &chassis, _timeout, _block);
+            localizationHandler.read_shm(p_header, &localization, _timeout, _block);
+            obstaclesHandler.read_shm(p_header, &obstacles, _timeout, _block);
+            polyLanesHandler.read_shm(p_header, &polyLanes, _timeout, _block);
+            pointLanesHandler.read_shm(p_header, &pointLanes, _timeout, _block);
+        #endif
+        
         /*Do your algorithm here*/
         control.set_brake(0);
         control.set_throttle(1);
@@ -70,5 +91,10 @@ int main(int argc, char*argv[]){
         controlHandler.write_shm(p_header, &control, _timeout, _block);
     }
     hander_manager.free_shmhandlers();
+
+    #if __linux__
+        threadpool.stop();
+    #endif
+
     return 1;
 }

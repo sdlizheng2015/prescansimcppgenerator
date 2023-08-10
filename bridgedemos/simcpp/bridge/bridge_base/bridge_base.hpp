@@ -23,7 +23,7 @@
 #include <cmath>
 #include <functional>
 
-#ifdef _WIN32
+#if _WIN64
 #include "corecrt_math_defines.h"
 #endif
 
