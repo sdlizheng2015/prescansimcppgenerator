@@ -593,3 +593,8 @@ SimCPP Generator可以在Windows或Ubuntu上分别为Prescan工程自动生成Si
     运行成功将看到如下界面：
     ![](./pic/bridge_simcpp_run_linux_with_userpy.png)
 6. 运行结束后，Simcpp和用户Python程序将自行结束。**注意，在Ubuntu上面，Simcpp和用户Python程序启动顺序没有特别指定**
+
+
+# 已知问题
+1. 在Windows环境下，Simcpp和User C++ App共享内存通信时候，C++ User App不能使用该项目中的定义好的线程池类读取数据，否则会出现卡死。
+2. 在Windows环境下，Prescandemos中的Prescan工程，PCS在PrescanViewer中的Annotate属性如果使能，Simcpp和User Python App则不能实现共享内存通信，因为在```C:\ProgramData\boost_interprocess```中的共享内存文件不是按照用户自定义的名称进行命名的，python无法找到对应的文件和内存。

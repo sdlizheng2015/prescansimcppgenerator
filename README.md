@@ -593,3 +593,7 @@ inside ```./bridgedemos/pybridge/shmtypes``` folder，open and edit ```bridge_sh
     you will see following if succeed:
     ![](./pic/bridge_simcpp_run_linux_with_userpy.png)
 6. When simulation ends, Simcpp and user Python App will finish automatically. **On Ubuntu, we don't specify the order to run Simcpp and user Python App**
+
+# Known Issues
+1. On Windows, when Simcpp communicates with User C++ App via shared memory，ThreadPool defined in this project can not be used in C++ User App, but it's ok on Ubuntu.
+2. On Windows，in Prescan experiment，if the Annotate is enabled in PCSPrescanViewer, Simcpp can't communicate with User Python App via shared memory, cause the files in ```C:\ProgramData\boost_interprocess``` are not named by the user given sharedmemory names. So, python can't map to relevant memory.
