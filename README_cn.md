@@ -52,12 +52,13 @@ Prescan Simcpp Generator 旨在提供了一个Prescan C++ 仿真工程的代码�
 ## 软件要求
 在使用该项目时候，需要事先安装好以前软件：
 * Prescan 2302 或者更高版本
-* Python 3.8或者更高版本，并安装以下包：
-  * pyyaml
+* Python 3.8或者更高版本，并pip安装以下包：
+  * pip install pyyaml
 * C/C++ 编译器(推荐使用Visual Studio 2019或者更高版本)
 * CMake 3.21或者更高版本
 
 ## 变量设置
+<div id="set_env.bat"></div>
 ### Windows
 根据你电脑Prescan和其他软件的安装情况，你需要做如下的步骤：
 1. 首先更改```set_env.bat```文件中的环境变量，将Prescan安装目录下的bin目录。如果有安装Plugins，也需要将Plugin文件夹下的bin目录添加到系统```PATH```路径；
@@ -421,11 +422,167 @@ SimCPP Generator可以在Windows或Ubuntu上分别为Prescan工程自动生成Si
 
 
 # 代码详解
-## 获取数据
+请参加线上和线下培训
 
 
 # 进阶应用
 ## SimCppBridge
-该项目中包含了一个Simcpp和C++或Python进程通过共享内存进行通信的示例。Prescan将感知数据从Simcpp中发送到共享内存，工作流程如下：
+该项目中包含了一个Prescan Simcpp和用户的C++或Python程序进行共享内存通信的示例，在Windows11和Ubuntu22.04两个平台进行了测试，工作流程如下：
 ![](./pic/workflow_cn.png)
-首先
+
+首先需要用户使用Protobuf定义各类消息并将其编译成C++和python文件，这些消息集将作为Prescan Simcpp和用户程序的通信媒介。Simcpp和用户程序使用共享内存通信的一个完整的仿真周期包括以下三步：
+
+1. 在simcpp程序中，用户将Prescan各类传感器或其他状态数据填充到相应的Protobuf消息中，并通过采用共享内存的方式将填充好的protobuf消息进行序列化并写入到共享内存，然后阻塞等待用户程序处理数据和返回结果；
+2. 用户程序阻塞读取共享内存中来自Prescan Simcpp的数据，并进行反序列化得到protobuf消息，然后完成用户逻辑或算法部分，得到结果（如控制指令），并将结果填充到对应的protobuf消息，最后进行序列化并写入共享内存；
+3. Simcpp读取来自用户程序的处理结果，然后反序列化为对应的protobuf消息，并将结果作用到Prescan（如控制车辆油门、转向和制动）；
+
+### 使用指南
+#### 软件环境
+除了SimCpp Generator要求的软件环境，还需要安装以下软件或依赖：
+* Windows：
+    * 安装 [vcpkg 2023.07.21 Release](https://github.com/microsoft/vcpkg) 并按照官方指导安装boost和protobuf库，vcpkg 2023.07.21 默认会安装boost 1.82版 和 protobuf 3.21.12版。**也可以安装其他版本的boost或者protobuf，但如果想要做Simcpp和python程序的共享内存通信的话，protobuf的C++版本必须和python版本兼容**。本示例中，python版本的protobuf 4.21.12和C++ protobuf 3.21.12兼容。
+        * vcpkg.exe install boost:x64-Windows
+        * vcpkg.exe install protobuf:x64-Windows
+    * pip install protobuf==4.21.12
+    * pip install matplotlib
+* Ubuntu:
+    * 安装boost>=1.72
+    * 安装protobuf>=3.19.2
+    * pip3 install protobuf==(protobuf C++兼容的版本)
+
+### Windows(Simcpp和C++用户程序)
+1. 将```./bridgedemos```下的simcpp文件夹直接拷贝到```./prescandemos/SimcppGenerator```示例工程里面。
+![](./pic/bridgesimcpp.png)
+![](./pic/experiment_bridge_simcpp.png)
+
+2. 进入```./prescandemos/SimcppGenerator/simcpp```中，按照[变量设置](#set_env.bat)修改```set_env.bat```，其中```vcpkg```为```"%vcpkg installation folder%\scripts\buildsystems\vcpkg.cmake```，用于在CMake中找到boost和protobuf依赖。
+
+3. 修改完毕后，双击```set_env.bat```弹出cmd窗口，输入：
+    ```powershell
+    build.bat
+    ```
+    等待编译完成，会看到以下输出，生成可执行文件，编译成功。
+    ```powershell
+    ...
+    Generating Code...
+    SimCppProject.vcxproj -> C:\Users\yiyan5ez\Desktop\PrescanSimcppGenerator\prescandemos\SimcppGenerator\simcpp\build\R
+    elease\SimCppProject.exe
+    Building Custom Rule C:/Users/yiyan5ez/Desktop/PrescanSimcppGenerator/prescandemos/SimcppGenerator/simcpp/CMakeLists.txt
+    ```
+4. 双击```set_env.bat```弹出cmd窗口，输入：
+    ```powershell
+    run.bat
+    ```
+    在运行该命令之前，请确保已启动Prescan Process Manager。运行成功将会看到如下和画面。但整个程序会阻塞在当前位置，因为用户程序尚未开启。
+    ![](/pic/bridge_simcpp_run_win.png)
+5. 接下来编译用户程序。进入```./bridgedemos/cppbridge```文件夹，同样先修改```set_env.bat```文件中的环境变量```vcpkg```。然后双击```set_env.bat```，打开cmd窗口，输入：
+    ```powershell
+    build.bat
+    ```
+    编译成功后你将看到以下信息，生成了可执行文件。
+    ```powershell
+    ...
+    cppbridge.vcxproj -> C:\Users\yiyan5ez\Desktop\PrescanSimcppGenerator\bridgedemos\cppbridge\build\Release\cppbridge.exe
+    Building Custom Rule C:/Users/yiyan5ez/Desktop/PrescanSimcppGenerator/bridgedemos/cppbridge/CMakeLists.txt
+    ```
+    最后，继续在cmd窗口中输入：
+    ```powershell
+    run.bat
+    ```
+    此时仿真将运行起来，Prescan Viewer也可以观察到变化，如下所示。
+    ![](./pic/bridge_simcpp_run_win_with_user.png)
+6. 运行结束后，Simcpp和用户C++程序将自行结束。**注意，在Windows上面，请先启动Simcpp，再启动用户C++程序。**
+
+### Windows(Simcpp和Python用户程序)
+1. 同“Windows(Simcpp和C++用户程序)”步骤1。
+2. 同“Windows(Simcpp和C++用户程序)”步骤2。
+3. 同“Windows(Simcpp和C++用户程序)”步骤3。
+4. 同“Windows(Simcpp和C++用户程序)”步骤4。
+5. 当Simcpp程序运行起来后，在```C:\ProgramData\boost_interprocess```文件夹下可以找到一个文件夹，里面包含共享内存的映射文件，如下所示：
+![](./pic/boost_files.png)
+进去文件夹```./bridgedemos/pybridge/shmtypes```，打开文件```bridge_shm..py```，将文件夹名（该示例为```44000000```）写入到python代码对应位置，然后保存关闭文件。
+    ```python
+    class ShmHandler:
+    if platform.system() == "Windows":
+        shm_path = "C:\\ProgramData\\boost_interprocess\\44000000\\"
+    elif platform.system() == "Linux":
+        shm_path = "/dev/shm/"
+    else:
+        raise Exception("Platform not supported")
+
+    ```
+
+    回到```./bridgedemos/pybridge```文件夹，在该路径下打开一个终端，输入：
+    ```python
+    python main.py
+    ```
+    运行成功将看到如下界面：
+    ![](./pic/bridge_simcpp_run_win_with_userpy.png)
+6. 运行结束后，Simcpp和用户Python程序将自行结束。**注意，在Windows上面，请先启动Simcpp，再启动用户Python程序。**
+
+
+### Ubuntu(Simcpp和C++用户程序)
+1. 同“Windows(Simcpp和C++用户程序)”步骤1。
+
+2. 进入```./prescandemos/SimcppGenerator/simcpp```中，按照[变量设置](#set_env.bat)修改```set_env.bash```。
+
+3. 修改完毕后，在当前路径打开一个终端，依次输入：
+    ```shell
+    source set_env.bash
+    ```
+    ```shell
+    bash build.bash
+    ```
+    等待编译完成，会看到以下输出，生成可执行文件，编译成功。
+    ```powershell
+    ...
+    [100%] Linking CXX executable SimCppProject
+    /usr/bin/ld: warning: /usr/local/Prescan_2302/lib/libplatform.so has a program header with invalid alignment
+    /usr/bin/ld: warning: /usr/local/Prescan_2302/lib/libpimp.so has a program header with invalid alignment
+    /usr/bin/ld: warning: /usr/local/Prescan_2302/lib/libfederate_sdk.so has a program header with invalid alignment
+    /usr/bin/ld: warning: /usr/local/Prescan_2302/lib/libpssettings.so has a program header with invalid alignment
+    /usr/bin/ld: warning: /usr/local/Prescan_2302/lib/libmoduleloader.so has a program header with invalid alignment
+    /usr/bin/ld: warning: /usr/local/Prescan_2302/lib/libprtl.so has a program header with invalid alignment
+    /usr/bin/ld: warning: /usr/local/Prescan_2302/lib/libvislibrary.so has a program header with invalid alignment
+    [100%] Built target SimCppProject
+    ```
+4. 在当前路径打开一个终端，依次输入：
+    ```shell
+    source set_env.bash
+    ```
+    ```shell
+    bash run.bash
+    ```
+    **在运行该命令之前，请确保已启动DeploymentService**。运行成功将会看到如下和画面。但整个程序会阻塞在当前位置，因为用户程序尚未开启。
+    ![](/pic/bridge_simcpp_run_linux_cpp.png)
+5. 接下来编译用户程序。进入```./bridgedemos/cppbridge```文件夹，在当前路径打开一个终端，输入：
+    ```shell
+    bash build.bash
+    ```
+    编译成功后你将看到以下信息，生成了可执行文件。
+    ```powershell
+    ...
+    [100%] Linking CXX executable cppbridge
+    [100%] Built target cppbridge
+    ```
+    最后，继续在终端中输入：
+    ```shell
+    bash run.bash
+    ```
+    此时仿真将运行起来，Prescan Viewer也可以观察到变化，如下所示。
+    ![](./pic/bridge_simcpp_run_linux_with_user.png)
+6. 运行结束后，Simcpp和用户C++程序将自行结束。**注意，在Ubuntu上面，Simcpp和用户C++程序启动顺序没有特别指定**
+
+
+### Ubuntu(Simcpp和Python用户程序)
+1. 同“Ubuntu(Simcpp和C++用户程序)”步骤1。
+2. 同“Ubuntu(Simcpp和C++用户程序)”步骤2。
+3. 同“Ubuntu(Simcpp和C++用户程序)”步骤3。
+4. 同“Ubuntu(Simcpp和C++用户程序)”步骤4。
+5. 当Simcpp程序运行起来后，回到```./bridgedemos/pybridge```文件夹，在该路径下打开一个终端，输入：
+    ```python
+    python3 main.py
+    ```
+    运行成功将看到如下界面：
+    ![](./pic/bridge_simcpp_run_linux_with_userpy.png)
+6. 运行结束后，Simcpp和用户Python程序将自行结束。**注意，在Ubuntu上面，Simcpp和用户Python程序启动顺序没有特别指定**

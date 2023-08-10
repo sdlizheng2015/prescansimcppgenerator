@@ -58,6 +58,7 @@ Before you start with this project, make sure you've installed the following sof
 * CMake 3.21 or higher
 
 ## Environment Vars
+<div id="set_env.bat"></div>
 ### Windows
 According to installation of Prescan on your machine, you may need to do the following configurations：
 1. First change the vars in ```set_env.bat```，add the Prescan bin directory as well as Plugins bin if exists to system ```PATH```；
@@ -420,8 +421,167 @@ SimCPP Generator can help generate the Prescan simcpp codes on both Windows and 
 
 
 # Details into Codes
-## How to get sensor data
+Please see online/offline trainings
 
 
 # Advanced Application
 ## SimCppBridge
+This project contains a demo which shows how to communicate between simcpp and a user application(C++ or Python) through shared memory on the same PC. This demo is tested on Windows11和Ubuntu22.04. The workflow is as follows:
+![](./pic/workflow_en.png)
+
+First of all, user needs to define the intermidiate message types using protobuf formate and compile them to C++ and Python files. The messages work as a bridge medium between Prescan sensors types and what the user needs.。A complete simulation cycle between Simcpp and user App includes the following three steps:
+
+1. In Simcpp, user needs to convert Prescan sensor or state data to the user-defined protobuf messages and then serialize them into shared memory. Then the Simcpp get blocked and waits for response from user App.
+2. User App will read meesages from Simcpp in a blocking mode. When user App succeeds reading data from shared memory, these data are deserialized to protobuf messages. After that, user App continue with these messages to finish the necesarry logics or alogorithms(e.g., control and planning). Then calculated results from user App are converted to protobuf messages and finally serialized to shared memory.
+3. Simcpp reads the responsed results from user App and deserialized them to protobuf messages and feeds these responses to Prescan(e.g., vehicle dunamics throttle, brake and steer).
+
+### GetStart
+#### Prerequisites
+First of all, you should install all the prerequisites for SimCpp Generator. Then, you should continue to install the following dependencies:
+* Windows：
+    * Install [vcpkg 2023.07.21 Release](https://github.com/microsoft/vcpkg) and follow the official guide to install boost and protobuf. By default, vcpkg 2023.07.21 will install boost 1.82 和 protobuf 3.21.12。**You can also install other versions of boost and protobuf, but if you want to try the simcpp and Python demo, protobuf C++ version must be compatible with Python protobuf version**. In this project, Python protobuf 4.21.12 is compatible with C++ protobuf 3.21.12。
+        * vcpkg.exe install boost:x64-Windows
+        * vcpkg.exe install protobuf:x64-Windows
+    * pip install protobuf==4.21.12
+    * pip install matplotlib
+* Ubuntu:
+    * boost>=1.72
+    * protobuf>=3.19.2
+    * pip3 install protobuf==(a version compatible with protobuf C++)
+
+### Windows(Simcpp and C++ user App)
+1. Inside ```./bridgedemos``` folder, copy simcpp to ```./prescandemos/SimcppGenerator``` experiment.
+![](./pic/bridgesimcpp.png)
+![](./pic/experiment_bridge_simcpp.png)
+
+2. Inside ```./prescandemos/SimcppGenerator/simcpp``` folder, follow [Environment Vars](#set_env.bat) to modify ```set_env.bat```, where ```vcpkg``` is ```"%vcpkg installation folder%\scripts\buildsystems\vcpkg.cmake```, which is used to find boost and protobuf in CMake.
+
+3. Then, double click ```set_env.bat``` and type the following command in the pop-up cmd window：
+    ```powershell
+    build.bat
+    ```
+    if built successfully, you will see the following outputs:
+    ```powershell
+    ...
+    Generating Code...
+    SimCppProject.vcxproj -> C:\Users\yiyan5ez\Desktop\PrescanSimcppGenerator\prescandemos\SimcppGenerator\simcpp\build\R
+    elease\SimCppProject.exe
+    Building Custom Rule C:/Users/yiyan5ez/Desktop/PrescanSimcppGenerator/prescandemos/SimcppGenerator/simcpp/CMakeLists.txt
+    ```
+4. double click ```set_env.bat``` and type the following in the pop-up cmd windows:
+    ```powershell
+    run.bat
+    ```
+    Please remember to start **Prescan Process Manager** before you run this command. If succeed, you will see the following. Note, the simcpp will get blocked cause the user App is not running.
+    ![](/pic/bridge_simcpp_run_win.png)
+5. Then build user C++ App. Inside ```./bridgedemos/cppbridge``` folder and modify ```vcpkg``` in ```set_env.bat```. Double click ```set_env.bat```, type the following command in the pop-up cmd window：
+    ```powershell
+    build.bat
+    ```
+    if built successfully, you will see the following outputs:
+    ```powershell
+    ...
+    cppbridge.vcxproj -> C:\Users\yiyan5ez\Desktop\PrescanSimcppGenerator\bridgedemos\cppbridge\build\Release\cppbridge.exe
+    Building Custom Rule C:/Users/yiyan5ez/Desktop/PrescanSimcppGenerator/bridgedemos/cppbridge/CMakeLists.txt
+    ```
+    finally, continue to type the following command in the cmd window:
+    ```powershell
+    run.bat
+    ```
+    if successful, the simulation will be running and you will see changes in Prescan Viewer.
+    ![](./pic/bridge_simcpp_run_win_with_user.png)
+6. When simulation ends, Simcpp and user C++ App will finish automatically. ==On Windows, please start Simcpp first and then user C++ App.==
+
+### Windows(Simcpp and User Python App)
+1. The same as step1 in Windows(Simcpp and C++ user App).
+2. The same as step2 in Windows(Simcpp and C++ user App).
+3. The same as step3 in Windows(Simcpp and C++ user App).
+4. The same as step4 in Windows(Simcpp and C++ user App).
+5. When Simcpp is running, inside ```C:\ProgramData\boost_interprocess``` folder, find the folder which contains the following files:
+![](./pic/boost_files.png)
+inside ```./bridgedemos/pybridge/shmtypes``` folder，open and edit ```bridge_shm..py```, change the folder name(in the example, it's ```44000000```), save and close:
+    ```python
+    class ShmHandler:
+    if platform.system() == "Windows":
+        shm_path = "C:\\ProgramData\\boost_interprocess\\44000000\\"
+    elif platform.system() == "Linux":
+        shm_path = "/dev/shm/"
+    else:
+        raise Exception("Platform not supported")
+
+    ```
+
+    back to ```./bridgedemos/pybridge``` folder, and open a Terminal and types:
+    ```python
+    python main.py
+    ```
+    you will see the following if succeed：
+    ![](./pic/bridge_simcpp_run_win_with_userpy.png)
+6. When simulation ends, Simcpp and user Python App will finish automatically. ==On Windows, please start Simcpp first and then user Python App.==
+
+
+### Ubuntu(Simcpp and User C++ App)
+1. The same as step1 in Windows(Simcpp and C++ user App).
+
+2. Inside ```./prescandemos/SimcppGenerator/simcpp``` folder，follow[Environment Vars](#set_env.bat) to modify ```set_env.bash```.
+
+3. Then open a Terminal from current path and type:
+    ```shell
+    source set_env.bash
+    ```
+    ```shell
+    bash build.bash
+    ```
+    you will see followings outputs if succeed:
+    ```powershell
+    ...
+    [100%] Linking CXX executable SimCppProject
+    /usr/bin/ld: warning: /usr/local/Prescan_2302/lib/libplatform.so has a program header with invalid alignment
+    /usr/bin/ld: warning: /usr/local/Prescan_2302/lib/libpimp.so has a program header with invalid alignment
+    /usr/bin/ld: warning: /usr/local/Prescan_2302/lib/libfederate_sdk.so has a program header with invalid alignment
+    /usr/bin/ld: warning: /usr/local/Prescan_2302/lib/libpssettings.so has a program header with invalid alignment
+    /usr/bin/ld: warning: /usr/local/Prescan_2302/lib/libmoduleloader.so has a program header with invalid alignment
+    /usr/bin/ld: warning: /usr/local/Prescan_2302/lib/libprtl.so has a program header with invalid alignment
+    /usr/bin/ld: warning: /usr/local/Prescan_2302/lib/libvislibrary.so has a program header with invalid alignment
+    [100%] Built target SimCppProject
+    ```
+4. Open Terminal from current path and type:
+    ```shell
+    source set_env.bash
+    ```
+    ```shell
+    bash run.bash
+    ```
+    Please make sure **DeploymentService** is running before you run the commands. Note, the simcpp will get blocked cause the user App is not running.
+    ![](/pic/bridge_simcpp_run_linux_cpp.png)
+5. Then build the user Python App. Inside ```./bridgedemos/cppbridge``` folder. Start a terminal from current path and type：
+    ```shell
+    bash build.bash
+    ```
+    if succeed, you will see:
+    ```powershell
+    ...
+    [100%] Linking CXX executable cppbridge
+    [100%] Built target cppbridge
+    ```
+    finally, continue to type:
+    ```shell
+    bash run.bash
+    ```
+    the simulation will be runnning and you can see the changes in Prescan Viewer:
+    ![](./pic/bridge_simcpp_run_linux_with_user.png)
+6. When simulation ends, Simcpp and user Python App will finish automatically. **On Ubuntu, we don't specify the order to run Simcpp and user C++ App**
+
+
+### Ubuntu(Simcpp and User Python App)
+1. The same as step1 in Ubuntu(Simcpp and User C++ App).
+2. The same as step2 in Ubuntu(Simcpp and User C++ App).
+3. The same as step3 in Ubuntu(Simcpp and User C++ App).
+4. The same as step4 in Ubuntu(Simcpp and User C++ App).
+5. When Simcpp is running, inside ```./bridgedemos/pybridge``` folder, open a terminal and type:
+    ```python
+    python3 main.py
+    ```
+    you will see following if succeed:
+    ![](./pic/bridge_simcpp_run_linux_with_userpy.png)
+6. When simulation ends, Simcpp and user Python App will finish automatically. **On Ubuntu, we don't specify the order to run Simcpp and user Python App**
