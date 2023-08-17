@@ -34,7 +34,8 @@ incl_cls.insert(0, incl_cls.pop(incl_cls.index(SelfUnitGenerator.SensorInclude))
 class SimcppGenerator:
     def __init__(self, pb: str, pb_yaml: str, ps_dir: str = "",
                  load_yaml: bool = True, enable_all_port: bool = False,
-                 enable_sim_time: bool = True, enable_bridge: bool = False):
+                 enable_sim_time: bool = True, enable_bridge: bool = False,
+                 options: str = ""):
         self.xp_yaml = {}
         self.ps_dir = ps_dir
         self.dst = ""
@@ -50,6 +51,7 @@ class SimcppGenerator:
         self.step_end = ""
         self.enable_sim_time = enable_sim_time
         self.enable_bridge = enable_bridge
+        self.options = options
         try:
             self.xp: prescan_api_experiment.Experiment = prescan_api_experiment.loadExperimentFromFile(pb)
             if load_yaml:
@@ -253,6 +255,12 @@ class SimcppGenerator:
             "//INITIALIZE//\n": self.initialize,
         }
 
+        main_cpp_path = self.dst + "/simmodel/main.cpp"
+        main_cpp = {
+            "//ADDOPTIONS//\n": f"{Generator.space2}sim.setCustomOptions(\"{self.options}\");\n" if self.options else "",
+        }
+
+
         # cmake_list_path = self.dst + "/CMakeLists.txt"
         # cmake_list = {
         #     "#PRESCAN_DIR#\n": f'''set(Prescan_DIR "{self.ps_dir}")\n''',
@@ -260,6 +268,7 @@ class SimcppGenerator:
 
         files = {
             simmodel_h_path: simmodel_h,
+            main_cpp_path: main_cpp,
             # cmake_list_path: cmake_list,
         }
 

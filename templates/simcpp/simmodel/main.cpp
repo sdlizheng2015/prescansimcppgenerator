@@ -50,6 +50,7 @@ PRESCAN_MAIN() {
     SimModel code;
     prescan::sim::Simulation sim(&code);
     sim.setSimulationPath("./");
+//ADDOPTIONS//
     sim.setLogLevel(LogLevelWarning);
     sim.run(experiment, simulationDuration);
   }
