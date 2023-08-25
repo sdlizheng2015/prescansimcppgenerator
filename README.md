@@ -6,12 +6,12 @@ html:
 
 
 <div style="text-align: center"><span style="font-family: Arial; font-size: 20px;"><strong>—————————————————————————————</strong></span></div>
-<div style="text-align: center"><span style="font-family: Arial; font-size: 20px;"><strong>Welcome to PrescanSimCppGenerator 1.0</strong></span></div>
+<div style="text-align: center"><span style="font-family: Arial; font-size: 20px;"><strong>Welcome to PrescanSimCppGenerator 1.1</strong></span></div>
 <div style="text-align: center"><span style="font-family: Arial; font-size: 20px;"><strong>—————————————————————————————</strong></span></div>
 
 ---
 
-[中文文档](/README_cn.html)
+For a better view of the help docment, please download and read the [README.html](README.html)
 
 [toc]
 
@@ -43,7 +43,7 @@ Prescan Simcpp Generator aims to provide a auto-generator for Prescan SimCPP pro
 
 # Version
 
-1. The project is for Prescan 2302 and higher version because the C++ namespace is changed after Prescan 2211.
+1. The project is for Prescan 2307 and higher version.
 2. The project is developed and tested based on Prescan 2302 with full functionalities(all features enabled).
 3. The generator supports both Windows and Ubuntu.
 4. For those Prescan with some feature disabled, user may need to do some modifications to the generator source codes before you can correctly use it.
@@ -69,7 +69,8 @@ Before you start with this project, make sure you've installed the following sof
 
 ### Windows
 According to installation of Prescan on your machine, you may need to do the following configurations：
-1. First change the vars in ```set_env.bat```，add the Prescan bin directory as well as Plugins bin if exists to system ```PATH```；
+1. First change the vars in ```set_env.bat```，add the Prescan path ```Prescan_path``` as well as Plugins path;
+2. add dependencies to ```PATH```, if you don't have all plugins installed on your system, **==please comment out thoese not installed plugins in the bat file.==**
 2. Set Prescan CMake path to ```Prescan_DIR```；
 3. If there is no python interpreter in your system path, you may need to specify a python by adding it to ```PATH```. If you have python in system path, please ignore and delete this step.
 4. Add Prescan python/modules/plugins directories to ```PYTHONPATH```, which you can find in Prescan installation folder；
@@ -83,51 +84,120 @@ Finally it looks like this：
 @ECHO OFF
 setlocal
 
-set "PATH=D:\Simcenter Prescan\Prescan_2302\bin;D:\Simcenter Prescan\Prescan_2302\Plugins\FullWaveformLidarPlugin\bin;D:\Simcenter Prescan\Prescan_2302\Plugins\PBRadarPlugin\bin;D:\Simcenter Prescan\Prescan_2302\Plugins\PointCloudLidarPlugin\bin;D:\Simcenter Prescan\Prescan_2302\Plugins\ProbabilisticSensorsPlugin\bin;D:\Simcenter Prescan\Prescan_2302\Plugins\V2XPlugin\bin;%PATH%"
+set "Prescan_path=D:\Simcenter Prescan\Prescan_2307"
+set "Prescan_plugin_path=D:\Simcenter Prescan\Prescan_2307\Plugins"
 
-set "Prescan_DIR=D:\Simcenter Prescan\Prescan_2302\lib\cmake"
+:::: add Prescan modules and plugin dependency path(please comment out(::) these plugins which are not installed on your machine)
+set "PATH=%PATH%;%Prescan_path%\bin;%"
+set "PATH=%PATH%;%Prescan_plugin_path%\FullWaveformLidarPlugin\bin;"
+set "PATH=%PATH%;%Prescan_plugin_path%\PBRadarPlugin\bin;"
+set "PATH=%PATH%;%Prescan_plugin_path%\PointCloudLidarPlugin\bin;"
+set "PATH=%PATH%;%Prescan_plugin_path%\ProbabilisticSensorsPlugin\bin;"
+set "PATH=%PATH%;%Prescan_plugin_path%\PhysicsBasedCameraUnreal;"
+set "PATH=%PATH%;%Prescan_plugin_path%\V2XPlugin\bin;"
 
+:::: add cmake config path
+set "Prescan_DIR=%Prescan_path%\lib\cmake"
+
+:::: if you have python in system, please ignor and delete it
 set "PATH=D:\Python38\Scripts\;D:\Python38\;%PATH%"
 
-set "PYTHONPATH=D:\Simcenter Prescan\Prescan_2302\python;D:\Simcenter Prescan\Prescan_2302\modules;D:\Simcenter Prescan\Prescan_2302\Plugins;%PYTHONPATH%"
+:::: add Prescan python API path
+set "PYTHONPATH=%PYTHONPATH%;%Prescan_path%\python;"
+set "PYTHONPATH=%PYTHONPATH%;%Prescan_path%\modules;"
+set "PYTHONPATH=%PYTHONPATH%;%Prescan_plugin_path%;"
 
-set experiment_dir="C:\\Users\\yiyan5ez\\Desktop\\PrescanSimcppGenerator\\prescandemos\\SimcppGenerator"
-set experiment_pb="C:\\Users\\yiyan5ez\\Desktop\\PrescanSimcppGenerator\\prescandemos\\SimcppGenerator\\SimcppGenerator.pb"
-set simcpp_dir="C:\\Users\\yiyan5ez\\Desktop\\PrescanSimcppGenerator\\prescandemos\\SimcppGenerator\\simcpp"
+:: add current Prescan experiment and destination simcpp project path
+set "experiment_dir=E:\Siemens\1_Prescan\3_Experiments\33_SimcppGenerator\PrescanSimcppGenerator\prescandemos\SimcppGenerator"
+set "experiment_pb=E:\Siemens\1_Prescan\3_Experiments\33_SimcppGenerator\PrescanSimcppGenerator\prescandemos\SimcppGenerator\SimcppGenerator.pb"
+set "simcpp_dir=E:\Siemens\1_Prescan\3_Experiments\33_SimcppGenerator\PrescanSimcppGenerator\prescandemos\SimcppGenerator\simcpp"
 
-echo set path ...
+echo "set path ..."
 cmd
 ```
 
 ### Ubuntu
-==**NOTE**==：Prescan 2307 or higher offcially supports Ubuntu 20.04 and has almost all the features that it has on Windows except V2X plugin. For the previous version(<2307), Prescan doesn't support Physics-Based Point Cloud Lidar and Physics-Based Radar on Ubuntu 20.04. In this situation, user may need to add plugin path to environment vars according to the Prescan installation on your own Ubuntu machine. With regard to how to add Prescan Plugin to PATH，please refer to Prescan help manual. In this demo, we don't have any plugins installed on Ubuntu.
+==**NOTE**==：Prescan 2307 or higher offcially supports Ubuntu 20.04 and has almost all the features that it has on Windows except V2X plugin. For the previous version(<2307), Prescan doesn't support Physics-Based Point Cloud Lidar and Physics-Based Radar on Ubuntu 20.04. User may need to add plugin path to environment vars according to the Prescan installation on your own Ubuntu machine. 
+It is recommended to install plugins on ubuntu in the same folder as windows, that is, to put all plugins in a ```Plugins``` folder in Prescan installation path and rename the plugins as what it's named on windows as shown follows:
+![](pic/plugins.png)
+![](pic/plugins_linux.png)
+
+ ==**With regard to how to install and enable Prescan Plugin on ubuntu，please refer to Prescan help manual.**==
 
 ```bash
 #! /usr/bin/env bash
 
-# add prescan
-export Prescan_version=Prescan_2302
-export PATH=$PATH:/usr/local/${Prescan_version}/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/${Prescan_version}/lib
+export Prescan_path=/usr/local/Prescan_2307
+export Prescan_plugin_path=/usr/local/Prescan_2307/Plugins
 
-# add Prescan Plugin path
-#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/${Prescan_version}/<path_to_plugin>/bin
+### add Prescan Plugin dependency path(please delete these not installed on your machine)
+export PATH=$PATH:$Prescan_path/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$Prescan_path/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$Prescan_plugin_path/FullWaveformLidarPlugin/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$Prescan_plugin_path/PBRadarPlugin/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$Prescan_plugin_path/PointCloudLidarPlugin/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$Prescan_plugin_path/ProbabilisticSensorsPlugin/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$Prescan_plugin_path/PhysicsBasedCameraUnreal
+#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$Prescan_plugin_path/V2X/(not supported on linux)
 
-export Prescan_DIR=/usr/local/${Prescan_version}/lib/cmake
+### add cmake config path
+export Prescan_DIR=$Prescan_path/lib/cmake
 
-export PYTHONPATH=$PYTHONPATH:/usr/local/${Prescan_version}/python:/usr/local/${Prescan_version}/modules:/usr/local/${Prescan_version}/Plugins
+### add Prescan python API path
+export PYTHONPATH=$PYTHONPATH:$Prescan_path/python
+export PYTHONPATH=$PYTHONPATH:$Prescan_path/modules
+export PYTHONPATH=$PYTHONPATH:$Prescan_plugin_path
 
+### add current Prescan experiment and destination simcpp project path
 export experiment_dir=/home/yang/Desktop/PrescanSimcppGenerator/prescandemos/SimcppGenerator
 export experiment_pb=/home/yang/Desktop/PrescanSimcppGenerator/prescandemos/SimcppGenerator/SimcppGenerator.pb
 export simcpp_dir=/home/yang/Desktop/PrescanSimcppGenerator/prescandemos/SimcppGenerator/simcpp
+
+echo "set path ..."
 ```
 
-
 ## Codes Modification
-For users who have installed Prescan with all features enabled, you can directly use this generator. However, if some features are disabled, you may need to do some modifications to the generator source codes before you can use it correctly. If you have all features enabled, you will find a Plugins folder in Prescan installation path, as shown in following picture. These highlighted plugins have some open API to users.
-![plugins](./pic/plugins.png)
+For users who have installed Prescan with all features enabled, you can directly use this generator. However, if some plugins are disabled, you may need to do some modifications to the generator source codes before you can use it correctly. If you have all features enabled, you will find a Plugins folder in Prescan installation path, as shown in following picture. These highlighted plugins have some open API to users.
 
-### prescan_python_dmapi.py
+![](pic/plugins.png)
+![](pic/plugins_linux.png)
+
+If you don't have all plugins installed on your system, you need to modify some source codes in the generator so that the generator can work correctly. You can either do this automatically or manually.
+
+### Automatically
+To modify the generator codes automatically, you must make sure the set_env.bat/set_env.bash files are correctly configured. Particularly, the library and dependency paths should be correct. For exampple, if you don't have ```FullWaveformLidarPlugin``` and ```PointCloudLidarPlugin``` then you should comment them out in the set_env files.
+```powershell
+:::: add Prescan modules and plugin dependency path(please comment out(::) these plugins which are not installed on your machine)
+set "PATH=%PATH%;%Prescan_path%\bin;%"
+::set "PATH=%PATH%;%Prescan_plugin_path%\FullWaveformLidarPlugin\bin;"
+set "PATH=%PATH%;%Prescan_plugin_path%\PBRadarPlugin\bin;"
+::set "PATH=%PATH%;%Prescan_plugin_path%\PointCloudLidarPlugin\bin;"
+set "PATH=%PATH%;%Prescan_plugin_path%\ProbabilisticSensorsPlugin\bin;"
+set "PATH=%PATH%;%Prescan_plugin_path%\PhysicsBasedCameraUnreal;"
+set "PATH=%PATH%;%Prescan_plugin_path%\V2XPlugin\bin;"
+```
+
+```bash
+### add Prescan modules and plugin dependency path(please comment out(::) these plugins which are not installed on your machine)
+export PATH=$PATH:$Prescan_path/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$Prescan_path/lib
+#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$Prescan_plugin_path/FullWaveformLidarPlugin/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$Prescan_plugin_path/PBRadarPlugin/bin
+#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$Prescan_plugin_path/PointCloudLidarPlugin/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$Prescan_plugin_path/ProbabilisticSensorsPlugin/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$Prescan_plugin_path/PhysicsBasedCameraUnreal
+#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$Prescan_plugin_path/V2X/(not supported on linux)
+```
+
+when you correctly configure the set_env files. Then you can go to [Code Generation](#Generation). When you run the ```main.py```, you just need to specify the option argv ```-conf_api 1```. Then the generator codes will be automatically modified according your set_env files.
+![Alt text](pic/conf_api.png)
+
+### Manually
+To manually modify the source codes of the generaor, you need to modify two parts:
+1. comment out the unsupported feature api in  ```prescan_python_dmapi.py```.
+2. delete the revelent source python file in ```sensors``` and ```generators``` folders. 
+
+#### prescan_python_dmapi.py
 Firstly, you need to delete/commentout some codes in ```./rename_api_namespace/prescan_python_dmapi.py```. This python module will import the open API of all Prescan features.
 
 ```python
@@ -269,8 +339,11 @@ if no access to probabilisticcamera/radar, delete/commmentout：
 If you don't even find the Plugins folder in your Prescan installation path, you need to delete/commentput all above. In addition, Prescan doesn't support v2x on Linux. So you must delete/commentout v2x API import when you use the generator on Linux.
 
 
-### sensors and generators
+#### sensors and generators
 After you finish the delete/commentout of API import, you should continue to delete the relevant modules in  ```sensors``` and ```generator``` folders. For example, if you delete/commentout the API import of ```pointcloudlidar``` in  ```prescan_python_dmapi.py```, then you must **delete** ```Pointcloudlidar.py``` and ```PointcloudlidarGenerator.py``` in ```sensors``` and ```generator``` folders, respectively.
+
+
+<div id="Generation"></div>
 
 ## Code Generation
 ==Before you start to generate simcpp codes, please follow the guide to delete/comment source codes according to the installation of Prescan features on your machine==.

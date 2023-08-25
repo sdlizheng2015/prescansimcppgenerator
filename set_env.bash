@@ -3,7 +3,7 @@
 export Prescan_path=/usr/local/Prescan_2307
 export Prescan_plugin_path=/usr/local/Prescan_2307/Plugins
 
-### add Prescan Plugin dependency path(please delete these not installed on your machine)
+### add Prescan modules and plugin dependency path(please comment out(::) these plugins which are not installed on your machine)
 export PATH=$PATH:$Prescan_path/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$Prescan_path/lib
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$Prescan_plugin_path/FullWaveformLidarPlugin/bin

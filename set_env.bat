@@ -4,7 +4,7 @@ setlocal
 set "Prescan_path=D:\Simcenter Prescan\Prescan_2307"
 set "Prescan_plugin_path=D:\Simcenter Prescan\Prescan_2307\Plugins"
 
-:::: add Prescan modules and plugin dependency path(please delete these not installed on your machine)
+:::: add Prescan modules and plugin dependency path(please comment out(::) these plugins which are not installed on your machine)
 set "PATH=%PATH%;%Prescan_path%\bin;%"
 set "PATH=%PATH%;%Prescan_plugin_path%\FullWaveformLidarPlugin\bin;"
 set "PATH=%PATH%;%Prescan_plugin_path%\PBRadarPlugin\bin;"
