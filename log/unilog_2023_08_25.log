@@ -1,0 +1,7 @@
+08/25/2023 12:17:14 PM SimcppGenerator: b"Can't load data model 'pointcloudlidarmodel' for module 'Physics Based Point Cloud Lidar', its version (5) is higher than the internal version (3)."
+08/25/2023 12:18:52 PM ObjectsSensorsParser: b"Object 'Ego' has no Amesim Dynamics configured"
+08/25/2023 12:18:52 PM ObjectsSensorsParser: b"WorldObject 'Ego' has no active trajectory"
+08/25/2023 12:18:52 PM ObjectsSensorsParser: b"Object 'A1' has no Amesim Dynamics configured"
+08/25/2023 12:18:52 PM ObjectsSensorsParser: b"WorldObject 'A1' has no active trajectory"
+08/25/2023 12:18:52 PM ObjectsSensorsParser: b"Object 'A2' has no Amesim Dynamics configured"
+08/25/2023 12:18:52 PM ObjectsSensorsParser: b"WorldObject 'A2' has no active trajectory"

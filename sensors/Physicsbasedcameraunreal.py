@@ -5,6 +5,9 @@
 # @Author  : Yi Yang
 # @Support : prescansls.sisw@siemens.com
 
+
+IS_PLUGIN = True
+
 from rename_api_namespace.prescan_python_dmapi import *
 from sensors.MetaSensor import Sensor
 

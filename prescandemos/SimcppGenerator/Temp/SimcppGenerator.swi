@@ -18,7 +18,7 @@ CameraSensor_1_mount.setRotationLegacyYUpAxes(1.5707963267948966, -1, 0, 0)
 
 CameraSensor_1 = visviewer.VisCamera(r"CameraSensor_1")
 CameraSensor_1_mount.addChild(CameraSensor_1)
-CameraSensor_1.setProjectionMatrixPerspective(0.80656290379155327, 0.61940599581389943, 0.10000000149011612, 300)
+CameraSensor_1.setProjectionMatrixPerspective(0.80656297037058056, 0.61940592923487225, 0.10000000149011612, 300)
 
 cameras[r"CameraSensor_1"] = VisCameras.CameraInfo(r"CameraSensor_1", CameraSensor_1, visviewer.VisViewerBase.SPECTATOR, True)
 cameras[r"CameraSensor_1"].setSensorDimensions(6.4, 4.8);cameras[r"CameraSensor_1"].setFrameRate(20)

@@ -5,6 +5,8 @@
 # @Author  : Yi Yang
 # @Support : prescansls.sisw@siemens.com
 
+IS_PLUGIN = True
+
 from sensors.Fullwaveformlidar import Fullwaveformlidar
 from sensors.MetaSensor import Sensor
 from ObjectsSensorsParser import ObjectSensors
@@ -95,8 +97,7 @@ class FullwaveformlidarGenerator(Generator):
                 if _object.enable_all_ports else Generator.Terminator
             port_Info = f"{fwlInfoUnit_prefix}_{fwl.fwl.name}_Info" \
                 if _object.enable_all_ports else Generator.Terminator
-                
-            
+
             powerUnit = f"{fwlPowerUnit_prefix}_{fwl.fwl.name}" if fwl.enableEnergyCalculation else Generator.Terminator
 
             self.steps += f"{self.space4}{sensorDemux}::demux_fwl(\n" \

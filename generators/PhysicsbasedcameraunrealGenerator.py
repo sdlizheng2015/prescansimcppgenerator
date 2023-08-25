@@ -5,6 +5,8 @@
 # @Author  : Yi Yang
 # @Support : prescansls.sisw@siemens.com
 
+IS_PLUGIN = True
+
 from sensors.Physicsbasedcameraunreal import Physicsbasedcameraunreal
 from sensors.MetaSensor import Sensor
 from ObjectsSensorsParser import ObjectSensors

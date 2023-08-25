@@ -5,7 +5,7 @@
 # @Author  : Yi Yang
 # @Support : prescansls.sisw@siemens.com
 
-from SimcppGenerator import SimcppGenerator
+from utils.config_python_api import config_python_api
 import argparse
 
 _argparse = argparse.ArgumentParser()
@@ -26,6 +26,11 @@ _argparse.add_argument("-options", type=str, action="store", default="",
                             "valid values: 'federate_record=1', 'profiler=file'"
                             ", e.g., -options profiler=file")
 
+_argparse.add_argument("-conf_api", type=int, action="store", default=0,
+                       help="based on set_env file, automatically, config Prescan_python_dmapi.py and "
+                            "modify python files in sensors and generators folders. You must make sure "
+                            "all configs in set_env files are correct, default: 0(disabled), e.g., -conf_api 1")
+
 _argparse.add_argument("-bridge", type=int, action="store", default=0,
                        help="enable simcpp bridge(not used now), default: 0, e.g., -bridge 1")
 
@@ -43,6 +48,11 @@ if __name__ == '__main__':
     show_time = bool(args.show_time)
     bridge = bool(args.bridge)
     options = args.options
+
+    if bool(args.conf_api):
+        config_python_api()
+
+    from SimcppGenerator import SimcppGenerator
 
     generator = SimcppGenerator(
         pb=fr"{pb_dir}",

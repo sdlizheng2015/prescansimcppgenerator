@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Experiment xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Description="" id="SimcppGenerator" UniqueId="0" TotalSimulationTime="18.05" Built="true" EnableCollisionDetection="false" MaxNumberOfCollisions="5" EnableObjectListProvider="true" EnableTestAutomation="false" Generate3DTrajectories="false" VisualizeSensorBeams="false" VisualizeBoundingBoxes="false" Parsed="true" PrecipitationRandomSeed="0" PRESCANVersion="2023.1.0" ResourcesDir="Resources" SensorRandomSeed="0" SimulationGenerationHash="52AF15BD19E609170BD3875E63D31E92F6BEAFA3E35EE285B927C92C0FEE8126" UniqueExperimentIdentifier="a0fd980b-8bf0-48fc-98f0-071db96ab04a" UniqueIdCounter="867" VisuAidMaxRenderingDistance="750" VisuAidMinRenderingDistance="0.1" WeatherTypeName="None">
+<Experiment xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Description="" id="SimcppGenerator" UniqueId="0" TotalSimulationTime="18.05" Built="true" EnableCollisionDetection="false" MaxNumberOfCollisions="5" EnableObjectListProvider="true" EnableTestAutomation="false" Generate3DTrajectories="false" VisualizeSensorBeams="false" VisualizeBoundingBoxes="false" Parsed="true" PrecipitationRandomSeed="0" PRESCANVersion="2023.2.0" ResourcesDir="Resources" SensorRandomSeed="0" SimulationGenerationHash="0A64A6D25F44C763A956EB58E9A6E20BDD23B984BCC823276949E8B11177EC09" UniqueExperimentIdentifier="a0fd980b-8bf0-48fc-98f0-071db96ab04a" UniqueIdCounter="885" VisuAidMaxRenderingDistance="750" VisuAidMinRenderingDistance="0.1" WeatherTypeName="None">
   <Actors>
     <Actor xsi:type="GenericModel" Description="A model of a DAF 95XF" id="DAF_95_XF" UniqueId="558" SensorDetectability="Detectable" NumericalID="4" ObjectTypeID="3" ParticipateInCollisionDetection="false" Movable="true" DynamicsConfiguration="AmesimPreconfigured" AmesimConfiguration="None" ContactConfiguration="Geometric" DiscreteModeActivated="false" FlatGround="false" Reference="false" UserSpecifiedControl="false" PhysicsSimpleDynamicsInteraction="PhysicsInheritsFromSD" ActorKind="DAF_95_XF" AnimatedActor="false" CompilationSheetPicture="DAF_95_XF_HighPoly.png" HashCode="a2d56834c0977a2c5f466a1bb6159c15" ModelFile="Vehicles\DAF_95_XF\DAF_95_XF.osgb" GenericModelSourceFile="Vehicles\DAF_95_XF\DAF_95_XF.pgmb" FileLocationType="ModelDepo" ContactWorldDetectable="false" SupportedDynamics="None Simple SimpleTD UserSpecified AmesimPreconfigured AmesimArchetype">
       <Location X="57.187564849853516" Y="78.322982788085938" Z="0.87999999523162842" />
@@ -358,7 +358,7 @@
             <LightMeshPositions />
             <VisuPortElements />
           </VisualizationActuator>
-          <VisualizationActuator xsi:type="MaterialRegionActuator" ActuatorName="MaterialRegionActuator" EnableActuator="false" ShowInAnimationList="false" ID="Material_Exterior" RegionName="Exterior" TargetMaterialDatabase="prescan" TargetMaterialIdentifier="e1b0cbd4-5e40-49e7-9a19-92c3b69b9e79" TargetMaterialName="MetallicGray">
+          <VisualizationActuator xsi:type="MaterialRegionActuator" ActuatorName="MaterialRegionActuator" EnableActuator="false" ShowInAnimationList="false" ID="Material_Exterior" RegionName="Exterior" UseMeasuredMaterials="false" MaterialDatabase="prescan" MaterialIdentifier="e1b0cbd4-5e40-49e7-9a19-92c3b69b9e79" MaterialName="MetallicGray">
             <LightMeshPositions />
             <VisuPortElements />
           </VisualizationActuator>
@@ -446,7 +446,7 @@
           </TestAutomationVariables>
           <IntensityFactorRGBMono IntensityFactorR="0.3" IntensityFactorG="0.59" IntensityFactorB="0.11" />
         </Sensor>
-        <Sensor xsi:type="CameraSensor" Description="" id="CameraSensor_1" UniqueId="866" PreventDragging="true" CurrentAttachmentPoint="Actor" Visualize="true" VisualizedAlpha="25" Annotate="false" BeamColor="Yellow (FFFFFF00)" FovAzimuth="46.21265" FovElevation="35.48935" HorizontalResolution="800" VerticalResolution="600" OutputCameraImage="true" ColorAssignment="Color" FrameRate="20" SweepRateScaleFactor="1" FocalLength="7.5" NearClippingDistance="0.1" FarClippingDistance="300" CurrentEffect="default" UsesCCDspec="true" SensorCCDType="HalfInch" CustomCCDWidth="2.5" CustomCCDHeight="2.5">
+        <Sensor xsi:type="CameraSensor" Description="" id="CameraSensor_1" UniqueId="866" PreventDragging="true" CurrentAttachmentPoint="Actor" Visualize="true" VisualizedAlpha="25" Annotate="false" BeamColor="Yellow (FFFFFF00)" FovAzimuth="46.2126541" FovElevation="35.4893456" HorizontalResolution="800" VerticalResolution="600" OutputCameraImage="true" ColorAssignment="Color" FrameRate="20" SweepRateScaleFactor="1" FocalLength="7.5" NearClippingDistance="0.1" FarClippingDistance="300" CurrentEffect="default" UsesCCDspec="true" SensorCCDType="HalfInch" CustomCCDWidth="2.5" CustomCCDHeight="2.5">
           <Location X="5" Y="0" Z="2.84999990463257" />
           <Orientation Bank="0" Tilt="0" Heading="0" />
           <Origin X="0" Y="1" Z="0" />
@@ -1686,15 +1686,15 @@
             <LightMeshPositions />
             <VisuPortElements />
           </VisualizationActuator>
-          <VisualizationActuator xsi:type="MaterialRegionActuator" ActuatorName="MaterialRegionActuator" EnableActuator="false" ShowInAnimationList="false" ID="Material_Exterior" RegionName="Exterior" TargetMaterialDatabase="prescan" TargetMaterialIdentifier="e1b0cbd4-5e40-49e7-9a19-92c3b69b9e79" TargetMaterialName="MetallicGray">
+          <VisualizationActuator xsi:type="MaterialRegionActuator" ActuatorName="MaterialRegionActuator" EnableActuator="false" ShowInAnimationList="false" ID="Material_Exterior" RegionName="Exterior" UseMeasuredMaterials="false" MaterialDatabase="prescan" MaterialIdentifier="e1b0cbd4-5e40-49e7-9a19-92c3b69b9e79" MaterialName="MetallicGray">
             <LightMeshPositions />
             <VisuPortElements />
           </VisualizationActuator>
-          <VisualizationActuator xsi:type="MaterialRegionActuator" ActuatorName="MaterialRegionActuator" EnableActuator="false" ShowInAnimationList="false" ID="Material_Exterior Trailer" RegionName="Exterior Trailer" TargetMaterialDatabase="prescan" TargetMaterialIdentifier="e1b0cbd4-5e40-49e7-9a19-92c3b69b9e79" TargetMaterialName="MetallicGray">
+          <VisualizationActuator xsi:type="MaterialRegionActuator" ActuatorName="MaterialRegionActuator" EnableActuator="false" ShowInAnimationList="false" ID="Material_Exterior Trailer" RegionName="Exterior Trailer" UseMeasuredMaterials="false" MaterialDatabase="prescan" MaterialIdentifier="e1b0cbd4-5e40-49e7-9a19-92c3b69b9e79" MaterialName="MetallicGray">
             <LightMeshPositions />
             <VisuPortElements />
           </VisualizationActuator>
-          <VisualizationActuator xsi:type="MaterialRegionActuator" ActuatorName="MaterialRegionActuator" EnableActuator="false" ShowInAnimationList="false" ID="Material_Exterior Fabric" RegionName="Exterior Fabric" TargetMaterialDatabase="prescan" TargetMaterialIdentifier="4bdc62b8-cdcb-48be-a73e-065c05af9a40" TargetMaterialName="CottonWool">
+          <VisualizationActuator xsi:type="MaterialRegionActuator" ActuatorName="MaterialRegionActuator" EnableActuator="false" ShowInAnimationList="false" ID="Material_Exterior Fabric" RegionName="Exterior Fabric" UseMeasuredMaterials="false" MaterialDatabase="prescan" MaterialIdentifier="4bdc62b8-cdcb-48be-a73e-065c05af9a40" MaterialName="CottonWool">
             <LightMeshPositions />
             <VisuPortElements />
           </VisualizationActuator>
@@ -2985,15 +2985,15 @@
             <LightMeshPositions />
             <VisuPortElements />
           </VisualizationActuator>
-          <VisualizationActuator xsi:type="MaterialRegionActuator" ActuatorName="MaterialRegionActuator" EnableActuator="false" ShowInAnimationList="false" ID="Material_Exterior" RegionName="Exterior" TargetMaterialDatabase="prescan" TargetMaterialIdentifier="e1b0cbd4-5e40-49e7-9a19-92c3b69b9e79" TargetMaterialName="MetallicGray">
+          <VisualizationActuator xsi:type="MaterialRegionActuator" ActuatorName="MaterialRegionActuator" EnableActuator="false" ShowInAnimationList="false" ID="Material_Exterior" RegionName="Exterior" UseMeasuredMaterials="false" MaterialDatabase="prescan" MaterialIdentifier="e1b0cbd4-5e40-49e7-9a19-92c3b69b9e79" MaterialName="MetallicGray">
             <LightMeshPositions />
             <VisuPortElements />
           </VisualizationActuator>
-          <VisualizationActuator xsi:type="MaterialRegionActuator" ActuatorName="MaterialRegionActuator" EnableActuator="false" ShowInAnimationList="false" ID="Material_Retro Reflective" RegionName="Retro Reflective" TargetMaterialDatabase="prescan" TargetMaterialIdentifier="c68910d5-25a2-420e-aa79-fde67883e334" TargetMaterialName="Reflector">
+          <VisualizationActuator xsi:type="MaterialRegionActuator" ActuatorName="MaterialRegionActuator" EnableActuator="false" ShowInAnimationList="false" ID="Material_Retro Reflective" RegionName="Retro Reflective" UseMeasuredMaterials="false" MaterialDatabase="prescan" MaterialIdentifier="c68910d5-25a2-420e-aa79-fde67883e334" MaterialName="Reflector">
             <LightMeshPositions />
             <VisuPortElements />
           </VisualizationActuator>
-          <VisualizationActuator xsi:type="MaterialRegionActuator" ActuatorName="MaterialRegionActuator" EnableActuator="false" ShowInAnimationList="false" ID="Material_License Plate" RegionName="License Plate" TargetMaterialDatabase="prescan" TargetMaterialIdentifier="fc185203-46e0-4b6f-98bc-811485b35048" TargetMaterialName="ReflectiveSheet">
+          <VisualizationActuator xsi:type="MaterialRegionActuator" ActuatorName="MaterialRegionActuator" EnableActuator="false" ShowInAnimationList="false" ID="Material_License Plate" RegionName="License Plate" UseMeasuredMaterials="false" MaterialDatabase="prescan" MaterialIdentifier="fc185203-46e0-4b6f-98bc-811485b35048" MaterialName="ReflectiveSheet">
             <LightMeshPositions />
             <VisuPortElements />
           </VisualizationActuator>
@@ -4092,11 +4092,11 @@
             <LightMeshPositions />
             <VisuPortElements />
           </VisualizationActuator>
-          <VisualizationActuator xsi:type="MaterialRegionActuator" ActuatorName="MaterialRegionActuator" EnableActuator="false" ShowInAnimationList="false" ID="Material_Exterior" RegionName="Exterior" TargetMaterialDatabase="prescan" TargetMaterialIdentifier="e1b0cbd4-5e40-49e7-9a19-92c3b69b9e79" TargetMaterialName="MetallicGray">
+          <VisualizationActuator xsi:type="MaterialRegionActuator" ActuatorName="MaterialRegionActuator" EnableActuator="false" ShowInAnimationList="false" ID="Material_Exterior" RegionName="Exterior" UseMeasuredMaterials="false" MaterialDatabase="prescan" MaterialIdentifier="e1b0cbd4-5e40-49e7-9a19-92c3b69b9e79" MaterialName="MetallicGray">
             <LightMeshPositions />
             <VisuPortElements />
           </VisualizationActuator>
-          <VisualizationActuator xsi:type="MaterialRegionActuator" ActuatorName="MaterialRegionActuator" EnableActuator="false" ShowInAnimationList="false" ID="Material_Retro Reflective" RegionName="Retro Reflective" TargetMaterialDatabase="prescan" TargetMaterialIdentifier="c68910d5-25a2-420e-aa79-fde67883e334" TargetMaterialName="Reflector">
+          <VisualizationActuator xsi:type="MaterialRegionActuator" ActuatorName="MaterialRegionActuator" EnableActuator="false" ShowInAnimationList="false" ID="Material_Retro Reflective" RegionName="Retro Reflective" UseMeasuredMaterials="false" MaterialDatabase="prescan" MaterialIdentifier="c68910d5-25a2-420e-aa79-fde67883e334" MaterialName="Reflector">
             <LightMeshPositions />
             <VisuPortElements />
           </VisualizationActuator>
@@ -5254,15 +5254,15 @@
             <LightMeshPositions />
             <VisuPortElements />
           </VisualizationActuator>
-          <VisualizationActuator xsi:type="MaterialRegionActuator" ActuatorName="MaterialRegionActuator" EnableActuator="false" ShowInAnimationList="false" ID="Material_Exterior" RegionName="Exterior" TargetMaterialDatabase="prescan" TargetMaterialIdentifier="e1b0cbd4-5e40-49e7-9a19-92c3b69b9e79" TargetMaterialName="MetallicGray">
+          <VisualizationActuator xsi:type="MaterialRegionActuator" ActuatorName="MaterialRegionActuator" EnableActuator="false" ShowInAnimationList="false" ID="Material_Exterior" RegionName="Exterior" UseMeasuredMaterials="false" MaterialDatabase="prescan" MaterialIdentifier="e1b0cbd4-5e40-49e7-9a19-92c3b69b9e79" MaterialName="MetallicGray">
             <LightMeshPositions />
             <VisuPortElements />
           </VisualizationActuator>
-          <VisualizationActuator xsi:type="MaterialRegionActuator" ActuatorName="MaterialRegionActuator" EnableActuator="false" ShowInAnimationList="false" ID="Material_Retro Reflective" RegionName="Retro Reflective" TargetMaterialDatabase="prescan" TargetMaterialIdentifier="c68910d5-25a2-420e-aa79-fde67883e334" TargetMaterialName="Reflector">
+          <VisualizationActuator xsi:type="MaterialRegionActuator" ActuatorName="MaterialRegionActuator" EnableActuator="false" ShowInAnimationList="false" ID="Material_Retro Reflective" RegionName="Retro Reflective" UseMeasuredMaterials="false" MaterialDatabase="prescan" MaterialIdentifier="c68910d5-25a2-420e-aa79-fde67883e334" MaterialName="Reflector">
             <LightMeshPositions />
             <VisuPortElements />
           </VisualizationActuator>
-          <VisualizationActuator xsi:type="MaterialRegionActuator" ActuatorName="MaterialRegionActuator" EnableActuator="false" ShowInAnimationList="false" ID="Material_License Plate" RegionName="License Plate" TargetMaterialDatabase="prescan" TargetMaterialIdentifier="fc185203-46e0-4b6f-98bc-811485b35048" TargetMaterialName="ReflectiveSheet">
+          <VisualizationActuator xsi:type="MaterialRegionActuator" ActuatorName="MaterialRegionActuator" EnableActuator="false" ShowInAnimationList="false" ID="Material_License Plate" RegionName="License Plate" UseMeasuredMaterials="false" MaterialDatabase="prescan" MaterialIdentifier="fc185203-46e0-4b6f-98bc-811485b35048" MaterialName="ReflectiveSheet">
             <LightMeshPositions />
             <VisuPortElements />
           </VisualizationActuator>
@@ -6813,7 +6813,7 @@
       </Segments>
       <LinePlacements />
       <PathShapes>
-        <Spline StartPointX="-19.995534896850586" StartPointY="38.737796783447266" StartPointZ="0" StartControlPointX="12.981395103149694" StartControlPointY="38.737796783447266" StartControlPointZ="0" EndControlPointX="45.958325103149242" EndControlPointY="38.737796783447266" EndControlPointZ="0" EndPointX="78.935255103149416" EndPointY="38.737796783447266" EndPointZ="0" />
+        <Spline StartPointX="-19.995534896850586" StartPointY="38.737796783447266" StartPointZ="0" StartControlPointX="12.981393814087149" StartControlPointY="38.737796783447266" StartControlPointZ="0" EndControlPointX="45.958322525024187" EndControlPointY="38.737796783447266" EndControlPointZ="0" EndPointX="78.935251235961914" EndPointY="38.737796783447266" EndPointZ="0" />
         <Spline StartPointX="78.935255103149416" StartPointY="38.737796783447266" StartPointZ="0" StartControlPointX="83.018586511637366" StartControlPointY="38.737796783447266" StartControlPointZ="0" EndControlPointX="87.101917920125331" EndControlPointY="38.737796783447266" EndControlPointZ="0" EndPointX="91.185249328613281" EndPointY="38.737796783447266" EndPointZ="0" />
         <Spline StartPointX="91.185249328613281" StartPointY="38.737796783447266" StartPointZ="0" StartControlPointX="93.009897304011375" StartControlPointY="38.735924069781248" StartControlPointZ="0" EndControlPointX="95.16176832239438" EndControlPointY="38.5025681999031" EndControlPointZ="0" EndPointX="96.867356042221843" EndPointY="39.281576142930525" EndPointZ="0" />
         <Spline StartPointX="96.867356042221843" StartPointY="39.281576142930525" StartPointZ="0" StartControlPointX="98.25111312516114" StartControlPointY="39.913591574502242" StartControlPointZ="0" EndControlPointX="98.68584883491441" EndControlPointY="41.312419919329244" EndControlPointZ="0" EndPointX="98.685249328613281" EndPointY="42.737796783447266" EndPointZ="0" />
@@ -6862,6 +6862,7 @@
   <PhysicsEnvironment AirDensity="1.28" Gravitation="9.81" AirTemperature="293.15" AtmPressure="101.325" AirHumidityPercentage="10" />
   <UsedPreScanBuilds>
     <Build Version="2023.1.0 " BuildNumber="52925" BuildId="b9673e4cff5d" Architecture="64" BuildNumberData="" BuildIdData="" BuildNumberExt="" BuildIdExt="" />
+    <Build Version="2023.2.0 " BuildNumber="" BuildId="" Architecture="64" BuildNumberData="" BuildIdData="" BuildNumberExt="" BuildIdExt="" />
   </UsedPreScanBuilds>
   <Resources />
   <SceneLightSource Description="" id="SceneLightSource" UniqueId="5" UseShadows="true" UseSoftShadows="false" UseReflectiveTexture="true" UseNormalMapTexture="true" GlobalAmbientR="0" GlobalAmbientG="0" GlobalAmbientB="0" AmbientR="150" AmbientG="150" AmbientB="150" AmbientA="255" DiffuseR="105" DiffuseG="105" DiffuseB="105" DiffuseA="255" SpecularR="150" SpecularG="150" SpecularB="150" SpecularA="255" PositionX="1" PositionY="-1" PositionZ="1" Intensity="1" AtmTurbFactor="2" Altitude="0" UseExplicitLightPositioning="true" UseCurrentGPSLocation="true" Hours="12" Minutes="0" Seconds="0" UTCoffset="0" Overcast="0" SceneShadowTextureSize="4096" SpotLightShadowTextureSize="1024">
@@ -7427,7 +7428,7 @@
     </ObjectProperties>
   </PreScanObjectTypeSettings>
   <SimulationConfiguration Description="" id="SimulationConfiguration" UniqueId="10" IntegrationFrequency="20" VisualizationUpdateRatio="20" DisableVisualWorld="true" SimulationUpdateRatio="1" SimulationTimescale="1" VisScriptFile="Temp\SimcppGenerator.swi" TerminationVisScriptFile="Temp\SimcppGenerator.swt" />
-  <Sky Description="Sky" id="Sky" UniqueId="7" SkyBoxName="SKY_Air" UseImageBasedSky="true" GenerateSkyAlbedo="0.5" GeneratedSkyTurbidity="4" ObjectTypeID="50" NumericalID="1" />
+  <Sky Description="Sky" id="Sky" UniqueId="7" SkyBoxName="SKY_Air" LightPollution="0" UseImageBasedSky="true" GenerateSkyAlbedo="0.5" GeneratedSkyTurbidity="4" ObjectTypeID="50" NumericalID="1" />
   <SpeedProfiles>
     <SpeedProfileBase xsi:type="SpeedProfile" Description="" id="SpeedProfile_1" UniqueId="46">
       <Physics Drag="0.27000001072883606" Mass="1820" MaxAcceleration="0.30000001192092896" MaxDeceleration="1" ReferenceArea="2.332564115524292" RollFriction="0.0099999997764825821" />
@@ -7633,7 +7634,7 @@
       <Slots>
         <Slot xsi:type="UserDefinedSlot" EndStateChange="false" ID="Slot18" CalculationType1="Speed" CalculationType2="EndOfSegmentID" CalculationValue1="15" CalculationValue2="10">
           <StartState Distance="0" Situation="Reached" Speed="15" Time="0" />
-          <EndState Distance="271.382221556966567" Situation="Reached" Speed="15" Time="18.092148103797771133333333333" />
+          <EndState Distance="271.382217689779067" Situation="Reached" Speed="15" Time="18.092147845985271133333333333" />
         </Slot>
       </Slots>
       <StartState Distance="0" Situation="Reached" Speed="15" Time="0" />
