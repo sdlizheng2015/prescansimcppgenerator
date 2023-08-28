@@ -61,7 +61,7 @@ Before you start with this project, make sure you've installed the following sof
 * Prescan 2302 or higher
 * Python 3.8 or higher，with following packages：
   * pip install pyyaml
-* C/C++ compiler(recommended to use Visual Studio 2019)
+* C/C++ compiler(tested with Visual Studio 2019 on Windows and GCC on Linux)
 * CMake 3.21 or higher
 
 ## Environment Vars
@@ -162,7 +162,7 @@ For users who have installed Prescan with all features enabled, you can directly
 ![](pic/plugins.png)
 ![](pic/plugins_linux.png)
 
-If you don't have all plugins installed on your system, you need to modify some source codes in the generator so that the generator can work correctly. You can either do this automatically or manually.
+==**If you don't have all plugins installed on your system, you need to modify some source codes in the generator so that the generator can work correctly. You can either do this automatically or manually.**==
 
 ### Automatically
 To modify the generator codes automatically, you must make sure the set_env.bat/set_env.bash files are correctly configured. Particularly, the library and dependency paths should be correct. For exampple, if you don't have ```FullWaveformLidarPlugin``` and ```PointCloudLidarPlugin``` then you should comment them out in the set_env files.
