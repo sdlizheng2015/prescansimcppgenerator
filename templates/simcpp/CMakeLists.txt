@@ -21,6 +21,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # find_package(boost)
 # find_package(protobuf)
 # find_package(OpenCV REQUIRED)
+# find_package(Eigen3 REQUIRED NO_MODULE)
+# include_directories("C:/Program Files/Eigen3/include/eigen3")
 ###########################################################
 
 # Find Prescan package
@@ -36,10 +38,12 @@ target_link_libraries(${PROJECT_NAME}
                       ${Prescan_LIBS}
 					  ################ add additional libs ###################
 					  #ADDLIBS#
-					  #e.g., ${Protobuf_LIBRARIES}
-					  #e.g., proj
-					  #e.g., ${OpenCV_LIBRARIES}
-					  #e.g., ${Boost_LIBRARIES}
+					  #e.g., 
+					  #${Protobuf_LIBRARIES}
+					  #proj
+					  #${OpenCV_LIBRARIES}
+					  #${Boost_LIBRARIES}
+					  #Eigen3::Eigen
 					  ########################################################
 )
 

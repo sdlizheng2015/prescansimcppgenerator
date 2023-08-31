@@ -4,6 +4,8 @@
 # @Team    : Siemens Prescan SLS
 # @Author  : Yi Yang
 # @Support : prescansls.sisw@siemens.com
+import os
+import sys
 
 from utils.config_python_api import config_python_api
 import argparse
@@ -31,6 +33,10 @@ _argparse.add_argument("-conf_api", type=int, action="store", default=0,
                             "modify python files in sensors and generators folders. You must make sure "
                             "all configs in set_env files are correct, default: 0(disabled), e.g., -conf_api 1")
 
+_argparse.add_argument("-fast", type=int, action="store", default=0,
+                       help="to quickly generate simcpp from set_env, default: 0(disabled), e.g., -fast 1"
+                            "This is equivalent 'main.py %exerpiment_pb% --out_dir %simcpp_dir% -conf_api 1'")
+
 _argparse.add_argument("-bridge", type=int, action="store", default=0,
                        help="enable simcpp bridge(not used now), default: 0, e.g., -bridge 1")
 
@@ -42,6 +48,10 @@ _argparse.add_argument("-yaml", type=str, action="store", default="",
 
 if __name__ == '__main__':
     args = _argparse.parse_args()
+    if bool(args.fast):
+        os.system("python main.py %experiment_pb% -out_dir %simcpp_dir% -conf_api 1")
+        sys.exit()
+
     pb_dir = args.pb_dir
     dst = args.out_dir
     all_ports = bool(args.all_ports)

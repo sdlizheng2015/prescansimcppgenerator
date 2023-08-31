@@ -18,6 +18,7 @@ amesim_incl = '''#include "prescan/api/Vehicledynamics.hpp"\n#include "prescan/s
 state_incl = '''#include "prescan/sim/StateActuatorUnit.hpp"\n'''
 lms_incl = '''#include "prescan/api/Lms.hpp"\n#include "prescan/sim/LmsSensorUnit.hpp"\n'''
 alms_incl = '''#include "prescan/api/Alms.hpp"\n#include "prescan/sim/AlmsSensorUnit.hpp"\n'''
+depthcamera_incl = '''#include "prescan/api/Depthcamera.hpp"\n#include "prescan/sim/DepthCameraSensorUnit.hpp"\n'''
 
 """sensor unit types"""
 SelfSensorUnit = "prescan::sim::SelfSensorUnit"
@@ -31,6 +32,8 @@ PcsSensor = "prescan::api::pcs::PcsSensor"
 PcsSensorUnit = "prescan::sim::PcsSensorUnit"
 CameraSensor = "prescan::api::camera::CameraSensor"
 CameraSensorUnit = "prescan::sim::CameraSensorUnit"
+DepthcameraaSensor = "prescan::api::depthcamera::DepthCameraSensor"
+DepthcameraSensorUnit = "prescan::sim::DepthCameraSensorUnit"
 PointCloudLidarSensor = "prescan::api::pointcloudlidar::PointCloudLidarSensor"
 PointCloudUnit = "prescan::sim::pointcloudlidar::PointCloudUnit"
 PointCloudObjectIdUnit = "prescan::sim::pointcloudlidar::ObjectIdUnit"
@@ -101,6 +104,9 @@ registerPcsSensorUnit = "prescan::sim::registerUnit<prescan::sim::PcsSensorUnit>
 
 getCameraSensor = "experiment.getObjectByName<prescan::api::camera::CameraSensor>"
 registerCameraSensorUnit = "prescan::sim::registerUnit<prescan::sim::CameraSensorUnit>"
+
+getDepthCameraSensor = "experiment.getObjectByName<prescan::api::depthcamera::DepthCameraSensor>"
+registerDepthCameraSensorUnit = "prescan::sim::registerUnit<prescan::sim::DepthCameraSensorUnit>"
 
 getPointCloudLidarSensor = "experiment.getObjectByName<prescan::api::pointcloudlidar::PointCloudLidarSensor>"
 registerPointCloudUnit = "prescan::sim::registerUnit<prescan::sim::pointcloudlidar::PointCloudUnit>"
