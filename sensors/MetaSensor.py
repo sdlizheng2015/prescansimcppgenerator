@@ -29,6 +29,7 @@ class Sensor(metaclass=ABCMeta):
     Trajectory = "Trajectory"
     Lms = "Lms"
     Alms = "Alms"
+    Depthcamera = "Depthcamera"
 
     def __init__(self):
         ...

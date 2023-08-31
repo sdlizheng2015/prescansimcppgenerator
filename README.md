@@ -23,6 +23,7 @@ Prescan Simcpp Generator aims to provide a auto-generator for Prescan SimCPP pro
 - Analytic Lane Marker Sensor
 - Amesim Preconfigured Dynamics
 - Detailed Camera
+- Depth Camera
 - ISimulationModel
 - Lane Marker Sensor
 - ObjectListProviderUnit
@@ -353,15 +354,19 @@ SimCPP Generator can help generate the Prescan simcpp codes on both Windows and 
 1. First create or open a Prescan experiment. In this project, we have a demo experiment in ```./prescandemos```folder, called ```SimcppGenerator```.
 2. In the Prescan GUI, you can create scenario, roads and actors，then set the simulation conditions, add trajectory or AmesimPreconfigedDynamics to actors，and finally add sensors to actors([supported sensors for auto generation](#introduction));
 ![GUI](./pic/GUI.png)
-3. Modify the vars in ```set_env.bat```，e.g., when this project locates in ```C:\\Users\\yiyan5ez\\Desktop\\PrescanSimcppGenerator```, the following paths are Prescan experiment, pb file and simcpp:
+3. Modify the vars in ```set_env.bat```，e.g., when this project locates in ```E:\Siemens\1_Prescan\3_Experiments\33_SimcppGenerator\PrescanSimcppGenerator```, the following paths are Prescan experiment, pb file and simcpp:
     ```powershell
-    set experiment_dir="C:\\Users\\yiyan5ez\\Desktop\\PrescanSimcppGenerator\\prescandemos\\SimcppGenerator"
-    set experiment_pb="C:\\Users\\yiyan5ez\\Desktop\\PrescanSimcppGenerator\\prescandemos\\SimcppGenerator\\SimcppGenerator.pb"
-    set simcpp_dir="C:\\Users\\yiyan5ez\\Desktop\\PrescanSimcppGenerator\\prescandemos\\SimcppGenerator\\simcpp"
+    set "experiment_dir=E:\Siemens\1_Prescan\3_Experiments\33_SimcppGenerator\PrescanSimcppGenerator\prescandemos\SimcppGenerator"
+    set "experiment_pb=E:\Siemens\1_Prescan\3_Experiments\33_SimcppGenerator\PrescanSimcppGenerator\prescandemos\SimcppGenerator\SimcppGenerator.pb"
+    set "simcpp_dir=E:\Siemens\1_Prescan\3_Experiments\33_SimcppGenerator\PrescanSimcppGenerator\prescandemos\SimcppGenerator\simcpp"
     ```
 4. Double click ```set_env.bat``` and a cmd Terminal will pop-up，type：
     ```powershell
     python main.py %experiment_pb% -out_dir %simcpp_dir%
+    ```
+    if you want to automatically modify the generator source codes according to the set_env file, you may need to run:
+    ```powershell
+    python main.py %experiment_pb% -out_dir %simcpp_dir% -conf_api 1
     ```
     where, the first arguement ```%experiment_pb%``` is the path to pb file and the second optional argument ```-out_dir``` is where you want to put the generated simcpp codes, here we put it in ```%simcpp_dir%```. If ```%simcpp_dir%``` already exists，then there will be a warning and you need to confirm as shown in the following picture:
     ![Alt text](./pic/generate_win.png)
