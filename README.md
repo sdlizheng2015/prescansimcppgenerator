@@ -22,6 +22,7 @@ Prescan Simcpp Generator aims to provide a auto-generator for Prescan SimCPP pro
 - Air Sensor
 - Analytic Lane Marker Sensor
 - Amesim Preconfigured Dynamics
+- CollisionDetection
 - Detailed Camera
 - Depth Camera
 - ISimulationModel

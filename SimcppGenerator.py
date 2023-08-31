@@ -169,6 +169,24 @@ class SimcppGenerator:
             self.initialize += f"{Generator.space2}objectsProvider.initialize(simulation);\n"
             self.initialize += f"{Generator.space2}//use 'objectsProvider.get_object_from_ID(NumericID)'\n"
 
+    def generate_collision_detection(self):
+        """
+        TODO: to generate the codes for collision detection
+        :return:
+        """
+        if self.xp.getBool('pimp/collisiondetectionmodel', 'detectionOn'):
+            self.includes += f'''#include "worldobjects/collisondetection.h"\n'''
+
+            self.properties += f"{Generator.space2}//Create CollisionDetection\n"
+            self.properties += f"{Generator.space2}CollisionDetection collisionDetection;\n"
+
+            self.registerUnits += f"{Generator.space2}//Register CollisionDetection\n"
+            self.registerUnits += f"{Generator.space2}collisionDetection.registerSimulationUnits(experiment, simulation);\n"
+
+            self.steps += f"{Generator.space2}//Step CollisionDetection, output is 'collisionDetection.collisonOutput'\n"
+            self.steps += f"{Generator.space2}collisionDetection.step(simulation, this);\n"
+
+
     def generate_codes(self):
         """
         TODO:
@@ -176,6 +194,7 @@ class SimcppGenerator:
         """
         self.generate_codes_with_sim_time()
         self.generate_object_provider()
+        self.generate_collision_detection()
         for _object in self.objectsSensorsParser.ParsedObjectsSensors:  # type: ObjectSensors
             if not self._is_object_to_generate(_object):
                 continue
