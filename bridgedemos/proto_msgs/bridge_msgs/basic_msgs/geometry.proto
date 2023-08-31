@@ -54,3 +54,12 @@ message Quaternion {
 message Polygon {
   repeated Point3D point = 1;
 }
+
+message CloudPoint {
+  optional double x = 1 [default = nan]; // sensor CRF
+  optional double y = 2 [default = nan]; // sensor CRF
+  optional double z = 3 [default = nan]; // sensor CRF
+  optional double intensity = 4 [default = nan]; //Range: [0-1]
+  optional uint32 id = 5; // beam or object id
+  optional double timestamp = 6;
+}

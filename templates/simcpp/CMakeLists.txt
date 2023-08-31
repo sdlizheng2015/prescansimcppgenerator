@@ -16,8 +16,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 ################### find_package() here ###################
 #FINDPKG#
-# e.g., find_package(boost)
-#
+# if you are using vcpkg, you may not need find_package
+# e.g.,
+# find_package(boost)
+# find_package(protobuf)
+# find_package(OpenCV REQUIRED)
 ###########################################################
 
 # Find Prescan package
@@ -35,6 +38,7 @@ target_link_libraries(${PROJECT_NAME}
 					  #ADDLIBS#
 					  #e.g., ${Protobuf_LIBRARIES}
 					  #e.g., proj
+					  #e.g., ${OpenCV_LIBRARIES}
 					  #e.g., ${Boost_LIBRARIES}
 					  ########################################################
 )

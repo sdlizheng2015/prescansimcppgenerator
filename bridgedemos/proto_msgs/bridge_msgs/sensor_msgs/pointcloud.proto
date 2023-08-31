@@ -1,0 +1,12 @@
+syntax = "proto2";
+
+package prescan.perception;
+
+import "bridge_msgs/basic_msgs/header.proto";
+import "bridge_msgs/basic_msgs/geometry.proto";
+
+
+message PointCloud {
+  repeated prescan.common.CloudPoint cloudpoint = 1;
+  optional prescan.common.Header header = 2;
+}
