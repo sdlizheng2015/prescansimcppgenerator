@@ -35,6 +35,9 @@ namespace prescan{
 namespace sensorDemux{
   void demux_depthcamera(prescan::sim::DepthCameraSensorUnit* depthCameraUnit,
                          std::shared_ptr<std::vector<float>> D = nullptr){
+		if(D == nullptr){
+			return;
+		}
         auto cameraImage = depthCameraUnit->imageOutput();
         auto res_x = static_cast<uint32_t>(cameraImage.resolutionX());
         auto res_y = static_cast<uint32_t>(cameraImage.resolutionY());
@@ -55,7 +58,7 @@ namespace sensorDemux{
         cv::Mat rotated_image, flipped_image;
         cv::rotate(image, rotated_image, cv::ROTATE_90_CLOCKWISE);
         cv::flip(rotated_image, flipped_image, 1);
-        cv::imshow(std::to_string(reinterpret_cast<uint32_t>(&D)), flipped_image);
+        cv::imshow(std::to_string(reinterpret_cast<uint32_t>(&depthCameraUnit)), flipped_image);
         cv::waitKey(1);
         #endif
   }

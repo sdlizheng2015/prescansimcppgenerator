@@ -32,7 +32,7 @@ Prescan Simcpp Generator aims to provide a auto-generator for Prescan SimCPP pro
 - [X] BrsSensorUnit
 - [X] CameraSensorUnit
 - [X] DepthCameraSensorUnit
-- [ ] ImageSegmentationSensorUnit
+- [X] ImageSegmentationSensorUnit
 - [X] CollisionDetectionUnit
 - [X] LmsSensorUnit
 - [ ] LidarSensorUnit
