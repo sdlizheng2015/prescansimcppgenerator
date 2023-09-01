@@ -23,6 +23,11 @@
 #include "prescan/sim/CameraSensorUnit.hpp"
 #include <vector>
 
+#include "dependency.h"
+#ifdef VIS_WITH_OPENCV_EIGEN
+#include "opencv2/opencv.hpp"
+#endif
+
 
 namespace prescan{
 namespace sensorDemux{
@@ -55,18 +60,24 @@ namespace sensorDemux{
 			  B->assign(data_blue, data_blue + res_x * res_y);
 		  }
 		  
-		  /*
-		  std::vector<uint8_t> rMsg;
-          for (size_t row = 0; row < res_y; row++) {
-            size_t idx_buffer_data = row;
-            for (size_t col = 0; col < res_x; col++) {
-              rMsg.push_back(data_red[idx_buffer_data]);
-              rMsg.push_back(data_green[idx_buffer_data]);
-              rMsg.push_back(data_blue[idx_buffer_data]);
-              idx_buffer_data += res_y;
-            }
-          }
-		  */
+		  #ifdef VIS_WITH_OPENCV_EIGEN
+      if (R != nullptr && G != nullptr && B != nullptr){
+        std::vector<uint8_t> rMsg;
+        rMsg.reserve(res_x * res_y * 3);
+        for (int i = 0; i < R->size(); i++) {
+          //cv by default is BGR format
+          rMsg.push_back((*B)[i]);
+          rMsg.push_back((*G)[i]);
+          rMsg.push_back((*R)[i]);
+        }
+        cv::Mat cv_image(res_x, res_y, CV_8UC3, rMsg.data());
+        cv::Mat rotated_image, flipped_image;
+        cv::rotate(cv_image, rotated_image, cv::ROTATE_90_CLOCKWISE);
+        cv::flip(rotated_image, flipped_image, 1);
+        cv::imshow(std::to_string(reinterpret_cast<uint32_t>(&sensorUnit)), flipped_image);
+        cv::waitKey(1);
+      }
+      #endif
   }
 }
 }

@@ -47,7 +47,7 @@ namespace sensorDemux{
 		  
           #ifdef VIS_WITH_OPENCV_EIGEN
           cv::Mat image(res_y, res_x, CV_8UC3, p_data);
-          cv::imshow(std::to_string(reinterpret_cast<uint32_t>(&BGRU8)), image);
+          cv::imshow(std::to_string(reinterpret_cast<uint32_t>(&sensorUnit)), image);
           cv::waitKey(1);
           #endif
   }
