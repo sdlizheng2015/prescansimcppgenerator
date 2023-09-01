@@ -19,11 +19,14 @@ state_incl = '''#include "prescan/sim/StateActuatorUnit.hpp"\n'''
 lms_incl = '''#include "prescan/api/Lms.hpp"\n#include "prescan/sim/LmsSensorUnit.hpp"\n'''
 alms_incl = '''#include "prescan/api/Alms.hpp"\n#include "prescan/sim/AlmsSensorUnit.hpp"\n'''
 depthcamera_incl = '''#include "prescan/api/Depthcamera.hpp"\n#include "prescan/sim/DepthCameraSensorUnit.hpp"\n'''
+brs_incl = '''#include "prescan/api/Brs.hpp"\n#include "prescan/sim/BrsSensorUnit.hpp"\n'''
 
 """sensor unit types"""
 SelfSensorUnit = "prescan::sim::SelfSensorUnit"
 AirSensor = "prescan::api::air::AirSensor"
 AirSensorUnit = "prescan::sim::AirSensorUnit"
+BrsSensor = "prescan::api::brs::BrsSensor"
+BrsSensorUnit = "prescan::sim::BrsSensorUnit"
 LmsSensor = "prescan::api::lms::LmsSensor"
 LmsSensorUnit = "prescan::sim::LmsSensorUnit"
 AlmsSensor = "prescan::api::alms::AlmsSensor"
@@ -92,6 +95,9 @@ registerStateActuatorUnit = "prescan::sim::registerUnit<prescan::sim::StateActua
 
 getAirSensor = "experiment.getObjectByName<prescan::api::air::AirSensor>"
 registerAirSensorUnit = "prescan::sim::registerUnit<prescan::sim::AirSensorUnit>"
+
+getBrsSensor = "experiment.getObjectByName<prescan::api::brs::BrsSensor>"
+registerBrsSensorUnit = "prescan::sim::registerUnit<prescan::sim::BrsSensorUnit>"
 
 getLmsSensor = "experiment.getObjectByName<prescan::api::lms::LmsSensor>"
 registerLmsSensorUnit = "prescan::sim::registerUnit<prescan::sim::LmsSensorUnit>"

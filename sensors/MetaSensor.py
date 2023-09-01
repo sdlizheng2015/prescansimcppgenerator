@@ -30,6 +30,7 @@ class Sensor(metaclass=ABCMeta):
     Lms = "Lms"
     Alms = "Alms"
     Depthcamera = "Depthcamera"
+    Brs = "Brs"
 
     def __init__(self):
         ...
