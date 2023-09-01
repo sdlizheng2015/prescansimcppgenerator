@@ -22,6 +22,11 @@
 #include "prescan/api/Pcs.hpp"
 #include "prescan/sim/PcsSensorUnit.hpp"
 #include <vector>
+#include "dependency.h"
+
+#ifdef VIS_WITH_OPENCV_EIGEN
+#include "opencv2/opencv.hpp"
+#endif
 
 using prescan::sim::PcsSensorUnit;
 using prescan::api::pcs::PcsSensor;
@@ -68,26 +73,18 @@ namespace sensorDemux{
       auto p_ID = const_cast<float *>(pcsID.data<float>());
       ID->assign(p_ID, p_ID + resoluation);
     }
-
-
-	/* Demo
-    std::vector<float> points;
-    points.reserve(4 * res_x * res_y);
-
-    for (int i = 0; i < res_x * res_y; i++){
-      if (isinf(pcsX[i])){
-		pcsX[i] = NAN;
-		pcsY[i] = NAN;
-		pcsZ[i] = NAN;
-		pcsI[i] = 0;
-      }
-	  points.push_back(pcsX[i]);
-	  points.push_back(pcsY[i]);
-	  points.push_back(pcsZ[i]);
-	  points.push_back(pcsI[i]);
-      }
+	
+	#ifdef VIS_WITH_OPENCV_EIGEN
+    cv::Mat image = cv::Mat::zeros(500, 1000, CV_8UC3);
+    int centerY = image.rows / 2;
+    int centerX = image.cols / 2;
+    for (int i=0;i< Y->size();i++){
+      cv::circle(image, cv::Point(centerX - static_cast<int>((*Y)[i] * 100), centerY - static_cast<int>((*Z)[i]*100)), 2, cv::Scalar(0, 125, 125), 0);
     }
-	*/
+    cv::imshow(std::to_string(reinterpret_cast<uint32_t>(&X)), image);
+    cv::waitKey(1);
+	#endif
+
   }
 }
 }

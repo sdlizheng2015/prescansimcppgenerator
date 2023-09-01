@@ -23,15 +23,12 @@
 #include "prescan/api/Depthcamera.hpp"
 #include "prescan/sim/DepthCameraSensorUnit.hpp"
 #include <vector>
+#include "dependency.h"
 
-/*
-#include <opencv2/core/core.hpp>
-#include <opencv2/highgui/highgui.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/core/mat.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
+#ifdef VIS_WITH_OPENCV_EIGEN
+#include "opencv2/opencv.hpp"
 #include "Eigen/Dense"
-*/
+#endif
 
 
 namespace prescan{
@@ -45,7 +42,7 @@ namespace sensorDemux{
         auto p_data = const_cast<float_t*>(buffer.data<float_t>());
         D->assign(p_data, p_data + res_x * res_y);
 
-        /*
+        #ifdef VIS_WITH_OPENCV_EIGEN
         Eigen::Map<Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic>> normal_image(p_data, res_x, res_y);
         if (normal_image.maxCoeff() != normal_image.minCoeff()) {
           normal_image = (normal_image - normal_image.minCoeff() * Eigen::MatrixXf::Ones(res_x, res_y))
@@ -59,8 +56,8 @@ namespace sensorDemux{
         cv::rotate(image, rotated_image, cv::ROTATE_90_CLOCKWISE);
         cv::flip(rotated_image, flipped_image, 1);
         cv::imshow(std::to_string(reinterpret_cast<uint32_t>(&D)), flipped_image);
-        cv::waitKey(25);
-        */
+        cv::waitKey(1);
+        #endif
   }
 }
 }

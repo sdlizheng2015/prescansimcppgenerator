@@ -6,7 +6,6 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-#PRESCAN_DIR#
 
 ################### add_subdirectory() here ###############
 #ADDSUBDIR#
@@ -21,9 +20,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # find_package(boost)
 # find_package(protobuf)
 # find_package(OpenCV REQUIRED)
-# find_package(Eigen3 REQUIRED NO_MODULE)
-# include_directories("C:/Program Files/Eigen3/include/eigen3")
 ###########################################################
+#ADDPKGS#
+
+# add Eigen3
+find_package(Eigen3 REQUIRED NO_MODULE)
+add_definitions(${EIGEN3_DEFINITIONS})
+include_directories(${EIGEN3_INCLUDE_DIRS})
 
 # Find Prescan package
 find_package(Prescan 2023.1 REQUIRED)
@@ -34,17 +37,17 @@ file(GLOB_RECURSE allsources CONFIGURE_DEPENDS "simmodel/*.cpp")
 
 add_executable(${PROJECT_NAME} ${allsources})
 
-target_link_libraries(${PROJECT_NAME} 
-                      ${Prescan_LIBS}
-					  ################ add additional libs ###################
-					  #ADDLIBS#
-					  #e.g., 
-					  #${Protobuf_LIBRARIES}
-					  #proj
-					  #${OpenCV_LIBRARIES}
-					  #${Boost_LIBRARIES}
-					  #Eigen3::Eigen
-					  ########################################################
+target_link_libraries(
+${PROJECT_NAME} 
+${Prescan_LIBS}
+################ add additional libs ###################
+#e.g., 
+#${Protobuf_LIBRARIES}
+#proj
+#${OpenCV_LIBRARIES}
+#${Boost_LIBRARIES}
+########################################################
+#ADDLIBS#
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE

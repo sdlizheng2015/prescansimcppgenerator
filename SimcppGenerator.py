@@ -35,7 +35,7 @@ class SimcppGenerator:
     def __init__(self, pb: str, pb_yaml: str, ps_dir: str = "",
                  load_yaml: bool = True, enable_all_port: bool = False,
                  enable_sim_time: bool = True, enable_bridge: bool = False,
-                 options: str = ""):
+                 options: str = "", vis: bool = False):
         self.xp_yaml = {}
         self.ps_dir = ps_dir
         self.dst = ""
@@ -49,9 +49,12 @@ class SimcppGenerator:
         self.initialize = ""
         self.step_start = ""
         self.step_end = ""
+        self.add_cmake_pkgs = ""
+        self.add_cmake_libs = ""
         self.enable_sim_time = enable_sim_time
         self.enable_bridge = enable_bridge
         self.options = options
+        self.vis = vis
         try:
             self.xp: prescan_api_experiment.Experiment = prescan_api_experiment.loadExperimentFromFile(pb)
             if load_yaml:
@@ -279,16 +282,26 @@ class SimcppGenerator:
             "//ADDOPTIONS//\n": f"{Generator.space2}sim.setCustomOptions(\"{self.options}\");\n" if self.options else "",
         }
 
+        if self.vis:
+            self.add_cmake_pkgs += "find_package(OpenCV REQUIRED)\n"
+            self.add_cmake_libs += "${OpenCV_LIBRARIES}\n"
+        cmake_list_path = self.dst + "/CMakeLists.txt"
+        cmake_list = {
+            "#ADDPKGS#\n": self.add_cmake_pkgs,
+            "#ADDLIBS#\n": self.add_cmake_libs,
+        }
 
-        # cmake_list_path = self.dst + "/CMakeLists.txt"
-        # cmake_list = {
-        #     "#PRESCAN_DIR#\n": f'''set(Prescan_DIR "{self.ps_dir}")\n''',
-        # }
+        dependency_path = self.dst + "/simmodel/sensorsdemux/dependency.h"
+        add_vis = "//ADDVIS//#define VIS_WITH_OPENCV_EIGEN\n"
+        dependency = {
+            add_vis: "#define VIS_WITH_OPENCV_EIGEN\n" if self.vis else add_vis,
+        }
 
         files = {
             simmodel_h_path: simmodel_h,
             main_cpp_path: main_cpp,
-            # cmake_list_path: cmake_list,
+            cmake_list_path: cmake_list,
+            dependency_path: dependency,
         }
 
         self.overwrite_files(files)

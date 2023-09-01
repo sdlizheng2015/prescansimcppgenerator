@@ -23,14 +23,12 @@
 #include "prescan/api/Camera.hpp"
 #include "prescan/sim/CameraSensorUnit.hpp"
 #include <vector>
+#include "dependency.h"
 
-/*
-#include <opencv2/core/core.hpp>
-#include <opencv2/highgui/highgui.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/core/mat.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
-*/
+#ifdef VIS_WITH_OPENCV_EIGEN
+#include "opencv2/opencv.hpp"
+#endif
+
 
 namespace prescan{
 namespace sensorDemux{
@@ -46,11 +44,12 @@ namespace sensorDemux{
           prescan::sim::Buffer buffer = cameraImage.buffers()[0];
           auto p_data = const_cast<unsigned char*>(buffer.data<unsigned char>());
           BGRU8->assign(p_data, p_data + res_x * res_y * 3);
-          /*
+		  
+          #ifdef VIS_WITH_OPENCV_EIGEN
           cv::Mat image(res_y, res_x, CV_8UC3, p_data);
           cv::imshow(std::to_string(reinterpret_cast<uint32_t>(&BGRU8)), image);
-          cv::waitKey(25);
-          */
+          cv::waitKey(1);
+          #endif
   }
 }
 }
