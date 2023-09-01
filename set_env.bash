@@ -2,6 +2,7 @@
 
 export Prescan_path=/usr/local/Prescan_2307
 export Prescan_plugin_path=/usr/local/Prescan_2307/Plugins
+export Generator_dir=/home/yang/Desktop/PrescanSimcppGenerator
 
 ### add Prescan modules and plugin dependency path(please comment out(::) these plugins which are not installed on your machine)
 export PATH=$PATH:$Prescan_path/bin
@@ -15,6 +16,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$Prescan_plugin_path/PhysicsBasedCameraU
 
 ### add cmake config path
 export Prescan_DIR=$Prescan_path/lib/cmake
+export Eigen3_DIR=$Generator_dir/libs/Eigen3/share/eigen3/cmake
 
 ### add Prescan python API path
 export PYTHONPATH=$PYTHONPATH:$Prescan_path/python
@@ -22,8 +24,8 @@ export PYTHONPATH=$PYTHONPATH:$Prescan_path/modules
 export PYTHONPATH=$PYTHONPATH:$Prescan_plugin_path
 
 ### add current Prescan experiment and destination simcpp project path
-export experiment_dir=/home/yang/Desktop/PrescanSimcppGenerator/prescandemos/SimcppGenerator
-export experiment_pb=/home/yang/Desktop/PrescanSimcppGenerator/prescandemos/SimcppGenerator/SimcppGenerator.pb
-export simcpp_dir=/home/yang/Desktop/PrescanSimcppGenerator/prescandemos/SimcppGenerator/simcpp
+export experiment_dir=$Generator_dir/prescandemos/SimcppGenerator
+export experiment_pb=$Generator_dir/prescandemos/SimcppGenerator/SimcppGenerator.pb
+export simcpp_dir=$Generator_dir/prescandemos/SimcppGenerator/simcpp
 
 echo "set path ..."
