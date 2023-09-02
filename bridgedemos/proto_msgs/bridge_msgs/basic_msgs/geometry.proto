@@ -1,53 +1,49 @@
-syntax = "proto2";
+syntax = "proto3";
 
 package prescan.common;
 
 
 message Point2D {
-  optional double x = 1 [default = nan];
-  optional double y = 2 [default = nan];
+  double x = 1;
+  double y = 2;
 }
 
-
 message Point3D {
-  optional double x = 1 [default = nan];
-  optional double y = 2 [default = nan];
-  optional double z = 3 [default = nan];
+  double x = 1;
+  double y = 2;
+  double z = 3;
 }
 
 message PointLLH {
-  optional double lat = 1 [default = nan];
-  optional double lon = 2 [default = nan];
-  optional double alt = 3 [default = nan];
+  double lat = 1;
+  double lon = 2;
+  double alt = 3;
 }
 
 message Orientation {
-  optional double roll = 1 [default = nan];
-  optional double pitch = 2 [default = nan];
-  optional double yaw = 3 [default = nan];
+  double roll = 1;
+  double pitch = 2;
+  double yaw = 3;
 }
-
 
 message BBox2D {
-  optional double xmin = 1;  // in pixels.
-  optional double ymin = 2;  // in pixels.
-  optional double xmax = 3;  // in pixels.
-  optional double ymax = 4;  // in pixels.
+  double xmin = 1;  // in pixels.
+  double ymin = 2;  // in pixels.
+  double xmax = 3;  // in pixels.
+  double ymax = 4;  // in pixels.
 }
-
 
 message BoundingBox3D {
-  optional double size_x = 1 [default = nan];
-  optional double size_y = 2 [default = nan];
-  optional double size_z = 3 [default = nan];
+  double size_x = 1;
+  double size_y = 2;
+  double size_z = 3;
 }
 
-
 message Quaternion {
-  optional double qx = 1 [default = nan];
-  optional double qy = 2 [default = nan];
-  optional double qz = 3 [default = nan];
-  optional double qw = 4 [default = nan];
+  double qx = 1;
+  double qy = 2;
+  double qz = 3;
+  double qw = 4;
 }
 
 // A general polygon, points countered clockwise
@@ -56,10 +52,10 @@ message Polygon {
 }
 
 message CloudPoint {
-  optional double x = 1 [default = nan]; // sensor CRF
-  optional double y = 2 [default = nan]; // sensor CRF
-  optional double z = 3 [default = nan]; // sensor CRF
-  optional double intensity = 4 [default = nan]; //Range: [0-1]
-  optional uint32 id = 5; // beam or object id
-  optional double timestamp = 6;
+  double x = 1; // sensor CRF
+  double y = 2; // sensor CRF
+  double z = 3; // sensor CRF
+  double intensity = 4; //Range: [0-1]
+  uint32 id = 5; // beam or object id
+  double timestamp = 6;
 }

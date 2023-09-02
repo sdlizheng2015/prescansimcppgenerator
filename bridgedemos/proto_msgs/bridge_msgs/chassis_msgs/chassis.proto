@@ -1,4 +1,4 @@
-syntax = "proto2";
+syntax = "proto3";
 
 package prescan.chassis;
 
@@ -18,26 +18,26 @@ message Chassis {
   }
 
   // Vehicle Speed in meters per second.
-  optional float speed_mps = 5 [default = 0];
+  float speed_mps = 6;
 
   // Real throttle location, ranging from 0 to 1.
-  optional float throttle = 8 [default = 0];
+  float throttle = 9;
 
   // Real brake location, ranging from 0 to 1.
-  optional float brake = 9 [default = 0];
+  float brake = 10;
 
   // Real steering location in [%], ranging from -1 to 1.
   // steering_angle / max_steering_angle
   // Clockwise: negative
   // CountClockwise: positive
-  optional float steering = 11 [default = 0];
+  float steering = 12;
 
-  optional GearPosition gear_location = 23;
+  GearPosition gear_location = 24;
 
   // chassis also needs it own sending timestamp
-  optional prescan.common.Header header = 25;
+  prescan.common.Header header = 26;
 
   // Vehicle name in Prescan
-  optional string vehicle_name = 33;
+  string vehicle_name = 34;
 
 }

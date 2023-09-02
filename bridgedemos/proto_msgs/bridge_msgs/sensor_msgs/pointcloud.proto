@@ -1,4 +1,4 @@
-syntax = "proto2";
+syntax = "proto3";
 
 package prescan.perception;
 
@@ -8,5 +8,5 @@ import "bridge_msgs/basic_msgs/geometry.proto";
 
 message PointCloud {
   repeated prescan.common.CloudPoint cloudpoint = 1;
-  optional prescan.common.Header header = 2;
+  prescan.common.Header header = 2;
 }

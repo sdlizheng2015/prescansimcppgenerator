@@ -1,4 +1,4 @@
-syntax = "proto2";
+syntax = "proto3";
 
 package prescan.localization;
 
@@ -8,35 +8,35 @@ import "bridge_msgs/basic_msgs/geometry.proto";
 // Vechile Reference Frame(VRF), forward: x, left: y, upward: z
 
 message Gps {
-  optional prescan.common.Header header = 1;
+  prescan.common.Header header = 1;
   // Unit: deg
-  optional prescan.common.PointLLH llh = 2;
+  prescan.common.PointLLH llh = 2;
   // Unit: deg, North: 0, East: 90 deg
-  optional double heading = 5;
+  double heading = 5;
 }
 
 message Pose {
-  optional prescan.common.Header header = 1;
+  prescan.common.Header header = 1;
   // Unit: m
-  optional prescan.common.Point3D xyz = 2;
+  prescan.common.Point3D xyz = 2;
 }
 
 message Imu {
-  optional prescan.common.Header header = 1;
+  prescan.common.Header header = 1;
 
   // Unit: rad, in VRF
-  optional prescan.common.Orientation orientation = 2;
+  prescan.common.Orientation orientation = 2;
 
   // Unit: rad, in VRF
-  optional prescan.common.Orientation orientation_rate = 7;
+  prescan.common.Orientation orientation_rate = 7;
 
   // Unit: m/s^2, in VRF
-  optional prescan.common.Point3D acceleration = 12;
+  prescan.common.Point3D acceleration = 12;
 }
 
 message LocalizationStatus {
-  optional prescan.common.Header header = 1;
-  optional Gps gps = 2;
-  optional Imu imu = 3;
-  optional Pose pose = 4;
+  prescan.common.Header header = 1;
+  Gps gps = 2;
+  Imu imu = 3;
+  Pose pose = 4;
 }
