@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package prescan.chassis;
+
+import "bridge_msgs/basic_msgs/header.proto";
+
+
+// next id :31
+message Chassis {
+  enum GearPosition {
+    GEAR_NEUTRAL = 0;
+    GEAR_DRIVE = 1;
+    GEAR_REVERSE = 2;
+    GEAR_PARKING = 3;
+    GEAR_LOW = 4;
+    GEAR_INVALID = 5;
+    GEAR_NONE = 6;
+  }
+
+  // Vehicle Speed in meters per second.
+  float speed_mps = 6;
+
+  // Real throttle location, ranging from 0 to 1.
+  float throttle = 9;
+
+  // Real brake location, ranging from 0 to 1.
+  float brake = 10;
+
+  // Real steering location in [%], ranging from -1 to 1.
+  // steering_angle / max_steering_angle
+  // Clockwise: negative
+  // CountClockwise: positive
+  float steering = 12;
+
+  GearPosition gear_location = 24;
+
+  // chassis also needs it own sending timestamp
+  prescan.common.Header header = 26;
+
+  // Vehicle name in Prescan
+  string vehicle_name = 34;
+
+}

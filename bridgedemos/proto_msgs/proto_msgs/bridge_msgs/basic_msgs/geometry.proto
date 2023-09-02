@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package prescan.common;
+
+
+message Point2D {
+  double x = 1;
+  double y = 2;
+}
+
+message Point3D {
+  double x = 1;
+  double y = 2;
+  double z = 3;
+}
+
+message PointLLH {
+  double lat = 1;
+  double lon = 2;
+  double alt = 3;
+}
+
+message Orientation {
+  double roll = 1;
+  double pitch = 2;
+  double yaw = 3;
+}
+
+message BBox2D {
+  double xmin = 1;  // in pixels.
+  double ymin = 2;  // in pixels.
+  double xmax = 3;  // in pixels.
+  double ymax = 4;  // in pixels.
+}
+
+message BoundingBox3D {
+  double size_x = 1;
+  double size_y = 2;
+  double size_z = 3;
+}
+
+message Quaternion {
+  double qx = 1;
+  double qy = 2;
+  double qz = 3;
+  double qw = 4;
+}
+
+// A general polygon, points countered clockwise
+message Polygon {
+  repeated Point3D point = 1;
+}
+
+message CloudPoint {
+  double x = 1; // sensor CRF
+  double y = 2; // sensor CRF
+  double z = 3; // sensor CRF
+  double intensity = 4; //Range: [0-1]
+  uint32 id = 5; // beam or object id
+  double timestamp = 6;
+}

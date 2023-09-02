@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package prescan.perception;
+
+import "bridge_msgs/basic_msgs/header.proto";
+
+
+message ImageRGBU8 {
+  //RRR...GGG...BBB...
+  repeated uint32 R = 1;
+  repeated uint32 G = 2;
+  repeated uint32 B = 3;
+  prescan.common.Header header = 4;
+}
+
+message ImageU8 {
+  //RGBRGBRGB...
+  repeated uint32 RGB = 1;
+  prescan.common.Header header = 2;
+}
