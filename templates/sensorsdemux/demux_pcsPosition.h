@@ -24,9 +24,6 @@
 #include <vector>
 #include "dependency.h"
 
-#ifdef VIS_WITH_OPENCV_EIGEN
-#include "opencv2/opencv.hpp"
-#endif
 
 using prescan::sim::PcsSensorUnit;
 using prescan::api::pcs::PcsSensor;
@@ -75,16 +72,7 @@ namespace sensorDemux{
     }
 	
 	#ifdef VIS_WITH_OPENCV_EIGEN
-	if (Z != nullptr && Y != nullptr){
-		cv::Mat image = cv::Mat::zeros(500, 1000, CV_8UC3);
-		int centerY = image.rows / 2;
-		int centerX = image.cols / 2;
-		for (int i=0;i< Y->size();i++){
-		  cv::circle(image, cv::Point(centerX - static_cast<int>((*Y)[i] * 100), centerY - static_cast<int>((*Z)[i]*100)), 2, cv::Scalar(0, 125, 125), 0);
-		}
-		cv::imshow(std::to_string(reinterpret_cast<uint32_t>(&m_pcsSensorUnit)), image);
-		cv::waitKey(1);
-	}
+	visualize_Pcs(reinterpret_cast<uint32_t>(&m_pcsSensorUnit), Y, Z);
 	#endif
 
   }
