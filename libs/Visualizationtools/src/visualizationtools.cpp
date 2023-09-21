@@ -1,32 +1,12 @@
-#pragma once
 
-
-//ADDVIS//#define VIS_WITH_OPENCV_EIGEN
-
-#ifdef VIS_WITH_OPENCV_EIGEN
-
-#include <iostream>
-#include <vector>
-#include <stddef.h>
-#if _WIN64
-#include <corecrt_math_defines.h>
-#endif
-#include <cmath>
-
+#include "visualizationtools.h"
 #include "opencv2/core/core.hpp"
 #include "opencv2/highgui.hpp"
 #include "opencv2/imgproc.hpp"
 #include "Eigen/Dense"
 #include <vector>
 
-/**
- * @brief to visualize the depth camera sensor
- * 
- * @param ID an unique name for the visualize window
- * @param D a float vector shared_ptr to depth camera data
- * @param res_x resolution X
- * @param res_y resolution Y
- */
+
 void visualize_depth(uint32_t ID, std::shared_ptr<std::vector<float>> D, 
                      uint32_t res_x, uint32_t res_y){
     if(D != nullptr){
@@ -47,14 +27,6 @@ void visualize_depth(uint32_t ID, std::shared_ptr<std::vector<float>> D,
     }
 }
 
-/**
- * @brief 
- * 
- * @param ID 
- * @param BGRU8 
- * @param res_x 
- * @param res_y 
- */
 void visualize_BRGU8(uint32_t ID, std::shared_ptr<std::vector<unsigned char>> BGRU8, 
                      uint32_t res_x, uint32_t res_y){
     if(BGRU8 != nullptr){
@@ -64,16 +36,7 @@ void visualize_BRGU8(uint32_t ID, std::shared_ptr<std::vector<unsigned char>> BG
     }
 }
 
-/**
- * @brief 
- * 
- * @param ID 
- * @param R 
- * @param G 
- * @param B 
- * @param res_x 
- * @param res_y 
- */
+
 void visualize_SimulinkU8(uint32_t ID, 
                           std::shared_ptr<std::vector<uint8_t>> R, 
                           std::shared_ptr<std::vector<uint8_t>> G,
@@ -97,19 +60,11 @@ void visualize_SimulinkU8(uint32_t ID,
     }
 }
 
-/**
- * @brief 
- * 
- * @param ID 
- * @param Y 
- * @param Z 
- * @param res_x 
- * @param res_y 
- */
+
 void visualize_Pcs(uint32_t ID, 
                    std::shared_ptr<std::vector<float>> Y, 
                    std::shared_ptr<std::vector<float>> Z,
-                   uint32_t res_x = 500, uint32_t res_y = 1000){
+                   uint32_t res_x, uint32_t res_y){
 	if (Z != nullptr && Y != nullptr){
 		cv::Mat image = cv::Mat::zeros(res_x, res_y, CV_8UC3);
 		int centerY = image.rows / 2;
@@ -122,6 +77,3 @@ void visualize_Pcs(uint32_t ID,
 		cv::waitKey(1);
 	}
 }
-
-
-#endif

@@ -25,10 +25,6 @@
 #include <vector>
 #include "dependency.h"
 
-#ifdef VIS_WITH_OPENCV_EIGEN
-#include "opencv2/opencv.hpp"
-#include "Eigen/Dense"
-#endif
 
 
 namespace prescan{
@@ -46,20 +42,7 @@ namespace sensorDemux{
         D->assign(p_data, p_data + res_x * res_y);
 
         #ifdef VIS_WITH_OPENCV_EIGEN
-        Eigen::Map<Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic>> normal_image(p_data, res_x, res_y);
-        if (normal_image.maxCoeff() != normal_image.minCoeff()) {
-          normal_image = (normal_image - normal_image.minCoeff() * Eigen::MatrixXf::Ones(res_x, res_y))
-          / (normal_image.maxCoeff() - normal_image.minCoeff());
-        }
-        else {
-          normal_image = Eigen::MatrixXf::Zero(res_x, res_y);
-        }
-        cv::Mat image(res_x, res_y, CV_32FC1, normal_image.data());
-        cv::Mat rotated_image, flipped_image;
-        cv::rotate(image, rotated_image, cv::ROTATE_90_CLOCKWISE);
-        cv::flip(rotated_image, flipped_image, 1);
-        cv::imshow(std::to_string(reinterpret_cast<uint32_t>(&depthCameraUnit)), flipped_image);
-        cv::waitKey(1);
+		visualize_depth(reinterpret_cast<uint32_t>(&depthCameraUnit), D, res_x, res_y);
         #endif
   }
 }

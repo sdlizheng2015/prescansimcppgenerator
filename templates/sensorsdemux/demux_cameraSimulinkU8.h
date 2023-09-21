@@ -22,11 +22,8 @@
 #include "prescan/api/Camera.hpp"
 #include "prescan/sim/CameraSensorUnit.hpp"
 #include <vector>
-
 #include "dependency.h"
-#ifdef VIS_WITH_OPENCV_EIGEN
-#include "opencv2/opencv.hpp"
-#endif
+
 
 
 namespace prescan{
@@ -60,23 +57,8 @@ namespace sensorDemux{
 			  B->assign(data_blue, data_blue + res_x * res_y);
 		  }
 		  
-		  #ifdef VIS_WITH_OPENCV_EIGEN
-      if (R != nullptr && G != nullptr && B != nullptr){
-        std::vector<uint8_t> rMsg;
-        rMsg.reserve(res_x * res_y * 3);
-        for (int i = 0; i < R->size(); i++) {
-          //cv by default is BGR format
-          rMsg.push_back((*B)[i]);
-          rMsg.push_back((*G)[i]);
-          rMsg.push_back((*R)[i]);
-        }
-        cv::Mat cv_image(res_x, res_y, CV_8UC3, rMsg.data());
-        cv::Mat rotated_image, flipped_image;
-        cv::rotate(cv_image, rotated_image, cv::ROTATE_90_CLOCKWISE);
-        cv::flip(rotated_image, flipped_image, 1);
-        cv::imshow(std::to_string(reinterpret_cast<uint32_t>(&sensorUnit)), flipped_image);
-        cv::waitKey(1);
-      }
+	  #ifdef VIS_WITH_OPENCV_EIGEN
+	  visualize_SimulinkU8(reinterpret_cast<uint32_t>(&sensorUnit), R, G, B, res_x, res_y);
       #endif
   }
 }
