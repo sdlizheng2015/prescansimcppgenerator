@@ -25,9 +25,6 @@
 #include <vector>
 #include "dependency.h"
 
-#ifdef VIS_WITH_OPENCV_EIGEN
-#include "opencv2/opencv.hpp"
-#endif
 
 
 namespace prescan{
@@ -46,9 +43,7 @@ namespace sensorDemux{
           BGRU8->assign(p_data, p_data + res_x * res_y * 3);
 		  
           #ifdef VIS_WITH_OPENCV_EIGEN
-          cv::Mat image(res_y, res_x, CV_8UC3, p_data);
-          cv::imshow(std::to_string(reinterpret_cast<uint32_t>(&sensorUnit)), image);
-          cv::waitKey(1);
+		  visualize_BRGU8(reinterpret_cast<uint32_t>(&sensorUnit), BGRU8, res_x, res_y);
           #endif
   }
 }
