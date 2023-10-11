@@ -32,6 +32,9 @@ class Sensor(metaclass=ABCMeta):
     Depthcamera = "Depthcamera"
     Brs = "Brs"
     Iss = "Iss"
+    PathFollower = "PathFollower"  # not a real sensor
+
+    NotRealSensors = [SelfUnit, StateActuator, PathFollower]
 
     def __init__(self):
         ...

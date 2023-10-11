@@ -20,6 +20,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # find_package(boost)
 # find_package(protobuf)
 # find_package(OpenCV REQUIRED)
+#find_package(PCL REQUIRED)
+#include_directories(${PCL_INCLUDE_DIRS})
+#link_directories(${PCL_LIBRARY_DIRS})
+#add_definitions(${PCL_DEFINITIONS})
 ###########################################################
 #ADDPKGS#
 
@@ -46,6 +50,7 @@ ${Prescan_LIBS}
 #proj
 #${OpenCV_LIBRARIES}
 #${Boost_LIBRARIES}
+#${PCL_LIBRARIES}
 ########################################################
 #ADDLIBS#
 )
