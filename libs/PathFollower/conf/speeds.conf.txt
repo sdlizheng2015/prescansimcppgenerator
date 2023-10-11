@@ -1,0 +1,3 @@
+0.0    0.0 // time[s] vs velocity[m/s], value must be double type with dot
+5.0    8.0
+80.0   8.0

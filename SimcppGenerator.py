@@ -22,6 +22,11 @@ from generators.StateActuatorGenerator import StateActuatorGenerator
 import yaml
 from logger.UserLog import uniLog
 
+"""
+Here need to change the order of generator:
+    First generate self unit
+    Then generate stata actuator unit
+"""
 generator_names = [os.path.splitext(module)[0] for module in os.listdir("generators") if
                    os.path.splitext(module)[1] in [".py", ".pyx"]]
 generator_cls, incl_cls = get_cls(generator_names, "generators", sub_cls_name="SensorInclude")
@@ -35,10 +40,13 @@ class SimcppGenerator:
     def __init__(self, pb: str, pb_yaml: str, ps_dir: str = "",
                  load_yaml: bool = True, enable_all_port: bool = False,
                  enable_sim_time: bool = True, enable_bridge: bool = False,
-                 options: str = "", vis: bool = False):
+                 options: str = "", vis: bool = False, followers: List[str] = None,
+                 dst: str = "./simcpp"):
+        if followers is None:
+            followers = []
         self.xp_yaml = {}
         self.ps_dir = ps_dir
-        self.dst = ""
+        self.dst = dst
         self.includes = ""
         self.properties = ""
         self.registerUnits = ""
@@ -55,6 +63,7 @@ class SimcppGenerator:
         self.enable_bridge = enable_bridge
         self.options = options
         self.vis = vis
+        self.followers: List[str] = followers
         try:
             self.xp: prescan_api_experiment.Experiment = prescan_api_experiment.loadExperimentFromFile(pb)
             if load_yaml:
@@ -64,22 +73,29 @@ class SimcppGenerator:
             uniLog.logger.error(self.__class__.__name__ + ": " + str(ee))
             raise PrescanException("load pb/yaml file failed")
         else:
-            self.objectsSensorsParser = ObjectsSensorsParser(self.xp, self.xp_yaml, load_yaml, enable_all_port)
+            self.objectsSensorsParser = ObjectsSensorsParser(self.xp, self.xp_yaml, load_yaml, enable_all_port, followers)
 
-    def copy_to_project(self, dst: str = "./simcpp"):
+    def generate(self):
         """
-        TODO: call this first
-        :param dst:
+        TODO: wrapped API to generate all codes
         :return:
         """
-        self.dst = dst
-        if os.path.exists(dst):
+        self.copy_templates_to_project()
+        self.prepare_codes_from_objects()
+        self.write_codes_to_templates()
+
+    def copy_templates_to_project(self):
+        """
+        TODO: call this first
+        :return:
+        """
+        if os.path.exists(self.dst):
             enter = input("Deleting the exiting project?(y/n):\n")
             if enter in ["y", "Y", "yes"]:
                 try:
-                    os.rmdir(dst)
+                    os.rmdir(self.dst)
                 except OSError:
-                    shutil.rmtree(dst)
+                    shutil.rmtree(self.dst)
                 except Exception as ee:
                     print(ee)
                     sys.exit()
@@ -88,7 +104,7 @@ class SimcppGenerator:
             else:
                 print(f"not copy templates to {self.dst}")
                 sys.exit()
-        shutil.copytree("./templates/simcpp", dst)
+        shutil.copytree("./templates/simcpp", self.dst)
         shutil.copy("./set_env.bat", f"{self.dst}")
         shutil.copy("./set_env.bash", f"{self.dst}")
         print(f"copy templates to {self.dst}")
@@ -141,7 +157,7 @@ class SimcppGenerator:
 
     def _is_object_to_generate(self, _object: ObjectSensors):
         """
-        TODO: generate actor with trajectory or dynamics or always_on_sheet
+        TODO: generate actor with trajectory or valid sensor or dynamics or always_on_sheet
         :param _object:
         :return:
         """
@@ -150,6 +166,10 @@ class SimcppGenerator:
         return False
 
     def generate_codes_with_sim_time(self):
+        """
+        TODO: to calculate the simulation performance
+        :return:
+        """
         if self.enable_sim_time:
             self.includes += f'''#include "utils/printsteptime.h"\n'''
             self.properties += f"{Generator.space2}//To print simulation step time info;\n"
@@ -158,7 +178,19 @@ class SimcppGenerator:
             self.step_start += f"{Generator.space2}stepTimeInfo.step_start_time(simulation);\n"
             self.step_end += f"{Generator.space2}stepTimeInfo.step_end_time();\n"
 
+    def generate_path_follower(self):
+        """
+        TODO: whether to add path follower to simcpp project
+        :return:
+        """
+        if len(self.followers) > 0:
+            shutil.copytree("./libs/PathFollower", self.dst + "/PathFollower")
+
     def generate_object_provider(self):
+        """
+        TODO:
+        :return:
+        """
         if self.xp.getBool('pimp/objectlistprovidermodel', 'detectionOn'):
             self.includes += f'''#include "worldobjects/objectsprovider.h"\n'''
 
@@ -189,15 +221,15 @@ class SimcppGenerator:
             self.steps += f"{Generator.space2}//Step CollisionDetection, output is 'collisionDetection.collisonOutput'\n"
             self.steps += f"{Generator.space2}collisionDetection.step(simulation, this);\n"
 
-
-    def generate_codes(self):
+    def prepare_codes_from_objects(self):
         """
-        TODO:
+        TODO: The is the core function to generate codes from each ps object
         :return:
         """
         self.generate_codes_with_sim_time()
         self.generate_object_provider()
         self.generate_collision_detection()
+        self.generate_path_follower()
         for _object in self.objectsSensorsParser.ParsedObjectsSensors:  # type: ObjectSensors
             if not self._is_object_to_generate(_object):
                 continue
@@ -264,7 +296,11 @@ class SimcppGenerator:
             self.updates += f"{Generator.space2}ps_{worldObject}.updateState();\n"
             self.steps += f"{Generator.space2}ps_{worldObject}.step(simulation, this);\n"
 
-    def write_to_simmodel(self):
+    def write_codes_to_templates(self):
+        """
+        TODO: to write all changes to files
+        :return:
+        """
         simmodel_h_path = self.dst + "/simmodel/simmodel/simmodel.h"
         simmodel_h = {
             "//INCLUDES//\n": self.includes,
@@ -285,6 +321,8 @@ class SimcppGenerator:
         if self.vis:
             self.add_cmake_pkgs += "find_package(OpenCV REQUIRED)\n"
             self.add_cmake_libs += "${OpenCV_LIBRARIES}\n"
+        if len(self.followers) > 0:
+            self.add_cmake_pkgs += "include_directories(./PathFollower)\n"
         cmake_list_path = self.dst + "/CMakeLists.txt"
         cmake_list = {
             "#ADDPKGS#\n": self.add_cmake_pkgs,

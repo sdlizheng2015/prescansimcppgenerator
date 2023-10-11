@@ -21,6 +21,7 @@ alms_incl = '''#include "prescan/api/Alms.hpp"\n#include "prescan/sim/AlmsSensor
 depthcamera_incl = '''#include "prescan/api/Depthcamera.hpp"\n#include "prescan/sim/DepthCameraSensorUnit.hpp"\n'''
 brs_incl = '''#include "prescan/api/Brs.hpp"\n#include "prescan/sim/BrsSensorUnit.hpp"\n'''
 iss_incl = '''#include "prescan/api/Iss.hpp"\n#include "prescan/sim/ImageSegmentationSensorUnit.hpp"\n'''
+driver_incl = '''#include "pathfollower.h"\n'''
 
 """sensor unit types"""
 SelfSensorUnit = "prescan::sim::SelfSensorUnit"

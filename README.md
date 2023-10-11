@@ -52,19 +52,21 @@ Prescan Simcpp Generator aims to provide a auto-generator for Prescan SimCPP pro
 - [ ] WheelContactUnit
 - [X] StateActuatorUnit
 - [X] SelfSensorUnit
-- [ ] PhysicsBasedCameraUnrealControlUnit
-- [ ] PhysicsBasedCameraUnrealExposureUnit
-- [ ] PhysicsBasedCameraUnrealRainOverlayUnit
-- [ ] PhysicsBasedCameraUnrealUnit
-- [ ] PhysicsBasedCameraUnrealSensorUnit
-- [X] PhysicsBasedCameraUnrealRGBUnit
-- [ ] PhysicsBasedCameraUnrealDistanceUnit
-- [ ] PhysicsBasedCameraUnrealImageSegmentationUnit
-- [ ] PhysicsBasedCameraUnrealOpticalFlowUnit
-- [ ] PhysicsBasedCameraUnrealIlluminanceUnit
+- [X] PhysicsBasedCameraUnreal
+    - [ ] PhysicsBasedCameraUnrealControlUnit
+    - [ ] PhysicsBasedCameraUnrealExposureUnit
+    - [ ] PhysicsBasedCameraUnrealRainOverlayUnit
+    - [ ] PhysicsBasedCameraUnrealUnit
+    - [ ] PhysicsBasedCameraUnrealSensorUnit
+    - [X] PhysicsBasedCameraUnrealRGBUnit
+    - [ ] PhysicsBasedCameraUnrealDistanceUnit
+    - [ ] PhysicsBasedCameraUnrealImageSegmentationUnit
+    - [ ] PhysicsBasedCameraUnrealOpticalFlowUnit
+    - [ ] PhysicsBasedCameraUnrealIlluminanceUnit
 - [X] PhysicsBased Fullwaveform Lidar
 - [X] PhysicsBased Point Cloud Lidar
 - [ ] PhysicsBased Radar
+- [X] Preconfigured AmesimDynamics PathFollower
 
 # Version
 
@@ -386,13 +388,13 @@ SimCPP Generator can help generate the Prescan simcpp codes on both Windows and 
     ```
 4. Double click ```set_env.bat``` and a cmd Terminal will pop-up，type：
     ```powershell
-    python main.py %experiment_pb% -out_dir %simcpp_dir%
+    python main.py -pb_dir %experiment_pb% -out_dir %simcpp_dir%
     ```
     if you want to automatically modify the generator source codes according to the set_env file, you may need to run:
     ```powershell
-    python main.py %experiment_pb% -out_dir %simcpp_dir% -conf_api 1
+    python main.py -pb_dir %experiment_pb% -out_dir %simcpp_dir% -conf_api 1
     ```
-    where, the first arguement ```%experiment_pb%``` is the path to pb file and the second optional argument ```-out_dir``` is where you want to put the generated simcpp codes, here we put it in ```%simcpp_dir%```. If ```%simcpp_dir%``` already exists，then there will be a warning and you need to confirm as shown in the following picture:
+    where, the first arguement ```-pb_dir``` is the path to pb file and the second optional argument ```-out_dir``` is where you want to put the generated simcpp codes, here we put it in ```%simcpp_dir%```. If ```%simcpp_dir%``` already exists，then there will be a warning and you need to confirm as shown in the following picture:
     ![Alt text](./pic/generate_win.png)
     input 'y' means to delete the existing simcpp folder and input 'n' or others mean to exit the program without doing anything. If codes are generated successfully, you will see the following outputs:
     ![Alt text](./pic/generated_win.png)
@@ -469,7 +471,7 @@ SimCPP Generator can help generate the Prescan simcpp codes on both Windows and 
     source set_env.bash
     ```
     ```shell
-    python3 main.py $experiment_pb -out_dir $simcpp_dir
+    python3 main.py -pb_dir $experiment_pb -out_dir $simcpp_dir
     ```
     if successful, you will find the 'simcpp' folder in your Prescan experiment.
     ![Alt text](./pic/simmodel_linux.png)
@@ -699,3 +701,10 @@ inside ```./bridgedemos/pybridge/shmtypes``` folder，open and edit ```bridge_sh
 # Known Issues
 1. On Windows, when Simcpp communicates with User C++ App via shared memory，ThreadPool defined in this project can not be used in C++ User App, but it's ok on Ubuntu.
 2. On Windows，in Prescan experiment，if the Annotate is enabled in PCSPrescanViewer, Simcpp can't communicate with User Python App via shared memory, cause the files in ```C:\ProgramData\boost_interprocess``` are not named by the user given sharedmemory names. So, python can't map to relevant memory.
+
+# Known Limitations
+1. If ```'federate_record=1'``` is enabled, the maximun number of objects with active trajectory is limited to a certain threshold, not sure how much exactly, but tested on windows it maybe 500 while 1000 on Linux(not sure). Over thses values may raise simulation runtime error and crash.
+Due to the limitation, if a simulation including over 500 objects with active trajectory runs on linux and record the replay data, it may fail to replay the recored data on windows.
+
+# Recommendations
+1. If ```'federate_record=1'``` is enabled, it is recommended to initial all movable objects' states in the initial function, otherwise replay may cause some jump movements in the viewer.

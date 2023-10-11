@@ -9,13 +9,16 @@ import sys
 
 from utils.config_python_api import config_python_api
 import argparse
+from logger.UserLog import uniLog
 
 _argparse = argparse.ArgumentParser()
-_argparse.add_argument("pb_dir", type=str,
-                       help=r'''Path pb file, e.g., "C:\Users\yiyan5ez\Desktop\SimcppGenerator\SimcppGenerator.pb"''')
+_argparse.add_argument("-pb_dir", type=str, action="store", default=os.environ['experiment_pb'],
+                       help=r'''Path to pb file, default: ${experiment_pb}, 
+                       usage: -pb_dir "C:\Users\yiyan5ez\Desktop\SimcppGenerator\SimcppGenerator.pb"''')
 
-_argparse.add_argument("-out_dir", type=str, action="store", default="./simcpp",
-                       help="folder to save generated simcpp project, default: ./simcpp, e.g.,: -out_dir ./simcpp")
+_argparse.add_argument("-out_dir", type=str, action="store", default=os.environ['simcpp_dir'],
+                       help=r'''folder to save generated simcpp project, default: ${simcpp_dir}, 
+                       usage: -out_dir "C:\Users\yiyan5ez\Desktop\SimcppGenerator\simcpp"''')
 
 _argparse.add_argument("-all_ports", type=int, action="store", default=1,
                        help="Enable all sensors output ports, default: 1(enabled), to disabled: -all_ports 0")
@@ -33,13 +36,13 @@ _argparse.add_argument("-conf_api", type=int, action="store", default=1,
                             "modify python files in sensors and generators folders. You must make sure "
                             "all configs in set_env files are correct, default: 1(enabled), to disabled: -conf_api 0")
 
-_argparse.add_argument("-fast", type=int, action="store", default=0,
-                       help='''to quickly generate simcpp from set_env, default: 0(disabled), to enable: -fast 1 
-                       This is equivalent to 'main $exerpiment_pb --out_dir $simcpp_dir -conf_api 1 -vis {vis}' ''')
-
 _argparse.add_argument("-vis", type=int, action="store", default=0,
                        help="to visualize the image or lidar point, you need opencv installed on your machine first, "
                             "default: 0(disabled), to enable: -vis 1")
+
+_argparse.add_argument("-driver", type=str, action="store", default='',
+                       help="to add path follower for pre-configured Amesim dynamics with active trajectory, "
+                            "default: '', usage: -driver VehicleName1,VehicleName2,...")
 
 _argparse.add_argument("-bridge", type=int, action="store", default=0,
                        help="enable simcpp bridge(not used now), default: 0, e.g., -bridge 1")
@@ -59,17 +62,20 @@ if __name__ == '__main__':
     bridge = bool(args.bridge)
     options = args.options
     vis = bool(args.vis)
-
-    if bool(args.fast):
-        os.system(f"python main.py %experiment_pb% -out_dir %simcpp_dir% -conf_api 1 -vis {args.vis}")
-        sys.exit()
+    driver: str = args.driver
+    followers = [name for name in driver.split(",") if name]
 
     """
     The following is to prepare and normally run the generator
     config_python_api must be done before construct SimcppGenerator
     """
     if bool(args.conf_api):
-        config_python_api()
+        try:
+            config_python_api()
+        except Exception as ee:
+            print(f"auto config api failed: {ee}")
+            uniLog.logger.error(f"auto config api failed: {ee}")
+            sys.exit()
 
     from SimcppGenerator import SimcppGenerator
 
@@ -81,9 +87,9 @@ if __name__ == '__main__':
         enable_sim_time=show_time,
         enable_bridge=bridge,
         options=options,
-        vis=vis
+        vis=vis,
+        followers=followers,
+        dst=dst
     )
 
-    generator.copy_to_project(fr"{dst}")
-    generator.generate_codes()
-    generator.write_to_simmodel()
+    generator.generate()

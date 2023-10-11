@@ -21,9 +21,15 @@ sensors_cls, _ = get_cls(sensor_names, "sensors")
 
 
 class ObjectSensors:
-    def __init__(self, ps_object: prescan_api_types.WorldObject, enable_all_port: bool):
+    """
+    TODO: This class stores all the sensors attached to one world object
+    """
+    def __init__(self, ps_object: prescan_api_types.WorldObject,
+                 enable_all_port: bool,
+                 has_follower: bool):
         self.ps_object: prescan_api_types.WorldObject = ps_object
         self.enable_all_ports = enable_all_port
+        self.has_follower = has_follower
         self.to_generate_code = False
         self.sensors_cls: Dict[str, callable(Sensor)] = {sensor.name: sensor for sensor in sensors_cls}
         self.objectSensors: Dict[str, List[Sensor]] = {sensor.name: [] for sensor in sensors_cls}
@@ -44,11 +50,15 @@ class ObjectSensors:
 
 class ObjectsSensorsParser:
     def __init__(self, xp: prescan_api_experiment.Experiment, xp_yaml: dict,
-                 load_yaml: bool, enable_all_port: bool = False):
+                 load_yaml: bool, enable_all_port: bool = False,
+                 followers: List[str] = None):
+        if followers is None:
+            followers = []
         self._objects_sensors: List[ObjectSensors] = []
         self._xp_yaml = xp_yaml
         self._xp = xp
         self._enable_all_ports = enable_all_port
+        self._followers = followers
         self._parse_objects()
         self._register_sensors()
 
@@ -57,8 +67,8 @@ class ObjectsSensorsParser:
         return self._objects_sensors
 
     def _parse_objects(self):
-        for _object in self._xp.objects:
-            self._objects_sensors.append(ObjectSensors(_object, self._enable_all_ports))
+        for _object in self._xp.objects:  # type: prescan_api_types.WorldObject
+            self._objects_sensors.append(ObjectSensors(_object, self._enable_all_ports, _object.name in self._followers))
 
     def _register_sensors(self):
         for _object in self._objects_sensors:  # type: ObjectSensors
@@ -72,9 +82,10 @@ class ObjectsSensorsParser:
                     _object.objectSensors[sensor_name].extend(
                         [sensor_cls(sensor, self._xp, self._xp_yaml) for sensor in sensors])
                     if not generate_code:
-                        """must has a real sensor or a trajectory"""
-                        if len(_object.objectSensors[sensor_name]) > 0 and \
-                                sensor_name not in [Sensor.SelfUnit, Sensor.StateActuator]:
+                        """must has a valid sensor or a trajectory or Pre-configured Amesim"""
+                        if (len(_object.objectSensors[sensor_name]) > 0 and sensor_name not in Sensor.NotRealSensors) \
+                                or prescan_api_trajectory.hasActiveTrajectory(_object.ps_object) \
+                                or prescan_api_vehicledynamics.hasAttachedAmesimPreconfiguredDynamics(_object.ps_object):
                             generate_code = True
             _object.to_generate_code = generate_code
 
