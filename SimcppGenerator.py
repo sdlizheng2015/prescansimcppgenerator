@@ -184,7 +184,7 @@ class SimcppGenerator:
         :return:
         """
         if len(self.followers) > 0:
-            shutil.copytree("./templates/PathFollower", self.dst + "/PathFollower")
+            shutil.copytree("./libs/PathFollower", self.dst + "/PathFollower")
 
     def generate_object_provider(self):
         """
